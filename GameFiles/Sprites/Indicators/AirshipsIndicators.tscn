@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://du44knylo88xu"]
+
+[ext_resource type="Script" uid="uid://d4nb2r5keorly" path="res://GameFiles/Gameplay Scripts/Indicators/airshipsInd.gd" id="1_f4qfs"]
+[ext_resource type="PackedScene" uid="uid://b742ayww4g6ji" path="res://GameFiles/Sprites/Indicators/Danger.tscn" id="1_gel0m"]
+[ext_resource type="AudioStream" uid="uid://dr48wcdkjf3gb" path="res://GameFiles/SoundEffects/MissilesBeep.mp3" id="3_qm1bk"]
+
+[node name="AirshipsIndicators" type="Node2D"]
+visible = false
+position = Vector2(0, 540)
+script = ExtResource("1_f4qfs")
+
+[node name="Indicator0" parent="." instance=ExtResource("1_gel0m")]
+position = Vector2(0, -360)
+
+[node name="Indicator1" parent="." instance=ExtResource("1_gel0m")]
+
+[node name="Indicator2" parent="." instance=ExtResource("1_gel0m")]
+position = Vector2(0, 360)
+
+[node name="DangerBeep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qm1bk")
+volume_db = 6.0
+autoplay = true
+
+[connection signal="finished" from="DangerBeep" to="." method="_on_danger_beep_finished"]

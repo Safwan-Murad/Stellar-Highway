@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0h3glcna5ih7"]
+
+[ext_resource type="Texture2D" uid="uid://bnwp1ihbdxqmm" path="res://GameFiles/SpinHead IMGS/Buildings/Windows/1.png" id="1_0yj8m"]
+[ext_resource type="Script" uid="uid://yuva7ljorwwn" path="res://GameFiles/Gameplay Scripts/Obstacles/Buildings/RandomBuilding/BuildingWindow.gd" id="1_54epc"]
+
+[node name="BuildingWindow" type="Sprite2D"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_0yj8m")
+script = ExtResource("1_54epc")

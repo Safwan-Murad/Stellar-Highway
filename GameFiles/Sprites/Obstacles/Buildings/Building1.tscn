@@ -1,0 +1,126 @@
+[gd_scene load_steps=16 format=3 uid="uid://4edjppuslk0n"]
+
+[ext_resource type="Texture2D" uid="uid://dsvqquq4g4t3u" path="res://GameFiles/SpinHead IMGS/Buildings/Building1/building1.png" id="1_gxygd"]
+[ext_resource type="Script" uid="uid://bk3lmwi4lwybp" path="res://GameFiles/Gameplay Scripts/Obstacles/Buildings/Building1.gd" id="1_r7r1g"]
+[ext_resource type="Texture2D" uid="uid://dyxwyhlijo0it" path="res://GameFiles/SpinHead IMGS/Buildings/Building1/light1.png" id="2_obx61"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="4_1wqsc"]
+[ext_resource type="Script" uid="uid://b5udwgkhs5rmo" path="res://GameFiles/ScreenView Scripts/rotateLight.gd" id="4_3mia4"]
+[ext_resource type="PackedScene" uid="uid://cp83oaxmru3nd" path="res://GameFiles/Sprites/Powerups/SpeedBooster.tscn" id="6_owux1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkpyp"]
+size = Vector2(9.47366, 219.649)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4ho6"]
+size = Vector2(9.47366, 217.544)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x8f5y"]
+size = Vector2(8.59648, 10.8772)
+
+[sub_resource type="Animation" id="Animation_2jndp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_l3i4j"]
+resource_name = "zeroScale"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o1q1n"]
+_data = {
+&"RESET": SubResource("Animation_2jndp"),
+&"zeroScale": SubResource("Animation_l3i4j")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggw84"]
+size = Vector2(177, 35)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3didc"]
+a = Vector2(-12, -9)
+b = Vector2(37, 16)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_o26br"]
+a = Vector2(-156, -264)
+b = Vector2(-66, -309)
+
+[node name="Building1" type="StaticBody2D"]
+script = ExtResource("1_r7r1g")
+
+[node name="KillRange" type="Area2D" parent="."]
+position = Vector2(83, -343)
+scale = Vector2(1e-05, 1e-05)
+script = ExtResource("4_1wqsc")
+
+[node name="KillerColl" type="CollisionShape2D" parent="KillRange"]
+position = Vector2(-2.265e+07, 3.99e+07)
+scale = Vector2(285000, 285000)
+shape = SubResource("RectangleShape2D_bkpyp")
+
+[node name="KillerColl2" type="CollisionShape2D" parent="KillRange"]
+position = Vector2(5.6e+06, 4.02e+07)
+scale = Vector2(285000, 285000)
+shape = SubResource("RectangleShape2D_m4ho6")
+
+[node name="KillerColl3" type="CollisionShape2D" parent="KillRange"]
+position = Vector2(5.775e+06, 7.65e+06)
+scale = Vector2(285000, 285000)
+shape = SubResource("RectangleShape2D_x8f5y")
+
+[node name="Building1" type="Sprite2D" parent="."]
+z_index = 5
+z_as_relative = false
+texture = ExtResource("1_gxygd")
+metadata/_edit_lock_ = true
+
+[node name="Light1" type="Sprite2D" parent="."]
+z_index = 3
+z_as_relative = false
+position = Vector2(83, -343)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("2_obx61")
+script = ExtResource("4_3mia4")
+anim = "zeroScale"
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Light1"]
+libraries = {
+"": SubResource("AnimationLibrary_o1q1n")
+}
+
+[node name="WalkableColl1" type="CollisionShape2D" parent="."]
+position = Vector2(21.5, -292.5)
+shape = SubResource("RectangleShape2D_ggw84")
+
+[node name="WalkableColl2" type="CollisionShape2D" parent="."]
+position = Vector2(121, -300)
+shape = SubResource("SegmentShape2D_3didc")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_o26br")
+
+[node name="SpeedBooster" parent="." instance=ExtResource("6_owux1")]
+position = Vector2(0, -400)
+
+[connection signal="body_entered" from="KillRange" to="KillRange" method="_on_body_entered"]

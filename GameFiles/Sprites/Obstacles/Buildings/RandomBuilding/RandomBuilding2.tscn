@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctfm8joa5fub"]
+
+[ext_resource type="Script" uid="uid://dt30d4ofijdde" path="res://GameFiles/Gameplay Scripts/Obstacles/Buildings/RandomBuilding/RandomBuilding2.gd" id="1_t5wlm"]
+[ext_resource type="Script" uid="uid://cpemou7fbrmic" path="res://GameFiles/Gameplay Scripts/Obstacles/Buildings/RandomBuilding/Windows4TheWin.gd" id="2_6l4ev"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ku5wj"]
+
+[node name="RandomBuilding2" type="StaticBody2D"]
+z_index = 5
+z_as_relative = false
+script = ExtResource("1_t5wlm")
+
+[node name="BuildingPolygon" type="Polygon2D" parent="."]
+color = Color(0.196078, 0.145098, 0.192157, 1)
+script = ExtResource("2_6l4ev")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_ku5wj")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_ku5wj")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="BuildingOutline" type="Line2D" parent="."]
+width = 5.0
+default_color = Color(0, 0, 0, 1)

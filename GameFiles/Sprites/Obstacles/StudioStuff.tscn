@@ -1,0 +1,112 @@
+[gd_scene load_steps=12 format=3 uid="uid://ciirfup4khboq"]
+
+[ext_resource type="Script" uid="uid://dm7istx3vfpc" path="res://GameFiles/Gameplay Scripts/Obstacles/StudioStuff/StudioStuff.gd" id="1_naug6"]
+[ext_resource type="Texture2D" uid="uid://b86702bpl3ffa" path="res://GameFiles/SpinHead IMGS/StudioStuff/IronBarsWithShadows.png" id="1_np18c"]
+[ext_resource type="Texture2D" uid="uid://5j3ax5er43ct" path="res://GameFiles/SpinHead IMGS/StudioStuff/IronBars.png" id="2_aoa2e"]
+[ext_resource type="Texture2D" uid="uid://bdi4o0b8hesu1" path="res://GameFiles/SpinHead IMGS/StudioStuff/LightProjector.png" id="2_gbpwv"]
+[ext_resource type="Script" uid="uid://cpb18qt080su3" path="res://GameFiles/Gameplay Scripts/Obstacles/StudioStuff/StudioStuffProjector.gd" id="3_tu1hn"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="4_lpspt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4w8te"]
+size = Vector2(115.5, 87.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jplhs"]
+size = Vector2(79, 22.1875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcfaj"]
+size = Vector2(952, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_616pa"]
+size = Vector2(750, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boro4"]
+size = Vector2(81.6999, 34.1672)
+
+[node name="StudioStuff" type="Node2D"]
+z_index = 12
+z_as_relative = false
+script = ExtResource("1_naug6")
+
+[node name="IronBarsWithShadows" type="Sprite2D" parent="."]
+position = Vector2(19.5, 83.5)
+texture = ExtResource("1_np18c")
+
+[node name="LightProjector0" type="CharacterBody2D" parent="."]
+position = Vector2(-300, 114)
+script = ExtResource("3_tu1hn")
+
+[node name="LightProjector" type="Sprite2D" parent="LightProjector0"]
+texture = ExtResource("2_gbpwv")
+offset = Vector2(0, 381)
+
+[node name="killArea2" type="Area2D" parent="LightProjector0"]
+position = Vector2(260, -74)
+script = ExtResource("4_lpspt")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LightProjector0/killArea2"]
+position = Vector2(-258.75, 145.75)
+shape = SubResource("RectangleShape2D_4w8te")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="LightProjector0/killArea2"]
+position = Vector2(-258.5, 91.0938)
+shape = SubResource("RectangleShape2D_jplhs")
+
+[node name="LightProjector2" type="CharacterBody2D" parent="."]
+position = Vector2(300, 114)
+script = ExtResource("3_tu1hn")
+
+[node name="LightProjector" type="Sprite2D" parent="LightProjector2"]
+texture = ExtResource("2_gbpwv")
+offset = Vector2(0, 381)
+
+[node name="killArea2" type="Area2D" parent="LightProjector2"]
+position = Vector2(260, -74)
+script = ExtResource("4_lpspt")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="LightProjector2/killArea2"]
+position = Vector2(-258.75, 145.75)
+shape = SubResource("RectangleShape2D_4w8te")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="LightProjector2/killArea2"]
+position = Vector2(-258.5, 91.0938)
+shape = SubResource("RectangleShape2D_jplhs")
+
+[node name="IronBars" type="Sprite2D" parent="."]
+position = Vector2(0, 60)
+texture = ExtResource("2_aoa2e")
+
+[node name="killArea" type="Area2D" parent="IronBars"]
+position = Vector2(0, -20)
+script = ExtResource("4_lpspt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="IronBars/killArea"]
+position = Vector2(0, 63)
+shape = SubResource("RectangleShape2D_gcfaj")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="IronBars/killArea"]
+position = Vector2(-1, 3)
+shape = SubResource("RectangleShape2D_616pa")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="IronBars/killArea"]
+position = Vector2(-411.258, -30.4488)
+rotation = 0.514872
+shape = SubResource("RectangleShape2D_boro4")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="IronBars/killArea"]
+position = Vector2(-400, 42)
+rotation = -0.514872
+shape = SubResource("RectangleShape2D_boro4")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="IronBars/killArea"]
+position = Vector2(400, 43)
+rotation = 0.514872
+shape = SubResource("RectangleShape2D_boro4")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="IronBars/killArea"]
+position = Vector2(406, -31)
+rotation = -0.514872
+shape = SubResource("RectangleShape2D_boro4")
+
+[connection signal="body_entered" from="LightProjector0/killArea2" to="LightProjector0/killArea2" method="_on_body_entered"]
+[connection signal="body_entered" from="LightProjector2/killArea2" to="LightProjector2/killArea2" method="_on_body_entered"]
+[connection signal="body_entered" from="IronBars/killArea" to="IronBars/killArea" method="_on_body_entered"]

@@ -1,0 +1,144 @@
+[gd_scene load_steps=34 format=3 uid="uid://cr1aminncnesc"]
+
+[ext_resource type="Texture2D" uid="uid://dlqxe5x2rkuj2" path="res://GameFiles/SpinHead IMGS/LoadingScreen/0.png" id="1_kf8ll"]
+[ext_resource type="Texture2D" uid="uid://b6x0xgb13g4k2" path="res://GameFiles/SpinHead IMGS/LoadingScreen/1.png" id="2_3hcpw"]
+[ext_resource type="Texture2D" uid="uid://cifgvn8dfntw5" path="res://GameFiles/SpinHead IMGS/LoadingScreen/2.png" id="3_y8to0"]
+[ext_resource type="Texture2D" uid="uid://cpvpxpgdaf3ai" path="res://GameFiles/SpinHead IMGS/LoadingScreen/3.png" id="4_4altf"]
+[ext_resource type="Texture2D" uid="uid://dohi8cb87uqt3" path="res://GameFiles/SpinHead IMGS/LoadingScreen/4.png" id="5_1pdxg"]
+[ext_resource type="Texture2D" uid="uid://dolp7mkkeh10x" path="res://GameFiles/SpinHead IMGS/LoadingScreen/5.png" id="6_8av2g"]
+[ext_resource type="Texture2D" uid="uid://hro3kmrts7c7" path="res://GameFiles/SpinHead IMGS/LoadingScreen/6.png" id="7_eilwv"]
+[ext_resource type="Texture2D" uid="uid://c2xl1kom2xvyc" path="res://GameFiles/SpinHead IMGS/LoadingScreen/7.png" id="8_vmumt"]
+[ext_resource type="Texture2D" uid="uid://dk0aaxchagogu" path="res://GameFiles/SpinHead IMGS/LoadingScreen/8.png" id="9_elkos"]
+[ext_resource type="Texture2D" uid="uid://bjm5saapn4g3t" path="res://GameFiles/SpinHead IMGS/LoadingScreen/9.jpg" id="10_ifoij"]
+[ext_resource type="Texture2D" uid="uid://bp25y1to6stkk" path="res://GameFiles/SpinHead IMGS/LoadingScreen/10.jpg" id="11_c1e1a"]
+[ext_resource type="Texture2D" uid="uid://cgguxe52dm67m" path="res://GameFiles/SpinHead IMGS/LoadingScreen/11.jpg" id="12_5jt0n"]
+[ext_resource type="Texture2D" uid="uid://s2oug2if7dpd" path="res://GameFiles/SpinHead IMGS/LoadingScreen/12.jpg" id="13_26pa8"]
+[ext_resource type="Texture2D" uid="uid://bini7vb0wuees" path="res://GameFiles/SpinHead IMGS/LoadingScreen/13.jpg" id="14_y6ig6"]
+[ext_resource type="Texture2D" uid="uid://dxkfi40mdv8m" path="res://GameFiles/SpinHead IMGS/LoadingScreen/14.jpg" id="15_r28n1"]
+[ext_resource type="Texture2D" uid="uid://c6leigvy1wbj7" path="res://GameFiles/SpinHead IMGS/LoadingScreen/15.jpg" id="16_47t4c"]
+[ext_resource type="Texture2D" uid="uid://du0cp65nuhi60" path="res://GameFiles/SpinHead IMGS/LoadingScreen/16.jpg" id="17_1a2gn"]
+[ext_resource type="Texture2D" uid="uid://4uw830sdcp2d" path="res://GameFiles/SpinHead IMGS/LoadingScreen/17.jpg" id="18_7btfu"]
+[ext_resource type="Texture2D" uid="uid://bdpg3nxkyx0ub" path="res://GameFiles/SpinHead IMGS/LoadingScreen/18.jpg" id="19_plqox"]
+[ext_resource type="Texture2D" uid="uid://dndry46q0lq1y" path="res://GameFiles/SpinHead IMGS/LoadingScreen/19.jpg" id="20_g62nj"]
+[ext_resource type="Texture2D" uid="uid://cdhxo5hqk0bcv" path="res://GameFiles/SpinHead IMGS/LoadingScreen/20.jpg" id="21_aor51"]
+[ext_resource type="Texture2D" uid="uid://cv0ymfhgso2yo" path="res://GameFiles/SpinHead IMGS/LoadingScreen/21.jpg" id="22_0ry1k"]
+[ext_resource type="Texture2D" uid="uid://ck32dtkrilcwg" path="res://GameFiles/SpinHead IMGS/LoadingScreen/22.jpg" id="23_wpq5l"]
+[ext_resource type="Texture2D" uid="uid://b5d4vh4rjp2pp" path="res://GameFiles/SpinHead IMGS/LoadingScreen/23.jpg" id="24_apnxw"]
+[ext_resource type="Texture2D" uid="uid://nqg7ohurtvu3" path="res://GameFiles/SpinHead IMGS/LoadingScreen/24.jpg" id="25_g3v2y"]
+[ext_resource type="Texture2D" uid="uid://dv0r4w8yb3khy" path="res://GameFiles/SpinHead IMGS/LoadingScreen/25.jpg" id="26_g4nko"]
+[ext_resource type="Texture2D" uid="uid://cvw2huur7s5jq" path="res://GameFiles/SpinHead IMGS/LoadingScreen/26.jpg" id="27_r8eg6"]
+[ext_resource type="Texture2D" uid="uid://bkj13rkpxbh7v" path="res://GameFiles/SpinHead IMGS/LoadingScreen/27.jpg" id="28_etmt3"]
+[ext_resource type="Texture2D" uid="uid://cjjqut2aryhbq" path="res://GameFiles/SpinHead IMGS/LoadingScreen/28.jpg" id="29_ciof3"]
+[ext_resource type="Texture2D" uid="uid://bkhdy67dhe0p7" path="res://GameFiles/SpinHead IMGS/LoadingScreen/29.jpg" id="30_rx1hv"]
+[ext_resource type="Texture2D" uid="uid://dklcqgkw8e4iq" path="res://GameFiles/SpinHead IMGS/LoadingScreen/30.jpg" id="31_qhdmk"]
+[ext_resource type="Script" uid="uid://ctg2ov077iru2" path="res://GameFiles/ScreenView Scripts/Loading.gd" id="32_hyel0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o8cxx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kf8ll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3hcpw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y8to0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4altf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1pdxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8av2g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_eilwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vmumt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_elkos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ifoij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_c1e1a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_5jt0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_26pa8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_y6ig6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_r28n1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_47t4c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_1a2gn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_7btfu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_plqox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_g62nj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_aor51")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_0ry1k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_wpq5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_apnxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_g3v2y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_g4nko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_r8eg6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_etmt3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_ciof3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_rx1hv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_qhdmk")
+}],
+"loop": false,
+"name": &"load",
+"speed": 30.0
+}]
+
+[node name="Loading" type="AnimatedSprite2D"]
+visible = false
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_o8cxx")
+animation = &"load"
+frame = 30
+frame_progress = 1.0
+script = ExtResource("32_hyel0")

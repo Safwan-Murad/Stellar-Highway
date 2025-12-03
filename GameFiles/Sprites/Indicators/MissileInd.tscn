@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://blg6w8jd1iqjq"]
+
+[ext_resource type="Texture2D" uid="uid://cia6kkxq7npai" path="res://GameFiles/SpinHead IMGS/UI/menu/tutorialBook/browseBTN.png" id="1_84303"]
+
+[node name="MissileInd" type="Sprite2D"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_84303")

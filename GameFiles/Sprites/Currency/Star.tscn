@@ -1,0 +1,158 @@
+[gd_scene load_steps=16 format=3 uid="uid://b23tgrb2dnbbq"]
+
+[ext_resource type="Texture2D" uid="uid://da2sv5h1ig14h" path="res://GameFiles/SpinHead IMGS/Currency/Star/0.png" id="1_1kqxh"]
+[ext_resource type="Texture2D" uid="uid://bdienoa8tuabn" path="res://GameFiles/SpinHead IMGS/Currency/Star/1.png" id="2_4gk13"]
+[ext_resource type="Texture2D" uid="uid://c57xlhseipkmb" path="res://GameFiles/SpinHead IMGS/Currency/Star/2.png" id="3_awsp5"]
+[ext_resource type="Texture2D" uid="uid://7u7g35orgerp" path="res://GameFiles/SpinHead IMGS/Currency/Star/3.png" id="4_lmhle"]
+[ext_resource type="Texture2D" uid="uid://ub6stn64pxm1" path="res://GameFiles/SpinHead IMGS/Currency/Star/4.png" id="5_cro7c"]
+[ext_resource type="Texture2D" uid="uid://dy6boe5ct4skx" path="res://GameFiles/SpinHead IMGS/Currency/Star/5.png" id="6_oslt7"]
+[ext_resource type="Texture2D" uid="uid://cw3f7xe41mupy" path="res://GameFiles/SpinHead IMGS/Currency/Star/6.png" id="7_l1i26"]
+[ext_resource type="Texture2D" uid="uid://b8x3jddhf35q" path="res://GameFiles/SpinHead IMGS/Currency/Star/7.png" id="8_0e28i"]
+[ext_resource type="Texture2D" uid="uid://b6bcvplruojwv" path="res://GameFiles/SpinHead IMGS/Currency/Star/glow.png" id="9_4numn"]
+[ext_resource type="Script" uid="uid://dpfw4plsnaq2a" path="res://GameFiles/Gameplay Scripts/Currency/Star.gd" id="9_7bgoq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rq3fl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1kqxh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_1kqxh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_1kqxh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_4gk13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_awsp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_awsp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lmhle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cro7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cro7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cro7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_oslt7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l1i26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_l1i26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_0e28i")
+}],
+"loop": true,
+"name": &"Spin",
+"speed": 20.0
+}]
+
+[sub_resource type="Animation" id="Animation_fn6sy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jxql1"]
+resource_name = "onCollect"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -128)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_576s2"]
+_data = {
+&"RESET": SubResource("Animation_fn6sy"),
+&"onCollect": SubResource("Animation_jxql1")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6u73j"]
+size = Vector2(38, 35.25)
+
+[node name="Star" type="Node2D"]
+z_index = 3
+z_as_relative = false
+scale = Vector2(0.5, 0.5)
+script = ExtResource("9_7bgoq")
+
+[node name="Star" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rq3fl")
+animation = &"Spin"
+autoplay = "Spin"
+frame_progress = 0.73531
+
+[node name="Glow" type="Sprite2D" parent="Star"]
+texture = ExtResource("9_4numn")
+
+[node name="Fade" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Star")
+libraries = {
+"": SubResource("AnimationLibrary_576s2")
+}
+
+[node name="killMe" type="Area2D" parent="."]
+position = Vector2(1, -1.5)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="killMe"]
+position = Vector2(-1, 2.25)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_6u73j")
+
+[connection signal="animation_finished" from="Fade" to="." method="_on_fade_animation_finished"]
+[connection signal="body_entered" from="killMe" to="." method="_on_kill_me_body_entered"]

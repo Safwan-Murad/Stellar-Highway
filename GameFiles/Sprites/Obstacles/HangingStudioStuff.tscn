@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://drrn3tgs0qc5q"]
+
+[ext_resource type="Texture2D" uid="uid://5j3ax5er43ct" path="res://GameFiles/SpinHead IMGS/StudioStuff/IronBars.png" id="1_2shif"]
+[ext_resource type="Script" uid="uid://bhtxielt1p53q" path="res://GameFiles/Gameplay Scripts/Obstacles/StudioStuff/HangingStudioStuff.gd" id="1_ed7a7"]
+[ext_resource type="Script" uid="uid://8rwm2mcbiyy7" path="res://GameFiles/Gameplay Scripts/Obstacles/Buildings/UnderConstruction/HeavyPendulum.gd" id="1_i21xd"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="4_1yohs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0wia"]
+size = Vector2(87, 572)
+
+[node name="HangingStudioStuff" type="Node2D"]
+z_index = 12
+z_as_relative = false
+scale = Vector2(0.85, 0.85)
+script = ExtResource("1_ed7a7")
+
+[node name="Rope" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, -1015)
+width = 6.0
+default_color = Color(0.356863, 0.356863, 0.356863, 1)
+
+[node name="Bars" type="StaticBody2D" parent="."]
+position = Vector2(2, 0)
+scale = Vector2(0.7, 0.7)
+script = ExtResource("1_i21xd")
+
+[node name="IronBars2" type="Sprite2D" parent="Bars"]
+position = Vector2(9, -9.66667)
+rotation = 1.5708
+texture = ExtResource("1_2shif")
+offset = Vector2(376, 0)
+flip_v = true
+
+[node name="IronBars" type="Sprite2D" parent="Bars"]
+position = Vector2(-16.6667, -9.66666)
+rotation = 1.5708
+texture = ExtResource("1_2shif")
+offset = Vector2(376, 0)
+
+[node name="killArea2" type="Area2D" parent="Bars"]
+position = Vector2(430, -123.333)
+scale = Vector2(1.66667, 1.66667)
+script = ExtResource("4_1yohs")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Bars/killArea2"]
+position = Vector2(-260.5, 294)
+shape = SubResource("RectangleShape2D_y0wia")
+
+[connection signal="body_entered" from="Bars/killArea2" to="Bars/killArea2" method="_on_body_entered"]

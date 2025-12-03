@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://bco65cjsp6ryd"]
+
+[ext_resource type="Texture2D" uid="uid://cb36cgin5us1k" path="res://GameFiles/SpinHead IMGS/Moon/1.png" id="1_1tpra"]
+[ext_resource type="Script" uid="uid://b5udwgkhs5rmo" path="res://GameFiles/ScreenView Scripts/rotateLight.gd" id="2_yjn8u"]
+[ext_resource type="Texture2D" uid="uid://dyddsy46h24gv" path="res://GameFiles/SpinHead IMGS/Moon/0.png" id="3_c7ryy"]
+
+[sub_resource type="Animation" id="Animation_yam2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.7, 0.7)]
+}
+
+[sub_resource type="Animation" id="Animation_lhkrp"]
+resource_name = "smallScale"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.7, 0.7), Vector2(1, 1), Vector2(0.7, 0.7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7d7s"]
+_data = {
+&"RESET": SubResource("Animation_yam2x"),
+&"smallScale": SubResource("Animation_lhkrp")
+}
+
+[node name="Moon" type="Node2D"]
+
+[node name="Dynamic" type="Sprite2D" parent="."]
+position = Vector2(64, 64)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_1tpra")
+offset = Vector2(-64, -64)
+script = ExtResource("2_yjn8u")
+anim = "smallScale"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dynamic"]
+libraries = {
+"": SubResource("AnimationLibrary_s7d7s")
+}
+
+[node name="Static" type="Sprite2D" parent="."]
+texture = ExtResource("3_c7ryy")

@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfa0op2xerryt"]
+
+[ext_resource type="Script" uid="uid://bfufwod6mfhmj" path="res://GameFiles/Gameplay Scripts/sts_intro.gd" id="1_er7aa"]
+[ext_resource type="VideoStream" uid="uid://bcae4kgha3q5h" path="res://GameFiles/Intro/stsVidOnly.ogv" id="2_x5fvg"]
+[ext_resource type="AudioStream" uid="uid://bwoq6jai2y4wn" path="res://GameFiles/Intro/stsAudio.mp3" id="3_nm1nl"]
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_er7aa")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_nm1nl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -544.0
+offset_right = 960.0
+offset_bottom = 544.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("2_x5fvg")
+expand = true
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

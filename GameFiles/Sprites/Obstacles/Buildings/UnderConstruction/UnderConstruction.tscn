@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3bwnc8qvdc2o"]
+
+[ext_resource type="Script" uid="uid://deb0bmijpaw6r" path="res://GameFiles/Gameplay Scripts/Obstacles/Buildings/UnderConstruction/UnderConstruction.gd" id="1_24fnr"]
+
+[node name="UnderConstruction" type="Node2D"]
+script = ExtResource("1_24fnr")

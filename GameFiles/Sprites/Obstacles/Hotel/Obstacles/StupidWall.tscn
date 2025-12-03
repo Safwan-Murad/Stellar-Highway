@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxmpdpylp7lih"]
+
+[ext_resource type="Texture2D" uid="uid://cdgb2efeu1hyt" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Obstacles/stupidWall.png" id="1_3liol"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="2_oiixt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q8j7o"]
+size = Vector2(38, 132)
+
+[node name="StupidWall" type="Sprite2D"]
+texture = ExtResource("1_3liol")
+
+[node name="killRange" type="Area2D" parent="."]
+script = ExtResource("2_oiixt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killRange"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_q8j7o")
+
+[connection signal="body_entered" from="killRange" to="killRange" method="_on_body_entered"]

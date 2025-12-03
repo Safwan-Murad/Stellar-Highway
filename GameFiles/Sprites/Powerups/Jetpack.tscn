@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://b50p8eorq32l8"]
+
+[ext_resource type="Script" uid="uid://2n21g5ny3vxb" path="res://GameFiles/Gameplay Scripts/Powerups/Jetpack.gd" id="1_08e43"]
+[ext_resource type="PackedScene" uid="uid://cv8vyjgk17bmx" path="res://GameFiles/Sprites/Powerups/PowerupGlow.tscn" id="2_t4uj4"]
+[ext_resource type="Script" uid="uid://cpyeta1hf78q0" path="res://GameFiles/Gameplay Scripts/Powerups/FireLine.gd" id="3_carvc"]
+[ext_resource type="Texture2D" uid="uid://dpkpy1y35ej61" path="res://GameFiles/SpinHead IMGS/Powerups/Jetpack/Jetpack.png" id="3_q0wab"]
+[ext_resource type="AudioStream" uid="uid://dclpgduki268b" path="res://GameFiles/SoundEffects/JetpackSound.mp3" id="5_u3wye"]
+[ext_resource type="AudioStream" uid="uid://boe46nr7wwa2h" path="res://GameFiles/SoundEffects/JetStart.mp3" id="6_5o3sy"]
+
+[sub_resource type="Curve" id="Curve_pcn0l"]
+_data = [Vector2(0, 0.246522), 0.0, 0.0, 0, 0, Vector2(0.501961, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_wemwe"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.929412, 0.105882, 0.141176, 1, 0.980392, 0.92549, 0.027451, 1, 1, 1, 1, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyyhj"]
+size = Vector2(33, 31)
+
+[node name="Jetpack" type="Node2D"]
+script = ExtResource("1_08e43")
+
+[node name="PowerupGlow" parent="." instance=ExtResource("2_t4uj4")]
+frame_progress = 0.81331
+
+[node name="FireLine" type="Line2D" parent="."]
+position = Vector2(-33, -10)
+width = 6.0
+width_curve = SubResource("Curve_pcn0l")
+default_color = Color(0.686275, 0.270588, 0.537255, 1)
+gradient = SubResource("Gradient_wemwe")
+script = ExtResource("3_carvc")
+
+[node name="FireLine2" type="Line2D" parent="."]
+position = Vector2(-33, 10)
+width = 6.0
+width_curve = SubResource("Curve_pcn0l")
+default_color = Color(0.686275, 0.270588, 0.537255, 1)
+gradient = SubResource("Gradient_wemwe")
+script = ExtResource("3_carvc")
+
+[node name="Jetpack" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_q0wab")
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2(1, -1.5)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-1, 1.5)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_uyyhj")
+
+[node name="JetSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_u3wye")
+volume_db = 6.0
+pitch_scale = 2.0
+
+[node name="JetStart" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_5o3sy")
+volume_db = 6.0
+pitch_scale = 1.5
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

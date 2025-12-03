@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0a24r8bchisb"]
+
+[ext_resource type="Texture2D" uid="uid://dsvqquq4g4t3u" path="res://GameFiles/SpinHead IMGS/Buildings/Building1/building1.png" id="1_6fb7l"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="2_0013q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bigdb"]
+size = Vector2(89.4574, 6.49125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hx0qu"]
+size = Vector2(9.47366, 379.298)
+
+[node name="IncompleteBuilding" type="StaticBody2D"]
+
+[node name="Building1" type="Sprite2D" parent="."]
+z_index = 5
+z_as_relative = false
+position = Vector2(0, 369)
+texture = ExtResource("1_6fb7l")
+flip_v = true
+
+[node name="Building2" type="Sprite2D" parent="."]
+z_index = 5
+z_as_relative = false
+position = Vector2(0, 904)
+texture = ExtResource("1_6fb7l")
+flip_v = true
+
+[node name="KillRange" type="Area2D" parent="."]
+position = Vector2(82.25, -30.75)
+scale = Vector2(1e-05, 1e-05)
+script = ExtResource("2_0013q")
+
+[node name="KillerColl3" type="CollisionShape2D" parent="KillRange"]
+position = Vector2(-8.52166e+06, 7.075e+06)
+scale = Vector2(285000, 285000)
+shape = SubResource("RectangleShape2D_bigdb")
+
+[node name="KillerColl" type="CollisionShape2D" parent="KillRange"]
+position = Vector2(-2.265e+07, 6.0225e+07)
+scale = Vector2(285000, 285000)
+shape = SubResource("RectangleShape2D_hx0qu")
+
+[node name="KillerColl2" type="CollisionShape2D" parent="KillRange"]
+position = Vector2(5.575e+06, 6.0175e+07)
+scale = Vector2(285000, 285000)
+shape = SubResource("RectangleShape2D_hx0qu")
+
+[connection signal="body_entered" from="KillRange" to="KillRange" method="_on_body_entered"]

@@ -1,0 +1,266 @@
+[gd_scene load_steps=26 format=3 uid="uid://72ihvcsw56ui"]
+
+[ext_resource type="Script" uid="uid://eeuq53e3yf6f" path="res://GameFiles/Gameplay Scripts/Obstacles/Missile/Missile.gd" id="1_ows51"]
+[ext_resource type="Texture2D" uid="uid://bj41uv2ukbs33" path="res://GameFiles/SpinHead IMGS/Missile/fire_R/0.png" id="3_tmck3"]
+[ext_resource type="Texture2D" uid="uid://b5u3qmxmeol3v" path="res://GameFiles/SpinHead IMGS/Missile/fire_B/0.png" id="3_vhfhs"]
+[ext_resource type="Texture2D" uid="uid://dmey2pjxpr7ow" path="res://GameFiles/SpinHead IMGS/Missile/fire_R/1.png" id="4_61jm1"]
+[ext_resource type="Texture2D" uid="uid://cks6l3u8foksq" path="res://GameFiles/SpinHead IMGS/Missile/fire_B/1.png" id="4_cet4w"]
+[ext_resource type="Texture2D" uid="uid://ca3b23s7cv71x" path="res://GameFiles/SpinHead IMGS/Missile/fire_R/2.png" id="5_ficgn"]
+[ext_resource type="Texture2D" uid="uid://bk8ui4y1p2xp2" path="res://GameFiles/SpinHead IMGS/Missile/fire_B/2.png" id="5_pkyhw"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="8_am7wc"]
+[ext_resource type="Texture2D" uid="uid://dynhqbcqas53g" path="res://GameFiles/SpinHead IMGS/Missile/Misslie.png" id="9_m1el4"]
+[ext_resource type="Texture2D" uid="uid://dytcddjqmivrc" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/0.png" id="10_ori1v"]
+[ext_resource type="Texture2D" uid="uid://dyl2m6mqrm4ot" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/1.png" id="11_krina"]
+[ext_resource type="Texture2D" uid="uid://ci68g77cudny7" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/2.png" id="12_2rqm6"]
+[ext_resource type="Texture2D" uid="uid://dhprcbupqsoix" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/3.png" id="13_fmq70"]
+[ext_resource type="Texture2D" uid="uid://jrvarng6ttnr" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/4.png" id="14_u5b63"]
+[ext_resource type="Texture2D" uid="uid://cuwepljt2egts" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/5.png" id="15_djnbx"]
+[ext_resource type="Texture2D" uid="uid://bkjx746cxu3ni" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/6.png" id="16_sbitn"]
+[ext_resource type="Texture2D" uid="uid://7ywibivvkyip" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/7.png" id="17_570ka"]
+[ext_resource type="Texture2D" uid="uid://bx4h7kopjigoi" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/8.png" id="18_ibu3j"]
+[ext_resource type="Texture2D" uid="uid://bito3o0h0v8rf" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/9.png" id="19_8sq7f"]
+[ext_resource type="Texture2D" uid="uid://deb72ro7ogytv" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/10.png" id="20_1tygb"]
+[ext_resource type="AudioStream" uid="uid://rprs222im2pq" path="res://GameFiles/SoundEffects/MissileExplosion.mp3" id="21_25vds"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqfey"]
+size = Vector2(22, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adjq1"]
+size = Vector2(24, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0lx50"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vhfhs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vhfhs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vhfhs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cet4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cet4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pkyhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pkyhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cet4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_cet4w")
+}],
+"loop": true,
+"name": &"fire_B",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tmck3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tmck3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tmck3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_61jm1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_61jm1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ficgn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ficgn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_61jm1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_61jm1")
+}],
+"loop": true,
+"name": &"fire_R",
+"speed": 20.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u2glv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_ori1v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_krina")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2rqm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fmq70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u5b63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_djnbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_sbitn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_570ka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ibu3j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_8sq7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_1tygb")
+}],
+"loop": false,
+"name": &"Explosion",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_ori1v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_krina")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2rqm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fmq70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u5b63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_djnbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fmq70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u5b63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_djnbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_sbitn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_570ka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_fmq70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u5b63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_djnbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_sbitn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_570ka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ibu3j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_u5b63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_djnbx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_sbitn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_570ka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ibu3j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_8sq7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_1tygb")
+}],
+"loop": false,
+"name": &"newExp",
+"speed": 20.0
+}]
+
+[node name="Missile" type="CharacterBody2D"]
+z_index = 3
+z_as_relative = false
+script = ExtResource("1_ows51")
+
+[node name="killMe" type="Area2D" parent="."]
+position = Vector2(2, -3)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="killMe"]
+position = Vector2(0, 3)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_bqfey")
+
+[node name="killArea" type="Area2D" parent="."]
+position = Vector2(2, -3)
+scale = Vector2(2, 2)
+script = ExtResource("8_am7wc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="killArea"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_adjq1")
+
+[node name="Fire" type="AnimatedSprite2D" parent="."]
+position = Vector2(-34, 0)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_0lx50")
+animation = &"fire_B"
+frame = 3
+frame_progress = 0.478889
+
+[node name="Misslie" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("9_m1el4")
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-1, 3)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_u2glv")
+animation = &"newExp"
+frame = 23
+frame_progress = 1.0
+
+[node name="ExpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("21_25vds")
+volume_db = 4.0
+
+[connection signal="body_entered" from="killMe" to="." method="_on_kill_me_body_entered"]
+[connection signal="body_entered" from="killArea" to="killArea" method="_on_body_entered"]
+[connection signal="animation_finished" from="Explosion" to="." method="_on_explosion_animation_finished"]
+[connection signal="finished" from="ExpSound" to="." method="_on_exp_sound_finished"]

@@ -1,0 +1,156 @@
+[gd_scene load_steps=20 format=3 uid="uid://b5ax1h5mgxle"]
+
+[ext_resource type="Texture2D" uid="uid://dpa0aphnr60wk" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Hotel Hall/backLayer.png" id="1_1cyem"]
+[ext_resource type="Script" uid="uid://cancpj2nkdnrt" path="res://GameFiles/Gameplay Scripts/Obstacles/Hotel/Hotel.gd" id="1_gvr2j"]
+[ext_resource type="Texture2D" uid="uid://c0o7h5bdtyyqn" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Hotel Hall/outerLayer.png" id="2_2qofg"]
+[ext_resource type="Texture2D" uid="uid://mbwpb4mkaxwy" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/hotelPiece.png" id="3_cx1os"]
+[ext_resource type="Texture2D" uid="uid://bjehisph5l5d" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Signs/Stupid Walls/on.png" id="5_syfnd"]
+[ext_resource type="Texture2D" uid="uid://ca1qp5mi3oiji" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Stars5/off.png" id="5_wc7fc"]
+[ext_resource type="Texture2D" uid="uid://dshl3scdtw7hi" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Stars5/on.png" id="6_gorx7"]
+[ext_resource type="Texture2D" uid="uid://c2sse6p36lq4i" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Signs/Stupid Walls/off.png" id="6_qjr0l"]
+[ext_resource type="Texture2D" uid="uid://b828ytgnua2uf" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Signs/Smooth Walls/on.png" id="6_sr25f"]
+[ext_resource type="Script" uid="uid://o4kbscykist4" path="res://GameFiles/Gameplay Scripts/Obstacles/Hotel/syncAnim.gd" id="7_qes8t"]
+[ext_resource type="Texture2D" uid="uid://c0r8wqefc0vko" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Signs/Smooth Walls/off.png" id="7_wvf45"]
+[ext_resource type="Texture2D" uid="uid://bws1khfjhvpag" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Stars6EE/on.png" id="7_xamo6"]
+[ext_resource type="Texture2D" uid="uid://bm6vtpty66ck4" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Hotel Building/Stars6EE/off.png" id="8_sjjsc"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="12_i2lax"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_05erv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_sr25f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wvf45")
+}],
+"loop": true,
+"name": &"SmoothWall",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_syfnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qjr0l")
+}],
+"loop": true,
+"name": &"StupidWall",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ohqpb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gorx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wc7fc")
+}],
+"loop": true,
+"name": &"S5",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_xamo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sjjsc")
+}],
+"loop": true,
+"name": &"S6",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpfbv"]
+size = Vector2(60, 360)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfsu4"]
+size = Vector2(1920, 59.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1aj0"]
+size = Vector2(1920, 54)
+
+[node name="Hotel" type="Node2D"]
+script = ExtResource("1_gvr2j")
+
+[node name="HotelPiece1" type="Sprite2D" parent="."]
+z_index = 5
+z_as_relative = false
+position = Vector2(0, -360)
+texture = ExtResource("3_cx1os")
+
+[node name="Sign" type="AnimatedSprite2D" parent="HotelPiece1"]
+z_index = 10
+z_as_relative = false
+position = Vector2(0, -60)
+sprite_frames = SubResource("SpriteFrames_05erv")
+animation = &"StupidWall"
+
+[node name="Stars" type="AnimatedSprite2D" parent="HotelPiece1"]
+z_index = 10
+z_as_relative = false
+position = Vector2(0, 60)
+sprite_frames = SubResource("SpriteFrames_ohqpb")
+animation = &"S5"
+frame_progress = 0.569777
+script = ExtResource("7_qes8t")
+
+[node name="killRange2" type="Area2D" parent="HotelPiece1"]
+position = Vector2(0, 360)
+script = ExtResource("12_i2lax")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HotelPiece1/killRange2"]
+position = Vector2(-930, -360)
+shape = SubResource("RectangleShape2D_xpfbv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HotelPiece1/killRange2"]
+position = Vector2(930, -360)
+shape = SubResource("RectangleShape2D_xpfbv")
+
+[node name="Hall" type="StaticBody2D" parent="."]
+
+[node name="BackLayer" type="Sprite2D" parent="Hall"]
+z_index = -10
+z_as_relative = false
+texture = ExtResource("1_1cyem")
+
+[node name="OuterLayer" type="Sprite2D" parent="Hall"]
+z_index = 5
+z_as_relative = false
+texture = ExtResource("2_2qofg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hall"]
+position = Vector2(0, 150.25)
+shape = SubResource("RectangleShape2D_yfsu4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hall"]
+position = Vector2(0, -153)
+shape = SubResource("RectangleShape2D_t1aj0")
+
+[node name="Hall1" type="StaticBody2D" parent="."]
+position = Vector2(0, 360)
+
+[node name="BackLayer" type="Sprite2D" parent="Hall1"]
+z_index = -10
+z_as_relative = false
+texture = ExtResource("1_1cyem")
+
+[node name="OuterLayer" type="Sprite2D" parent="Hall1"]
+z_index = 5
+z_as_relative = false
+texture = ExtResource("2_2qofg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hall1"]
+position = Vector2(0, 150.25)
+shape = SubResource("RectangleShape2D_yfsu4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hall1"]
+position = Vector2(0, -153)
+shape = SubResource("RectangleShape2D_t1aj0")
+
+[connection signal="frame_changed" from="HotelPiece1/Sign" to="HotelPiece1/Stars" method="_on_sign_frame_changed"]
+[connection signal="body_entered" from="HotelPiece1/killRange2" to="HotelPiece1/killRange2" method="_on_body_entered"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhd1fn1h7l3rq"]
+
+[ext_resource type="Script" uid="uid://dykd4bypx1db4" path="res://GameFiles/Gameplay Scripts/Indicators/dragonsInd.gd" id="1_xmrsx"]
+[ext_resource type="PackedScene" uid="uid://b742ayww4g6ji" path="res://GameFiles/Sprites/Indicators/Danger.tscn" id="2_a7cqu"]
+[ext_resource type="AudioStream" uid="uid://dr48wcdkjf3gb" path="res://GameFiles/SoundEffects/MissilesBeep.mp3" id="3_bgdhm"]
+
+[node name="DragonsIndicators" type="Node2D"]
+visible = false
+position = Vector2(0, 540)
+script = ExtResource("1_xmrsx")
+
+[node name="Indicator0" parent="." instance=ExtResource("2_a7cqu")]
+position = Vector2(0, -360)
+
+[node name="Indicator1" parent="." instance=ExtResource("2_a7cqu")]
+
+[node name="Indicator2" parent="." instance=ExtResource("2_a7cqu")]
+position = Vector2(0, 360)
+
+[node name="DangerBeep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bgdhm")
+volume_db = 3.0
+autoplay = true
+
+[connection signal="finished" from="DangerBeep" to="." method="_on_danger_beep_finished"]

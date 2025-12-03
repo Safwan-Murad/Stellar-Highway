@@ -1,0 +1,199 @@
+[gd_scene load_steps=21 format=3 uid="uid://b1yuixstdgaiq"]
+
+[ext_resource type="Script" uid="uid://eeuq53e3yf6f" path="res://GameFiles/Gameplay Scripts/Obstacles/Missile/Missile.gd" id="1_jqpuf"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="2_e070p"]
+[ext_resource type="Texture2D" uid="uid://qclgjwopdh44" path="res://GameFiles/SpinHead IMGS/TimedMissile/TimedMisslie.png" id="3_7f7s2"]
+[ext_resource type="Script" uid="uid://diyqkajh2wvwo" path="res://GameFiles/Gameplay Scripts/Obstacles/Missile/Fuse4Missile.gd" id="4_njixg"]
+[ext_resource type="Texture2D" uid="uid://dytcddjqmivrc" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/0.png" id="5_d2jdn"]
+[ext_resource type="Texture2D" uid="uid://dyl2m6mqrm4ot" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/1.png" id="6_7ajam"]
+[ext_resource type="Texture2D" uid="uid://ci68g77cudny7" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/2.png" id="7_g6bsy"]
+[ext_resource type="Texture2D" uid="uid://dhprcbupqsoix" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/3.png" id="8_yh2qr"]
+[ext_resource type="Texture2D" uid="uid://jrvarng6ttnr" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/4.png" id="9_ws5rw"]
+[ext_resource type="Texture2D" uid="uid://cuwepljt2egts" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/5.png" id="10_303yh"]
+[ext_resource type="Texture2D" uid="uid://bkjx746cxu3ni" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/6.png" id="11_j6oo6"]
+[ext_resource type="Texture2D" uid="uid://7ywibivvkyip" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/7.png" id="12_p1mby"]
+[ext_resource type="Texture2D" uid="uid://bx4h7kopjigoi" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/8.png" id="13_pcgim"]
+[ext_resource type="Texture2D" uid="uid://bito3o0h0v8rf" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/9.png" id="14_sfy28"]
+[ext_resource type="Texture2D" uid="uid://deb72ro7ogytv" path="res://GameFiles/SpinHead IMGS/Missile/Explosion/10.png" id="15_lg4r3"]
+[ext_resource type="AudioStream" uid="uid://rprs222im2pq" path="res://GameFiles/SoundEffects/MissileExplosion.mp3" id="16_61w58"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adjq1"]
+size = Vector2(26, 18)
+
+[sub_resource type="Gradient" id="Gradient_eorsh"]
+colors = PackedColorArray(0.886275, 1, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_l6n0f"]
+_data = [Vector2(0.501961, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.146059), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tk18s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_d2jdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7ajam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_g6bsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yh2qr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ws5rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_303yh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_j6oo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_p1mby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_pcgim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_sfy28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lg4r3")
+}],
+"loop": false,
+"name": &"Explosion",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_d2jdn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7ajam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_g6bsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yh2qr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ws5rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_303yh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yh2qr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ws5rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_303yh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_j6oo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_p1mby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yh2qr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ws5rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_303yh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_j6oo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_p1mby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_pcgim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ws5rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_303yh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_j6oo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_p1mby")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_pcgim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_sfy28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lg4r3")
+}],
+"loop": false,
+"name": &"newExp",
+"speed": 20.0
+}]
+
+[node name="TimedMissile" type="CharacterBody2D"]
+z_index = 3
+z_as_relative = false
+script = ExtResource("1_jqpuf")
+
+[node name="killArea" type="Area2D" parent="."]
+position = Vector2(2, -3)
+scale = Vector2(2, 2)
+script = ExtResource("2_e070p")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="killArea"]
+position = Vector2(-0.5, 2)
+shape = SubResource("RectangleShape2D_adjq1")
+
+[node name="FusePars" type="CPUParticles2D" parent="."]
+scale = Vector2(2, 2)
+lifetime = 0.75
+emission_shape = 1
+emission_sphere_radius = 2.0
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+color = Color(1, 1, 0, 1)
+color_ramp = SubResource("Gradient_eorsh")
+
+[node name="TimedMisslie" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("3_7f7s2")
+
+[node name="Fuse" type="Line2D" parent="TimedMisslie"]
+show_behind_parent = true
+position = Vector2(15, -2)
+scale = Vector2(0.666667, 0.666667)
+width = 1.5
+width_curve = SubResource("Curve_l6n0f")
+default_color = Color(0.819608, 0.407843, 0, 1)
+script = ExtResource("4_njixg")
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-1, 3)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_tk18s")
+animation = &"newExp"
+
+[node name="ExpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_61w58")
+volume_db = 4.0
+
+[connection signal="body_entered" from="killArea" to="killArea" method="_on_body_entered"]
+[connection signal="animation_finished" from="Explosion" to="." method="_on_explosion_animation_finished"]
+[connection signal="finished" from="ExpSound" to="." method="_on_exp_sound_finished"]

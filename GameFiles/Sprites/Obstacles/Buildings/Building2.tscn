@@ -1,0 +1,322 @@
+[gd_scene load_steps=27 format=3 uid="uid://dm3wimct6ve4x"]
+
+[ext_resource type="Script" uid="uid://btg16c7kc3cna" path="res://GameFiles/Gameplay Scripts/Obstacles/Buildings/Building2.gd" id="1_ebmxv"]
+[ext_resource type="Texture2D" uid="uid://b5wqq6gehollb" path="res://GameFiles/SpinHead IMGS/Buildings/Building2/innerLayer.png" id="1_iulkk"]
+[ext_resource type="Texture2D" uid="uid://d28ciqaay40gp" path="res://GameFiles/SpinHead IMGS/Buildings/Building2/outerLayerNoProjectors.png" id="2_pbvxt"]
+[ext_resource type="Texture2D" uid="uid://cgxihkvcikqc2" path="res://GameFiles/SpinHead IMGS/StageLight/stageLight.png" id="3_57jau"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="3_nuror"]
+[ext_resource type="Script" uid="uid://b5udwgkhs5rmo" path="res://GameFiles/ScreenView Scripts/rotateLight.gd" id="4_sb457"]
+[ext_resource type="PackedScene" uid="uid://jk8gnskxp6w" path="res://GameFiles/Sprites/Decor/LightProjector.tscn" id="6_ehvxw"]
+[ext_resource type="PackedScene" uid="uid://b23tgrb2dnbbq" path="res://GameFiles/Sprites/Currency/Star.tscn" id="8_qmhq3"]
+[ext_resource type="PackedScene" uid="uid://cp83oaxmru3nd" path="res://GameFiles/Sprites/Powerups/SpeedBooster.tscn" id="9_4j4vg"]
+
+[sub_resource type="Animation" id="Animation_kbrg4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.523599]
+}
+
+[sub_resource type="Animation" id="Animation_w2f3j"]
+resource_name = "Rotate"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.523599, 0.523599, -0.523599]
+}
+
+[sub_resource type="Animation" id="Animation_8enk4"]
+resource_name = "Rotate1"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.523599, -0.523599, 0.523599]
+}
+
+[sub_resource type="Animation" id="Animation_51max"]
+resource_name = "smolRotate"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.410152, 0.410152, -0.410152]
+}
+
+[sub_resource type="Animation" id="Animation_l4imd"]
+resource_name = "smolRotate1"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.410152, -0.410152, 0.410152]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kug2o"]
+_data = {
+&"RESET": SubResource("Animation_kbrg4"),
+&"Rotate": SubResource("Animation_w2f3j"),
+&"Rotate1": SubResource("Animation_8enk4"),
+&"smolRotate": SubResource("Animation_51max"),
+&"smolRotate1": SubResource("Animation_l4imd")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3w4um"]
+size = Vector2(19, 283)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qgpxd"]
+size = Vector2(19, 517)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0i62o"]
+size = Vector2(15.5, 29.9997)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f04ue"]
+size = Vector2(18.75, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_770bf"]
+size = Vector2(863, 36)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hw7gq"]
+a = Vector2(-156, -264)
+b = Vector2(-66, -309)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brngc"]
+size = Vector2(964, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bajhd"]
+size = Vector2(263.625, 36)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hus44"]
+a = Vector2(976, -230)
+b = Vector2(927, -255)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8u1te"]
+a = Vector2(1055, -286)
+b = Vector2(890, -212)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0awsh"]
+a = Vector2(1091.05, -406.95)
+b = Vector2(845, -165)
+
+[node name="Building2" type="StaticBody2D"]
+script = ExtResource("1_ebmxv")
+
+[node name="InnerLayer" type="Sprite2D" parent="."]
+z_index = -10
+z_as_relative = false
+position = Vector2(-259, -75)
+texture = ExtResource("1_iulkk")
+
+[node name="OuterLayer" type="Sprite2D" parent="."]
+z_index = 5
+z_as_relative = false
+texture = ExtResource("2_pbvxt")
+
+[node name="StageLight1" type="Sprite2D" parent="."]
+z_index = 4
+z_as_relative = false
+position = Vector2(754.5, -362.5)
+rotation = -0.523599
+texture = ExtResource("3_57jau")
+offset = Vector2(0, 112)
+script = ExtResource("4_sb457")
+anim = "smolRotate1"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StageLight1"]
+libraries = {
+"": SubResource("AnimationLibrary_kug2o")
+}
+speed_scale = 0.5
+
+[node name="StageLight2" type="Sprite2D" parent="."]
+z_index = 4
+z_as_relative = false
+position = Vector2(817.5, -362.5)
+texture = ExtResource("3_57jau")
+offset = Vector2(0, 112)
+
+[node name="StageLight3" type="Sprite2D" parent="."]
+z_index = 4
+z_as_relative = false
+position = Vector2(880.5, -362.5)
+rotation = -0.523599
+texture = ExtResource("3_57jau")
+offset = Vector2(0, 112)
+script = ExtResource("4_sb457")
+anim = "smolRotate"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StageLight3"]
+libraries = {
+"": SubResource("AnimationLibrary_kug2o")
+}
+speed_scale = 0.5
+
+[node name="killerColl" type="Area2D" parent="."]
+script = ExtResource("3_nuror")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killerColl"]
+position = Vector2(-1093.5, 265.5)
+shape = SubResource("RectangleShape2D_3w4um")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="killerColl"]
+position = Vector2(1088, 148.5)
+shape = SubResource("RectangleShape2D_qgpxd")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="killerColl"]
+position = Vector2(1090.25, -125)
+shape = SubResource("RectangleShape2D_0i62o")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="killerColl"]
+position = Vector2(955.625, -190.5)
+shape = SubResource("RectangleShape2D_f04ue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-581.5, 89)
+shape = SubResource("RectangleShape2D_770bf")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+position = Vector2(-946, 381)
+shape = SubResource("SegmentShape2D_hw7gq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(573, -151)
+shape = SubResource("RectangleShape2D_brngc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(836.188, -224)
+shape = SubResource("RectangleShape2D_bajhd")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(127, 87)
+shape = SubResource("SegmentShape2D_hus44")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(-349, 45)
+shape = SubResource("SegmentShape2D_8u1te")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(-999, 239)
+shape = SubResource("SegmentShape2D_0awsh")
+
+[node name="LightProjector" parent="." instance=ExtResource("6_ehvxw")]
+position = Vector2(-187, 390)
+scale = Vector2(0.8, 0.8)
+path = "LightSource/AnimationPlayer"
+
+[node name="LightProjector2" parent="." instance=ExtResource("6_ehvxw")]
+position = Vector2(134, 390)
+scale = Vector2(0.8, 0.8)
+anim = "Rotate1"
+path = "LightSource/AnimationPlayer"
+
+[node name="starColls" type="Node2D" parent="."]
+
+[node name="starColl" type="Node2D" parent="starColls"]
+
+[node name="Star" parent="starColls/starColl" instance=ExtResource("8_qmhq3")]
+position = Vector2(-1030, 48)
+
+[node name="Star2" parent="starColls/starColl" instance=ExtResource("8_qmhq3")]
+position = Vector2(-925, 48)
+
+[node name="starColl2" type="Node2D" parent="starColls"]
+position = Vector2(173, 0)
+
+[node name="Star" parent="starColls/starColl2" instance=ExtResource("8_qmhq3")]
+position = Vector2(-1030, 48)
+
+[node name="Star2" parent="starColls/starColl2" instance=ExtResource("8_qmhq3")]
+position = Vector2(-925, 48)
+
+[node name="starColl3" type="Node2D" parent="starColls"]
+position = Vector2(346, 0)
+
+[node name="Star" parent="starColls/starColl3" instance=ExtResource("8_qmhq3")]
+position = Vector2(-1030, 48)
+
+[node name="Star2" parent="starColls/starColl3" instance=ExtResource("8_qmhq3")]
+position = Vector2(-925, 48)
+
+[node name="starColl4" type="Node2D" parent="starColls"]
+position = Vector2(519, 0)
+
+[node name="Star" parent="starColls/starColl4" instance=ExtResource("8_qmhq3")]
+position = Vector2(-1030, 48)
+
+[node name="Star2" parent="starColls/starColl4" instance=ExtResource("8_qmhq3")]
+position = Vector2(-925, 48)
+
+[node name="starColl5" type="Node2D" parent="starColls"]
+position = Vector2(692, 0)
+
+[node name="Star" parent="starColls/starColl5" instance=ExtResource("8_qmhq3")]
+position = Vector2(-1030, 48)
+
+[node name="Star2" parent="starColls/starColl5" instance=ExtResource("8_qmhq3")]
+position = Vector2(-925, 48)
+
+[node name="starColl" type="Node2D" parent="."]
+position = Vector2(185, -195)
+scale = Vector2(0.5, 0.5)
+
+[node name="Star" parent="starColl" instance=ExtResource("8_qmhq3")]
+scale = Vector2(1, 1)
+
+[node name="Star2" parent="starColl" instance=ExtResource("8_qmhq3")]
+position = Vector2(194, 0)
+scale = Vector2(1, 1)
+
+[node name="Star3" parent="starColl" instance=ExtResource("8_qmhq3")]
+position = Vector2(388, 0)
+scale = Vector2(1, 1)
+
+[node name="Star4" parent="starColl" instance=ExtResource("8_qmhq3")]
+position = Vector2(582, 0)
+scale = Vector2(1, 1)
+
+[node name="SpeedBooster" parent="." instance=ExtResource("9_4j4vg")]
+position = Vector2(-96, -108)
+rotation = -0.785398
+
+[connection signal="body_entered" from="killerColl" to="killerColl" method="_on_body_entered"]

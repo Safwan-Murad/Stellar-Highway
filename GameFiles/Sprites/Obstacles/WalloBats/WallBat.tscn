@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://g0afw3me5xi1"]
+
+[ext_resource type="Texture2D" uid="uid://dnskx85gq4epg" path="res://GameFiles/SpinHead IMGS/Bat/1.png" id="1_y1tq7"]
+[ext_resource type="Texture2D" uid="uid://deersvdqdtn3c" path="res://GameFiles/SpinHead IMGS/Bat/2.png" id="2_q8bel"]
+[ext_resource type="Texture2D" uid="uid://bbjis5lru3xs7" path="res://GameFiles/SpinHead IMGS/Bat/3.png" id="3_wiw8c"]
+[ext_resource type="Texture2D" uid="uid://d3a5uo6ba1thj" path="res://GameFiles/SpinHead IMGS/Bat/4.png" id="4_obpxg"]
+[ext_resource type="Texture2D" uid="uid://wyq432squj5s" path="res://GameFiles/SpinHead IMGS/Bat/5.png" id="5_4nptj"]
+[ext_resource type="Texture2D" uid="uid://dv7rwf5ljwuuv" path="res://GameFiles/SpinHead IMGS/Bat/0.png" id="6_lfllx"]
+[ext_resource type="Script" uid="uid://c2mkfa1hpjvuh" path="res://GameFiles/Gameplay Scripts/Obstacles/WallBat.gd" id="7_woijl"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="8_f18jb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xiqul"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y1tq7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_q8bel")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wiw8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_obpxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_obpxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4nptj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4nptj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4nptj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_obpxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_obpxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wiw8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_q8bel")
+}],
+"loop": true,
+"name": &"Fly",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_lfllx")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adjq1"]
+size = Vector2(24, 15)
+
+[node name="WallBat" type="AnimatedSprite2D"]
+z_index = 3
+z_as_relative = false
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_xiqul")
+animation = &"Fly"
+autoplay = "Fly"
+flip_h = true
+script = ExtResource("7_woijl")
+
+[node name="killArea" type="Area2D" parent="."]
+script = ExtResource("8_f18jb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killArea"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_adjq1")
+
+[connection signal="body_entered" from="killArea" to="killArea" method="_on_body_entered"]

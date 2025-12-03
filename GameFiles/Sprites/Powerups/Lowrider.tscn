@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqta41vqugf21"]
+
+[ext_resource type="Script" uid="uid://cahbh57qvm832" path="res://GameFiles/Gameplay Scripts/Powerups/Lowrider.gd" id="1_mq2d5"]
+[ext_resource type="PackedScene" uid="uid://cv8vyjgk17bmx" path="res://GameFiles/Sprites/Powerups/PowerupGlow.tscn" id="2_7s0g4"]
+[ext_resource type="Texture2D" uid="uid://bj5n8k16gqaki" path="res://GameFiles/SpinHead IMGS/Powerups/Lowrider/0.png" id="3_brmoh"]
+[ext_resource type="Texture2D" uid="uid://cvs33nn3wm3le" path="res://GameFiles/SpinHead IMGS/Powerups/Lowrider/1.png" id="4_1d6n6"]
+[ext_resource type="Texture2D" uid="uid://lhfrf2hxajcr" path="res://GameFiles/SpinHead IMGS/Powerups/Lowrider/2.png" id="5_g8kdj"]
+[ext_resource type="AudioStream" uid="uid://bt7pd5gmist87" path="res://GameFiles/SoundEffects/LowriderJUMP.mp3" id="7_61pi6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ysq2i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_brmoh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1d6n6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_g8kdj")
+}],
+"loop": false,
+"name": &"bounce",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_brmoh")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyyhj"]
+size = Vector2(33, 31)
+
+[node name="Lowrider" type="Node2D"]
+script = ExtResource("1_mq2d5")
+
+[node name="PowerupGlow" parent="." instance=ExtResource("2_7s0g4")]
+frame_progress = 0.81331
+
+[node name="Lowrider" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_ysq2i")
+animation = &"bounce"
+autoplay = "default"
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2(1, -1.5)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-1, 1.5)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_uyyhj")
+
+[node name="LowriderJUMP" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_61pi6")
+volume_db = -2.0
+pitch_scale = 2.0
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

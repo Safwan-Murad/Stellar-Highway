@@ -1,0 +1,82 @@
+[gd_scene load_steps=6 format=3 uid="uid://b742ayww4g6ji"]
+
+[ext_resource type="Texture2D" uid="uid://cymxbcr0uv3ri" path="res://GameFiles/SpinHead IMGS/Indicators/danger.png" id="1_oa4gq"]
+[ext_resource type="Texture2D" uid="uid://magtcujrjycv" path="res://GameFiles/SpinHead IMGS/Indicators/indicatorLight.png" id="2_b513l"]
+
+[sub_resource type="Animation" id="Animation_nilc8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Danger:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("IndicatorLight:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_sevqq"]
+resource_name = "scaleMe"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Danger:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(3, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("IndicatorLight:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1.5, 1.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_365x8"]
+_data = {
+&"RESET": SubResource("Animation_nilc8"),
+&"scaleMe": SubResource("Animation_sevqq")
+}
+
+[node name="Indicator" type="Node2D"]
+
+[node name="Danger" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_oa4gq")
+
+[node name="IndicatorLight" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_b513l")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_365x8")
+}
+autoplay = "scaleMe"
+speed_scale = 4.0

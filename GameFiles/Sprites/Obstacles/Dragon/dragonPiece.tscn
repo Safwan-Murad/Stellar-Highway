@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://0entdmu8xa0k"]
+
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="2_0ghgi"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_l1fwi"]
+b = Vector2(0, 0)
+
+[node name="dragonPiece" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_l1fwi")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 34)
+script = ExtResource("2_0ghgi")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_l1fwi")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

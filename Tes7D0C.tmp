@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bumk018a2seu5"]
+
+[ext_resource type="PackedScene" uid="uid://dnsq6ycm7t8as" path="res://GameFiles/Background.tscn" id="1_k63br"]
+[ext_resource type="PackedScene" uid="uid://dtmw5o80xydm1" path="res://GameFiles/Player.tscn" id="1_u4kaf"]
+[ext_resource type="Script" path="res://GameFiles/Gameplay Scripts/playerInput.gd" id="2_gixaf"]
+[ext_resource type="Script" path="res://GameFiles/Gameplay Scripts/Score.gd" id="4_2p35r"]
+[ext_resource type="Texture2D" uid="uid://c5rdgd3smuwtg" path="res://icon.svg" id="4_vi27i"]
+[ext_resource type="Script" path="res://GameFiles/Gameplay Scripts/Speed.gd" id="5_vr4cv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3t1g"]
+size = Vector2(246.5, 23.1336)
+
+[node name="testField" type="Node2D"]
+
+[node name="Background" parent="." instance=ExtResource("1_k63br")]
+
+[node name="Player" parent="." instance=ExtResource("1_u4kaf")]
+
+[node name="playerInput" type="Node2D" parent="."]
+script = ExtResource("2_gixaf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(98.5, 45.5)
+scale = Vector2(1.96094, 0.179688)
+texture = ExtResource("4_vi27i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(98.75, 44)
+shape = SubResource("RectangleShape2D_a3t1g")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="UI" type="CanvasLayer" parent="."]
+offset = Vector2(960, 540)
+transform = Transform2D(1, 0, 0, 1, 960, 540)
+
+[node name="Score" type="Label" parent="UI"]
+offset_left = -705.0
+offset_top = -499.0
+offset_right = -334.0
+offset_bottom = -393.0
+text = "SCORE: 0"
+script = ExtResource("4_2p35r")
+
+[node name="Speed" type="Label" parent="UI"]
+offset_left = -715.0
+offset_top = 394.0
+offset_right = -508.0
+offset_bottom = 504.0
+text = "SPEED: 0"
+vertical_alignment = 2
+script = ExtResource("5_vr4cv")

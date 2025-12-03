@@ -1,0 +1,104 @@
+[gd_scene load_steps=12 format=3 uid="uid://cxdk86anlvjjj"]
+
+[ext_resource type="Texture2D" uid="uid://wiwymmnlykul" path="res://GameFiles/SpinHead IMGS/UI/menu/startBTN/top1.png" id="1_58ghx"]
+[ext_resource type="Texture2D" uid="uid://dlage01l836k8" path="res://GameFiles/SpinHead IMGS/UI/menu/startBTN/clipperBoard.png" id="1_ddev1"]
+[ext_resource type="Script" uid="uid://oooyevir2wn5" path="res://GameFiles/ScreenView Scripts/MainMenu/gameStart.gd" id="1_gef23"]
+[ext_resource type="Texture2D" uid="uid://bgrhbhfrhobvj" path="res://GameFiles/SpinHead IMGS/UI/menu/startBTN/top2.png" id="2_abwak"]
+[ext_resource type="Texture2D" uid="uid://d01edueyjk03l" path="res://GameFiles/SpinHead IMGS/UI/menu/startBTN/clipperBoardG.png" id="2_my1we"]
+[ext_resource type="Script" uid="uid://dhwuh0oi6h3mk" path="res://GameFiles/ScreenView Scripts/UI/p2s.gd" id="5_woin5"]
+[ext_resource type="FontFile" uid="uid://bnelx1c1ni330" path="res://GameFiles/Assets/fonts/PressStart2P-Regular.ttf" id="6_jipr1"]
+
+[sub_resource type="Animation" id="Animation_isxli"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.392699]
+}
+
+[sub_resource type="Animation" id="Animation_0l6cb"]
+resource_name = "close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.392699, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d83dw"]
+_data = {
+&"RESET": SubResource("Animation_isxli"),
+&"close": SubResource("Animation_0l6cb")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pter"]
+
+[node name="ClipperBoard" type="Node2D"]
+script = ExtResource("1_gef23")
+metadata/_edit_vertical_guides_ = [-225.0]
+
+[node name="Top1" type="Sprite2D" parent="."]
+position = Vector2(0, -144)
+texture = ExtResource("1_58ghx")
+
+[node name="Top2" type="Sprite2D" parent="."]
+position = Vector2(-224.5, -158.5)
+rotation = -0.392699
+texture = ExtResource("2_abwak")
+offset = Vector2(224.5, -14.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Top2"]
+libraries = {
+"": SubResource("AnimationLibrary_d83dw")
+}
+speed_scale = 3.0
+
+[node name="ClipperBoard" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_ddev1")
+
+[node name="ClipperBoardG" type="Sprite2D" parent="."]
+position = Vector2(-0.5, -0.5)
+texture = ExtResource("2_my1we")
+
+[node name="p2s" type="Label" parent="."]
+offset_left = -187.5
+offset_top = -12.5
+offset_right = 187.5
+offset_bottom = 12.5
+theme_override_colors/font_color = Color(1, 0.8, 1, 1)
+theme_override_fonts/font = ExtResource("6_jipr1")
+theme_override_font_sizes/font_size = 25
+text = " PRESS TO START"
+script = ExtResource("5_woin5")
+
+[node name="highScore" type="Label" parent="."]
+offset_left = -25.0
+offset_top = -91.0
+offset_right = 175.0
+offset_bottom = -66.0
+theme_override_colors/font_color = Color(1, 0.8, 1, 1)
+theme_override_fonts/font = ExtResource("6_jipr1")
+theme_override_font_sizes/font_size = 25
+text = "00000000"
+
+[node name="Button" type="TouchScreenButton" parent="."]
+position = Vector2(0, -14)
+scale = Vector2(22.5, 14.5)
+shape = SubResource("RectangleShape2D_2pter")
+
+[connection signal="animation_finished" from="Top2/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="released" from="Button" to="." method="_on_button_released"]

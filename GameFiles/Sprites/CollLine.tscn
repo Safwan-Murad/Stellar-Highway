@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://1rstur705118"]
+
+[ext_resource type="Script" uid="uid://dq2nby7xn65pq" path="res://GameFiles/Gameplay Scripts/CollLine.gd" id="1_jr5p0"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_cmwxn"]
+b = Vector2(0, 0)
+
+[node name="CollLine" type="StaticBody2D"]
+script = ExtResource("1_jr5p0")
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 2
+z_as_relative = false
+points = PackedVector2Array(0, 0)
+width = 3.0
+default_color = Color(1, 0, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_cmwxn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(3, 3)
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

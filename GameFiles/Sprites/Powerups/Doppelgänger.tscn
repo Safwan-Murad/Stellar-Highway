@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cts0wn7vjh5b"]
+
+[ext_resource type="Script" uid="uid://bfpug7u5g71fq" path="res://GameFiles/Gameplay Scripts/Powerups/Doppelgänger.gd" id="1_8x5sk"]
+[ext_resource type="PackedScene" uid="uid://cv8vyjgk17bmx" path="res://GameFiles/Sprites/Powerups/PowerupGlow.tscn" id="2_2jnfv"]
+[ext_resource type="Texture2D" uid="uid://cpgbtcaay8tyr" path="res://GameFiles/SpinHead IMGS/Powerups/Doppelgänger/Doppelgänger.png" id="3_d3ikd"]
+[ext_resource type="AudioStream" uid="uid://dxhuxh3w3knk3" path="res://GameFiles/SoundEffects/DoppelSound.mp3" id="4_5kcwh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyyhj"]
+size = Vector2(33, 31)
+
+[node name="Doppelgänger" type="Node2D"]
+script = ExtResource("1_8x5sk")
+
+[node name="PowerupGlow" parent="." instance=ExtResource("2_2jnfv")]
+frame_progress = 0.81331
+
+[node name="Doppelgänger" type="Sprite2D" parent="."]
+texture = ExtResource("3_d3ikd")
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2(1, -1.5)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-1, 1.5)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_uyyhj")
+
+[node name="DoppelSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5kcwh")
+volume_db = 6.0
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

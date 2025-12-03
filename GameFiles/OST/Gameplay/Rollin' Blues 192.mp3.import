@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csi85ln6l672o"
+path="res://.godot/imported/Rollin' Blues 192.mp3-13ae98e2f5c7e9a3a39f878a6e3c5168.mp3str"
+
+[deps]
+
+source_file="res://GameFiles/OST/Gameplay/Rollin' Blues 192.mp3"
+dest_files=["res://.godot/imported/Rollin' Blues 192.mp3-13ae98e2f5c7e9a3a39f878a6e3c5168.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

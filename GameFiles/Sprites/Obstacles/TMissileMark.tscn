@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://lc25k8qx3k1d"]
+
+[ext_resource type="Script" uid="uid://d2q1nmjytrqnj" path="res://GameFiles/Gameplay Scripts/Obstacles/Missile/TMissileMark.gd" id="1_1k08s"]
+[ext_resource type="AudioStream" uid="uid://dtlxko1lp4fuk" path="res://GameFiles/SoundEffects/BombFuse.mp3" id="2_jec1k"]
+
+[node name="TMissileMark" type="Node2D"]
+script = ExtResource("1_1k08s")
+
+[node name="MissileBeep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_jec1k")
+volume_db = -6.0
+autoplay = true
+
+[connection signal="finished" from="MissileBeep" to="." method="_on_missile_beep_finished"]

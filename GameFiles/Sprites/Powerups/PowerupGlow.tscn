@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://cv8vyjgk17bmx"]
+
+[ext_resource type="Texture2D" uid="uid://r2iwtsyr10cl" path="res://GameFiles/SpinHead IMGS/Powerups/PowerupGlow/1.png" id="1_kobum"]
+[ext_resource type="Texture2D" uid="uid://cbod4rbqaynjh" path="res://GameFiles/SpinHead IMGS/Powerups/PowerupGlow/0.png" id="2_7dgqj"]
+[ext_resource type="Texture2D" uid="uid://3dtijamwf7c" path="res://GameFiles/SpinHead IMGS/Powerups/PowerupGlow/2.png" id="2_nlag4"]
+[ext_resource type="Texture2D" uid="uid://n36hkaol0dnp" path="res://GameFiles/SpinHead IMGS/Powerups/PowerupGlow/3.png" id="3_e5ngv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nlwam"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kobum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nlag4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nlag4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7dgqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7dgqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e5ngv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e5ngv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e5ngv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nlag4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nlag4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7dgqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_e5ngv")
+}],
+"loop": true,
+"name": &"glitchGlow",
+"speed": 15.0
+}]
+
+[node name="PowerupGlow" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_nlwam")
+animation = &"glitchGlow"
+autoplay = "glitchGlow"
+frame_progress = 0.942918

@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqj7bqaxu0gjy"]
+
+[ext_resource type="Script" uid="uid://cw6cnth6b47tw" path="res://GameFiles/Gameplay Scripts/Powerups/Umbrella.gd" id="1_pww5r"]
+[ext_resource type="PackedScene" uid="uid://cv8vyjgk17bmx" path="res://GameFiles/Sprites/Powerups/PowerupGlow.tscn" id="2_lgmc3"]
+[ext_resource type="Texture2D" uid="uid://duunc2fwup0ol" path="res://GameFiles/SpinHead IMGS/Powerups/Umbrella/Umbrella.png" id="3_hxhtx"]
+[ext_resource type="AudioStream" uid="uid://baa8m56y51b5x" path="res://GameFiles/SoundEffects/UmbrellaSound.mp3" id="4_fo4rm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyyhj"]
+size = Vector2(33, 31)
+
+[node name="Umbrella" type="Node2D"]
+script = ExtResource("1_pww5r")
+
+[node name="PowerupGlow" parent="." instance=ExtResource("2_lgmc3")]
+frame_progress = 0.81331
+
+[node name="Umbrella" type="Sprite2D" parent="."]
+texture = ExtResource("3_hxhtx")
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2(1, -1.5)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-1, 1.5)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_uyyhj")
+
+[node name="UmbrellaSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fo4rm")
+volume_db = 10.0
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

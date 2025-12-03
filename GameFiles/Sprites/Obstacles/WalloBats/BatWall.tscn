@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bti3xngri88cl"]
+
+[ext_resource type="Script" uid="uid://d2xx5ep1xed3w" path="res://GameFiles/Gameplay Scripts/Obstacles/BatWall.gd" id="1_qtsoe"]
+
+[node name="BatWall" type="Node2D"]
+script = ExtResource("1_qtsoe")

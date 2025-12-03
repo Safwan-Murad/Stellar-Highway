@@ -1,0 +1,120 @@
+[gd_scene load_steps=11 format=3 uid="uid://jk8gnskxp6w"]
+
+[ext_resource type="Texture2D" uid="uid://dt60sskrtjbyx" path="res://GameFiles/SpinHead IMGS/LightProjector/Stand.png" id="1_518pk"]
+[ext_resource type="Texture2D" uid="uid://rmckei5ufpj3" path="res://GameFiles/SpinHead IMGS/LightProjector/Holders.png" id="1_qgrtb"]
+[ext_resource type="Script" uid="uid://b5udwgkhs5rmo" path="res://GameFiles/ScreenView Scripts/rotateLight.gd" id="1_ykxst"]
+[ext_resource type="Texture2D" uid="uid://dqn42uw8db4p3" path="res://GameFiles/SpinHead IMGS/LightProjector/lightSource.png" id="2_misj7"]
+
+[sub_resource type="Animation" id="Animation_kbrg4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.523599]
+}
+
+[sub_resource type="Animation" id="Animation_w2f3j"]
+resource_name = "Rotate"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.523599, 0.523599, -0.523599]
+}
+
+[sub_resource type="Animation" id="Animation_8enk4"]
+resource_name = "Rotate1"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.523599, -0.523599, 0.523599]
+}
+
+[sub_resource type="Animation" id="Animation_51max"]
+resource_name = "smolRotate"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.410152, 0.410152, -0.410152]
+}
+
+[sub_resource type="Animation" id="Animation_l4imd"]
+resource_name = "smolRotate1"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.410152, -0.410152, 0.410152]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kug2o"]
+_data = {
+&"RESET": SubResource("Animation_kbrg4"),
+&"Rotate": SubResource("Animation_w2f3j"),
+&"Rotate1": SubResource("Animation_8enk4"),
+&"smolRotate": SubResource("Animation_51max"),
+&"smolRotate1": SubResource("Animation_l4imd")
+}
+
+[node name="LightProjector" type="Node2D"]
+z_index = 10
+z_as_relative = false
+script = ExtResource("1_ykxst")
+
+[node name="Holders" type="Sprite2D" parent="."]
+texture = ExtResource("1_qgrtb")
+
+[node name="LightSource" type="Sprite2D" parent="."]
+rotation = -0.523599
+texture = ExtResource("2_misj7")
+offset = Vector2(0, -527)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LightSource"]
+speed_scale = 0.5
+libraries = {
+"": SubResource("AnimationLibrary_kug2o")
+}
+
+[node name="Stand" type="Sprite2D" parent="."]
+texture = ExtResource("1_518pk")

@@ -1,0 +1,146 @@
+[gd_scene load_steps=16 format=3 uid="uid://c8xjoskss74jb"]
+
+[ext_resource type="Script" uid="uid://bw3f5cok7m1lp" path="res://GameFiles/Gameplay Scripts/Obstacles/Buildings/Restaurant1.gd" id="1_6jcem"]
+[ext_resource type="Texture2D" uid="uid://cjppamwf8f3g0" path="res://GameFiles/SpinHead IMGS/Buildings/Restaurant1/innerWithMid.png" id="2_ijswi"]
+[ext_resource type="Texture2D" uid="uid://bomntw4hrcba8" path="res://GameFiles/SpinHead IMGS/Buildings/Restaurant1/outer.png" id="3_bcyq2"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="3_tnf2j"]
+[ext_resource type="PackedScene" uid="uid://b23tgrb2dnbbq" path="res://GameFiles/Sprites/Currency/Star.tscn" id="4_d506h"]
+[ext_resource type="PackedScene" uid="uid://cp83oaxmru3nd" path="res://GameFiles/Sprites/Powerups/SpeedBooster.tscn" id="6_13g2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ctbjw"]
+size = Vector2(57, 599)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w4gx"]
+size = Vector2(903, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfkra"]
+size = Vector2(906, 43)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jh02"]
+size = Vector2(755, 32)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_h8ij3"]
+a = Vector2(0, -1.5)
+b = Vector2(86, -52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o51vm"]
+size = Vector2(1038, 21)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_l2rdj"]
+a = Vector2(1, 0)
+b = Vector2(-85, -50.5)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7k36s"]
+a = Vector2(-161, -269)
+b = Vector2(-66, -309)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xq1wh"]
+a = Vector2(161, -269)
+b = Vector2(66, -309)
+
+[node name="Restaurant1" type="StaticBody2D"]
+script = ExtResource("1_6jcem")
+
+[node name="InnerLayer" type="Sprite2D" parent="."]
+z_index = -5
+z_as_relative = false
+position = Vector2(-10, -287)
+texture = ExtResource("2_ijswi")
+
+[node name="OuterLayer" type="Sprite2D" parent="."]
+z_index = 5
+z_as_relative = false
+texture = ExtResource("3_bcyq2")
+
+[node name="StarColl" type="Node2D" parent="."]
+
+[node name="Star" parent="StarColl" instance=ExtResource("4_d506h")]
+position = Vector2(-538, -355)
+
+[node name="Star2" parent="StarColl" instance=ExtResource("4_d506h")]
+position = Vector2(-538, -301)
+
+[node name="Star3" parent="StarColl" instance=ExtResource("4_d506h")]
+position = Vector2(-538, -247)
+
+[node name="Star4" parent="StarColl" instance=ExtResource("4_d506h")]
+position = Vector2(-538, -193)
+
+[node name="Star5" parent="StarColl" instance=ExtResource("4_d506h")]
+position = Vector2(538, -355)
+
+[node name="Star6" parent="StarColl" instance=ExtResource("4_d506h")]
+position = Vector2(538, -301)
+
+[node name="Star7" parent="StarColl" instance=ExtResource("4_d506h")]
+position = Vector2(538, -247)
+
+[node name="Star8" parent="StarColl" instance=ExtResource("4_d506h")]
+position = Vector2(538, -193)
+
+[node name="StarColl2" type="Node2D" parent="."]
+position = Vector2(-2, -10)
+
+[node name="Star" parent="StarColl2" instance=ExtResource("4_d506h")]
+position = Vector2(-313, -202)
+
+[node name="Star2" parent="StarColl2" instance=ExtResource("4_d506h")]
+position = Vector2(-259, -202)
+
+[node name="Star3" parent="StarColl2" instance=ExtResource("4_d506h")]
+position = Vector2(-205, -202)
+
+[node name="Star4" parent="StarColl2" instance=ExtResource("4_d506h")]
+position = Vector2(205, -202)
+
+[node name="Star5" parent="StarColl2" instance=ExtResource("4_d506h")]
+position = Vector2(259, -202)
+
+[node name="Star6" parent="StarColl2" instance=ExtResource("4_d506h")]
+position = Vector2(313, -202)
+
+[node name="killRange" type="Area2D" parent="."]
+script = ExtResource("3_tnf2j")
+
+[node name="killerColl" type="CollisionShape2D" parent="killRange"]
+position = Vector2(0.5, 200.5)
+shape = SubResource("RectangleShape2D_ctbjw")
+
+[node name="killerColl2" type="CollisionShape2D" parent="killRange"]
+position = Vector2(0.5, -117)
+shape = SubResource("RectangleShape2D_7w4gx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -170.5)
+shape = SubResource("RectangleShape2D_gfkra")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -481)
+shape = SubResource("RectangleShape2D_7jh02")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-547, -391)
+scale = Vector2(2, 2)
+shape = SubResource("SegmentShape2D_h8ij3")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -392)
+shape = SubResource("RectangleShape2D_o51vm")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(545, -394)
+scale = Vector2(2, 2)
+shape = SubResource("SegmentShape2D_l2rdj")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+position = Vector2(-386, 118)
+shape = SubResource("SegmentShape2D_7k36s")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="."]
+position = Vector2(386, 118)
+shape = SubResource("SegmentShape2D_xq1wh")
+
+[node name="SpeedBooster" parent="." instance=ExtResource("6_13g2s")]
+position = Vector2(0, -589.5)
+
+[connection signal="body_entered" from="killRange" to="killRange" method="_on_body_entered"]

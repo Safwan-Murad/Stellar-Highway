@@ -1,0 +1,224 @@
+[gd_scene load_steps=11 format=3 uid="uid://c3w2xh4hrmnql"]
+
+[ext_resource type="Texture2D" uid="uid://dyyc8j8nxrplp" path="res://GameFiles/SpinHead IMGS/Airship/airship.png" id="1_5txqb"]
+[ext_resource type="Script" uid="uid://b60db2rl3qukq" path="res://GameFiles/Gameplay Scripts/Obstacles/Airships.gd" id="1_vihrk"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="2_rl4t7"]
+[ext_resource type="Script" uid="uid://wa2ymgmr34kp" path="res://GameFiles/Gameplay Scripts/Obstacles/Move.gd" id="3_2fa0u"]
+
+[sub_resource type="Curve" id="Curve_eysr5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.866667, 0.568006), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcpjn"]
+size = Vector2(128.776, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07os4"]
+size = Vector2(408.388, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7hg4"]
+size = Vector2(152, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jbqmh"]
+size = Vector2(297, 13.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgrst"]
+size = Vector2(62, 338)
+
+[node name="Airships" type="Node2D"]
+script = ExtResource("1_vihrk")
+
+[node name="Airship0" type="Sprite2D" parent="."]
+z_index = 7
+z_as_relative = false
+position = Vector2(-320, 180)
+texture = ExtResource("1_5txqb")
+script = ExtResource("3_2fa0u")
+
+[node name="Line2D" type="Line2D" parent="Airship0"]
+show_behind_parent = true
+position = Vector2(285, 174)
+points = PackedVector2Array(0, 0, 40, 0, 80, 0, 120, 0, 160, 0, 200, 0, 240, 0, 280, 0, 320, 0, 360, 0, 400, 0, 440, 0, 480, 0, 520, 0, 560, 0, 600, 0, 640, 0, 680, 0, 720, 0)
+width_curve = SubResource("Curve_eysr5")
+default_color = Color(0.780392, 0.14902, 0.341176, 1)
+
+[node name="Line2D2" type="Line2D" parent="Airship0"]
+show_behind_parent = true
+position = Vector2(285, -174)
+points = PackedVector2Array(0, 0, 40, 0, 80, 0, 120, 0, 160, 0, 200, 0, 240, 0, 280, 0, 320, 0, 360, 0, 400, 0, 440, 0, 480, 0, 520, 0, 560, 0, 600, 0, 640, 0, 680, 0, 720, 0)
+width_curve = SubResource("Curve_eysr5")
+default_color = Color(0.780392, 0.14902, 0.341176, 1)
+
+[node name="killArea" type="Area2D" parent="Airship0"]
+script = ExtResource("2_rl4t7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Airship0/killArea"]
+position = Vector2(-276.819, -39.7603)
+rotation = -0.785398
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Airship0/killArea"]
+position = Vector2(-273, 43)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Airship0/killArea"]
+position = Vector2(-23.1941, 85)
+shape = SubResource("RectangleShape2D_07os4")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Airship0/killArea"]
+position = Vector2(-19, -84)
+shape = SubResource("RectangleShape2D_07os4")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Airship0/killArea"]
+position = Vector2(-79, 120.5)
+shape = SubResource("RectangleShape2D_s7hg4")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Airship0/killArea"]
+position = Vector2(-17.5, -109.25)
+shape = SubResource("RectangleShape2D_jbqmh")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Airship0/killArea"]
+position = Vector2(308, 0)
+shape = SubResource("RectangleShape2D_jgrst")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Airship0/killArea"]
+position = Vector2(229, 122)
+rotation = 0.698132
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Airship0/killArea"]
+position = Vector2(234, -124)
+rotation = -0.698132
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="Airship1" type="Sprite2D" parent="."]
+z_index = 7
+z_as_relative = false
+position = Vector2(-320, 540)
+texture = ExtResource("1_5txqb")
+script = ExtResource("3_2fa0u")
+
+[node name="Line2D" type="Line2D" parent="Airship1"]
+show_behind_parent = true
+position = Vector2(285, 174)
+points = PackedVector2Array(0, 0, 40, 0, 80, 0, 120, 0, 160, 0, 200, 0, 240, 0, 280, 0, 320, 0, 360, 0, 400, 0, 440, 0, 480, 0, 520, 0, 560, 0, 600, 0, 640, 0, 680, 0, 720, 0)
+width_curve = SubResource("Curve_eysr5")
+default_color = Color(0.780392, 0.14902, 0.341176, 1)
+
+[node name="Line2D2" type="Line2D" parent="Airship1"]
+show_behind_parent = true
+position = Vector2(285, -174)
+points = PackedVector2Array(0, 0, 40, 0, 80, 0, 120, 0, 160, 0, 200, 0, 240, 0, 280, 0, 320, 0, 360, 0, 400, 0, 440, 0, 480, 0, 520, 0, 560, 0, 600, 0, 640, 0, 680, 0, 720, 0)
+width_curve = SubResource("Curve_eysr5")
+default_color = Color(0.780392, 0.14902, 0.341176, 1)
+
+[node name="killArea" type="Area2D" parent="Airship1"]
+script = ExtResource("2_rl4t7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Airship1/killArea"]
+position = Vector2(-276.819, -39.7603)
+rotation = -0.785398
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Airship1/killArea"]
+position = Vector2(-273, 43)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Airship1/killArea"]
+position = Vector2(-23.1941, 85)
+shape = SubResource("RectangleShape2D_07os4")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Airship1/killArea"]
+position = Vector2(-19, -84)
+shape = SubResource("RectangleShape2D_07os4")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Airship1/killArea"]
+position = Vector2(-79, 120.5)
+shape = SubResource("RectangleShape2D_s7hg4")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Airship1/killArea"]
+position = Vector2(-17.5, -109.25)
+shape = SubResource("RectangleShape2D_jbqmh")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Airship1/killArea"]
+position = Vector2(308, 0)
+shape = SubResource("RectangleShape2D_jgrst")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Airship1/killArea"]
+position = Vector2(229, 122)
+rotation = 0.698132
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Airship1/killArea"]
+position = Vector2(234, -124)
+rotation = -0.698132
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="Airship2" type="Sprite2D" parent="."]
+z_index = 7
+z_as_relative = false
+position = Vector2(-320, 900)
+texture = ExtResource("1_5txqb")
+script = ExtResource("3_2fa0u")
+
+[node name="Line2D" type="Line2D" parent="Airship2"]
+show_behind_parent = true
+position = Vector2(285, 174)
+points = PackedVector2Array(0, 0, 40, 0, 80, 0, 120, 0, 160, 0, 200, 0, 240, 0, 280, 0, 320, 0, 360, 0, 400, 0, 440, 0, 480, 0, 520, 0, 560, 0, 600, 0, 640, 0, 680, 0, 720, 0)
+width_curve = SubResource("Curve_eysr5")
+default_color = Color(0.780392, 0.14902, 0.341176, 1)
+
+[node name="Line2D2" type="Line2D" parent="Airship2"]
+show_behind_parent = true
+position = Vector2(285, -174)
+points = PackedVector2Array(0, 0, 40, 0, 80, 0, 120, 0, 160, 0, 200, 0, 240, 0, 280, 0, 320, 0, 360, 0, 400, 0, 440, 0, 480, 0, 520, 0, 560, 0, 600, 0, 640, 0, 680, 0, 720, 0)
+width_curve = SubResource("Curve_eysr5")
+default_color = Color(0.780392, 0.14902, 0.341176, 1)
+
+[node name="killArea" type="Area2D" parent="Airship2"]
+script = ExtResource("2_rl4t7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Airship2/killArea"]
+position = Vector2(-276.819, -39.7603)
+rotation = -0.785398
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Airship2/killArea"]
+position = Vector2(-273, 43)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Airship2/killArea"]
+position = Vector2(-23.1941, 85)
+shape = SubResource("RectangleShape2D_07os4")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Airship2/killArea"]
+position = Vector2(-19, -84)
+shape = SubResource("RectangleShape2D_07os4")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Airship2/killArea"]
+position = Vector2(-79, 120.5)
+shape = SubResource("RectangleShape2D_s7hg4")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Airship2/killArea"]
+position = Vector2(-17.5, -109.25)
+shape = SubResource("RectangleShape2D_jbqmh")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Airship2/killArea"]
+position = Vector2(308, 0)
+shape = SubResource("RectangleShape2D_jgrst")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Airship2/killArea"]
+position = Vector2(229, 122)
+rotation = 0.698132
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Airship2/killArea"]
+position = Vector2(234, -124)
+rotation = -0.698132
+shape = SubResource("RectangleShape2D_kcpjn")
+
+[connection signal="body_entered" from="Airship0/killArea" to="Airship0/killArea" method="_on_body_entered"]
+[connection signal="body_entered" from="Airship1/killArea" to="Airship1/killArea" method="_on_body_entered"]
+[connection signal="body_entered" from="Airship2/killArea" to="Airship2/killArea" method="_on_body_entered"]

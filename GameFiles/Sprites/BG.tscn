@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfgb46ftipq5r"]
+
+[ext_resource type="PackedScene" uid="uid://bco65cjsp6ryd" path="res://GameFiles/Sprites/Moon.tscn" id="1_xvrgw"]
+[ext_resource type="Texture2D" uid="uid://c82iiw4epp4h0" path="res://GameFiles/SpinHead IMGS/Background/Buildings.jpg" id="3_3lyj3"]
+[ext_resource type="Texture2D" uid="uid://bng8btqic1i0u" path="res://GameFiles/SpinHead IMGS/Background/clouds.png" id="3_sv6mh"]
+
+[node name="BG" type="Node2D"]
+
+[node name="Moon" type="ParallaxBackground" parent="."]
+offset = Vector2(1320, 240)
+transform = Transform2D(1, 0, 0, 1, 1320, 240)
+scroll_base_scale = Vector2(0, 0)
+
+[node name="Moon" type="ParallaxLayer" parent="Moon"]
+motion_scale = Vector2(0, 0)
+
+[node name="Moon" parent="Moon/Moon" instance=ExtResource("1_xvrgw")]
+
+[node name="Background" type="ParallaxBackground" parent="."]
+offset = Vector2(0, 540)
+transform = Transform2D(1, 0, 0, 1, 0, 540)
+
+[node name="Clouds" type="ParallaxLayer" parent="Background"]
+position = Vector2(0, -207)
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(5760, 0)
+
+[node name="Clouds" type="Sprite2D" parent="Background/Clouds"]
+position = Vector2(-1920, 0)
+texture = ExtResource("3_sv6mh")
+
+[node name="Clouds2" type="Sprite2D" parent="Background/Clouds"]
+texture = ExtResource("3_sv6mh")
+
+[node name="Clouds3" type="Sprite2D" parent="Background/Clouds"]
+position = Vector2(1920, 0)
+texture = ExtResource("3_sv6mh")
+
+[node name="Buildings" type="ParallaxLayer" parent="Background"]
+position = Vector2(0, 322)
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(5760, 0)
+
+[node name="Buildings" type="Sprite2D" parent="Background/Buildings"]
+position = Vector2(-1920, 0)
+texture = ExtResource("3_3lyj3")
+
+[node name="Buildings2" type="Sprite2D" parent="Background/Buildings"]
+texture = ExtResource("3_3lyj3")
+
+[node name="Buildings3" type="Sprite2D" parent="Background/Buildings"]
+position = Vector2(1920, 0)
+texture = ExtResource("3_3lyj3")

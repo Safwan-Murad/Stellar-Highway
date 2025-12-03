@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://fbxptafecx01"]
+
+[ext_resource type="Script" uid="uid://corn75ly68jin" path="res://GameFiles/Gameplay Scripts/Indicators/hangingInd.gd" id="1_o2a78"]
+[ext_resource type="PackedScene" uid="uid://b742ayww4g6ji" path="res://GameFiles/Sprites/Indicators/Danger.tscn" id="2_y1tke"]
+[ext_resource type="AudioStream" uid="uid://dr48wcdkjf3gb" path="res://GameFiles/SoundEffects/MissilesBeep.mp3" id="3_8xli7"]
+
+[node name="HangingIndicators" type="Node2D"]
+position = Vector2(0, 540)
+script = ExtResource("1_o2a78")
+
+[node name="Indicator0" parent="." instance=ExtResource("2_y1tke")]
+position = Vector2(0, -160)
+
+[node name="Indicator1" parent="." instance=ExtResource("2_y1tke")]
+
+[node name="Indicator2" parent="." instance=ExtResource("2_y1tke")]
+position = Vector2(0, 160)
+
+[node name="DangerBeep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8xli7")
+volume_db = 6.0
+autoplay = true
+
+[connection signal="finished" from="DangerBeep" to="." method="_on_danger_beep_finished"]

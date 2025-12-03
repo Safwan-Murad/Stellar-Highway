@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dasbfpqj65ox1"]
+
+[ext_resource type="Script" uid="uid://dsshi67kodvq1" path="res://GameFiles/Gameplay Scripts/Powerups/RockstarGuitar.gd" id="1_04s1p"]
+[ext_resource type="Texture2D" uid="uid://dlhvgg5a5xb1c" path="res://GameFiles/SpinHead IMGS/Powerups/RockstarGuitar/RockstarGuitar.png" id="2_8tdto"]
+[ext_resource type="PackedScene" uid="uid://cv8vyjgk17bmx" path="res://GameFiles/Sprites/Powerups/PowerupGlow.tscn" id="2_47d65"]
+[ext_resource type="AudioStream" uid="uid://cbrwybojie16e" path="res://GameFiles/SoundEffects/RockstarSound.mp3" id="4_v7p1t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8hwex"]
+size = Vector2(33, 31)
+
+[node name="RockstarGuitar" type="Node2D"]
+rotation = -0.523599
+script = ExtResource("1_04s1p")
+
+[node name="PowerupGlow" parent="." instance=ExtResource("2_47d65")]
+rotation = 0.523599
+frame_progress = 0.366993
+
+[node name="RockstarGuitar" type="Sprite2D" parent="."]
+texture = ExtResource("2_8tdto")
+
+[node name="hitbox" type="Area2D" parent="."]
+position = Vector2(1, -1.5)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-2, 3)
+rotation = 0.523599
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_8hwex")
+
+[node name="RockstarSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_v7p1t")
+volume_db = 10.0
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_kill_me_body_entered"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs4xlgml6s5dj"]
+
+[ext_resource type="Texture2D" uid="uid://cuora81bd1sbg" path="res://GameFiles/SpinHead IMGS/Buildings/Hotel/Obstacles/smoothWall.png" id="1_fftkb"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="2_rx3of"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrddo"]
+size = Vector2(24.0416, 161.22)
+
+[node name="SmoothWall" type="Sprite2D"]
+texture = ExtResource("1_fftkb")
+
+[node name="killRange" type="Area2D" parent="."]
+script = ExtResource("2_rx3of")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killRange"]
+position = Vector2(8.5, 10.5)
+rotation = -0.785398
+shape = SubResource("RectangleShape2D_yrddo")
+
+[connection signal="body_entered" from="killRange" to="killRange" method="_on_body_entered"]

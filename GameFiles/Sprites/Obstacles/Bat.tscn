@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://b26blrbbfoql7"]
+
+[ext_resource type="Texture2D" uid="uid://dnskx85gq4epg" path="res://GameFiles/SpinHead IMGS/Bat/1.png" id="1_dxkvh"]
+[ext_resource type="Texture2D" uid="uid://deersvdqdtn3c" path="res://GameFiles/SpinHead IMGS/Bat/2.png" id="2_aw334"]
+[ext_resource type="Texture2D" uid="uid://bbjis5lru3xs7" path="res://GameFiles/SpinHead IMGS/Bat/3.png" id="3_5tonu"]
+[ext_resource type="Texture2D" uid="uid://d3a5uo6ba1thj" path="res://GameFiles/SpinHead IMGS/Bat/4.png" id="4_xrila"]
+[ext_resource type="Texture2D" uid="uid://wyq432squj5s" path="res://GameFiles/SpinHead IMGS/Bat/5.png" id="5_c44lm"]
+[ext_resource type="Texture2D" uid="uid://dv7rwf5ljwuuv" path="res://GameFiles/SpinHead IMGS/Bat/0.png" id="6_1mpvp"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="6_3rhyg"]
+[ext_resource type="Script" uid="uid://dgaw832p8sct0" path="res://GameFiles/Gameplay Scripts/Obstacles/Bat.gd" id="7_c1r3a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xiqul"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dxkvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_aw334")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5tonu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xrila")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xrila")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c44lm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c44lm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c44lm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xrila")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xrila")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5tonu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_aw334")
+}],
+"loop": true,
+"name": &"Fly",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1mpvp")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adjq1"]
+size = Vector2(24, 9)
+
+[node name="Bat" type="AnimatedSprite2D"]
+z_index = 7
+z_as_relative = false
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_xiqul")
+animation = &"Idle"
+autoplay = "Idle"
+flip_v = true
+script = ExtResource("7_c1r3a")
+
+[node name="killArea" type="Area2D" parent="."]
+script = ExtResource("6_3rhyg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killArea"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_adjq1")
+
+[connection signal="body_entered" from="killArea" to="killArea" method="_on_body_entered"]

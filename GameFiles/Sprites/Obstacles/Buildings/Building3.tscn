@@ -1,0 +1,166 @@
+[gd_scene load_steps=18 format=3 uid="uid://dscrsuxi5n756"]
+
+[ext_resource type="Script" uid="uid://8a0wa4bcj5ig" path="res://GameFiles/Gameplay Scripts/Obstacles/Buildings/Building3.gd" id="1_4npxi"]
+[ext_resource type="Texture2D" uid="uid://biyddxny13gd2" path="res://GameFiles/SpinHead IMGS/Buildings/Building3/outerLayer.png" id="1_jpbg5"]
+[ext_resource type="Texture2D" uid="uid://f1ux8ujmkyfl" path="res://GameFiles/SpinHead IMGS/Buildings/Building3/innerLayer.png" id="2_gvoak"]
+[ext_resource type="Script" uid="uid://1yngxbrtnkx0" path="res://GameFiles/Gameplay Scripts/killPlayer.gd" id="3_dq888"]
+[ext_resource type="PackedScene" uid="uid://jk8gnskxp6w" path="res://GameFiles/Sprites/Decor/LightProjector.tscn" id="3_fgvvr"]
+[ext_resource type="PackedScene" uid="uid://b23tgrb2dnbbq" path="res://GameFiles/Sprites/Currency/Star.tscn" id="6_027ir"]
+[ext_resource type="PackedScene" uid="uid://cp83oaxmru3nd" path="res://GameFiles/Sprites/Powerups/SpeedBooster.tscn" id="7_bn1tr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2ugq"]
+size = Vector2(35, 703)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pg8tj"]
+size = Vector2(34.5, 217)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jwuw"]
+size = Vector2(34.5, 321)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ww0q6"]
+size = Vector2(420, 35)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4yobd"]
+a = Vector2(250.5, -17.5)
+b = Vector2(495.5, 224.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8c0nq"]
+size = Vector2(509, 35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ununt"]
+size = Vector2(221.5, 35)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vlks2"]
+a = Vector2(182, -152)
+b = Vector2(-125, 184)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_md6hc"]
+a = Vector2(179, -153)
+b = Vector2(234, -94)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_v4boq"]
+a = Vector2(-156, -264)
+b = Vector2(-66, -309)
+
+[node name="Building3" type="StaticBody2D"]
+script = ExtResource("1_4npxi")
+
+[node name="InnerLayer" type="Sprite2D" parent="."]
+z_index = -5
+z_as_relative = false
+position = Vector2(-759.5, -500)
+texture = ExtResource("2_gvoak")
+
+[node name="OuterLayer" type="Sprite2D" parent="."]
+z_index = 5
+z_as_relative = false
+position = Vector2(35, 48)
+texture = ExtResource("1_jpbg5")
+offset = Vector2(-35, -48)
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_dq888")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-993.5, 38.5)
+shape = SubResource("RectangleShape2D_e2ugq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(988.75, 280.5)
+shape = SubResource("RectangleShape2D_pg8tj")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(994, 11.5)
+shape = SubResource("RectangleShape2D_8jwuw")
+
+[node name="LightProjector" parent="." instance=ExtResource("3_fgvvr")]
+position = Vector2(176, -143)
+scale = Vector2(0.8, 0.8)
+anim = "Rotate1"
+path = "LightSource/AnimationPlayer"
+
+[node name="LightProjector2" parent="." instance=ExtResource("3_fgvvr")]
+position = Vector2(-207, -143)
+scale = Vector2(0.8, 0.8)
+path = "LightSource/AnimationPlayer"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-712, -348.5)
+shape = SubResource("RectangleShape2D_ww0q6")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-754.5, -348.5)
+shape = SubResource("SegmentShape2D_4yobd")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-8, -109)
+shape = SubResource("RectangleShape2D_8c0nq")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-6, -109)
+shape = SubResource("SegmentShape2D_4yobd")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2(596.25, 131)
+shape = SubResource("RectangleShape2D_ununt")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2(775, -67)
+shape = SubResource("SegmentShape2D_vlks2")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2(777, -65)
+shape = SubResource("SegmentShape2D_md6hc")
+
+[node name="starColl" type="Node2D" parent="."]
+
+[node name="Star" parent="starColl" instance=ExtResource("6_027ir")]
+position = Vector2(-873, -388)
+
+[node name="Star2" parent="starColl" instance=ExtResource("6_027ir")]
+position = Vector2(-819, -388)
+
+[node name="Star3" parent="starColl" instance=ExtResource("6_027ir")]
+position = Vector2(-700, -388)
+
+[node name="Star4" parent="starColl" instance=ExtResource("6_027ir")]
+position = Vector2(-646, -388)
+
+[node name="starColl2" type="Node2D" parent="."]
+
+[node name="Star" parent="starColl2" instance=ExtResource("6_027ir")]
+position = Vector2(-172, -148)
+
+[node name="Star2" parent="starColl2" instance=ExtResource("6_027ir")]
+position = Vector2(-118, -148)
+
+[node name="Star5" parent="starColl2" instance=ExtResource("6_027ir")]
+position = Vector2(83, -148)
+
+[node name="Star6" parent="starColl2" instance=ExtResource("6_027ir")]
+position = Vector2(137, -148)
+
+[node name="starColl3" type="Node2D" parent="."]
+position = Vector2(688, 239)
+
+[node name="Star" parent="starColl3" instance=ExtResource("6_027ir")]
+position = Vector2(-172, -148)
+
+[node name="Star2" parent="starColl3" instance=ExtResource("6_027ir")]
+position = Vector2(-118, -148)
+
+[node name="Star5" parent="starColl3" instance=ExtResource("6_027ir")]
+position = Vector2(-64, -148)
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+position = Vector2(-855, -56)
+shape = SubResource("SegmentShape2D_v4boq")
+
+[node name="SpeedBooster0" parent="." instance=ExtResource("7_bn1tr")]
+position = Vector2(743, -123)
+rotation = -0.785398
+
+[node name="SpeedBooster1" parent="." instance=ExtResource("7_bn1tr")]
+position = Vector2(-759, -458)
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

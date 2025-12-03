@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://u76mrcvh3isd"
+path="res://.godot/imported/Error! Error! ERROR! 192.mp3-9ce004de1900b58d1c7bf51be495dcd6.mp3str"
+
+[deps]
+
+source_file="res://GameFiles/OST/Gameplay/Error! Error! ERROR! 192.mp3"
+dest_files=["res://.godot/imported/Error! Error! ERROR! 192.mp3-9ce004de1900b58d1c7bf51be495dcd6.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

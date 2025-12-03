@@ -1,0 +1,140 @@
+[gd_scene load_steps=18 format=3 uid="uid://cp83oaxmru3nd"]
+
+[ext_resource type="Texture2D" uid="uid://d1mioqwlwl5px" path="res://GameFiles/SpinHead IMGS/SpeedBooster/boosterPost/0.png" id="1_17wg8"]
+[ext_resource type="Script" uid="uid://bmru7say7uobq" path="res://GameFiles/Gameplay Scripts/Powerups/SpeedBooster.gd" id="1_exysa"]
+[ext_resource type="Texture2D" uid="uid://3ae5r78rpnos" path="res://GameFiles/SpinHead IMGS/SpeedBooster/boosterPost/1.png" id="2_3ljig"]
+[ext_resource type="Texture2D" uid="uid://3n88sb85lasy" path="res://GameFiles/SpinHead IMGS/SpeedBooster/boosterPost/2.png" id="3_p1gs4"]
+[ext_resource type="Texture2D" uid="uid://cik23441xf0dx" path="res://GameFiles/SpinHead IMGS/SpeedBooster/boosterPost/3.png" id="4_bwe4n"]
+[ext_resource type="Texture2D" uid="uid://twd8sqcdin5l" path="res://GameFiles/SpinHead IMGS/SpeedBooster/boosterPost/4.png" id="5_cp3mt"]
+[ext_resource type="Texture2D" uid="uid://bmu8kctyso77m" path="res://GameFiles/SpinHead IMGS/SpeedBooster/boosterPost/5.png" id="6_bwqs0"]
+[ext_resource type="Texture2D" uid="uid://jlyqtd14dtox" path="res://GameFiles/SpinHead IMGS/SpeedBooster/boosterPost/6.png" id="7_hqiu0"]
+[ext_resource type="Texture2D" uid="uid://cpfdr1xoit1jx" path="res://GameFiles/SpinHead IMGS/SpeedBooster/boosterPost/7.png" id="8_8tl4w"]
+[ext_resource type="Texture2D" uid="uid://bw1df4q4unj1y" path="res://GameFiles/SpinHead IMGS/SpeedBooster/top/topArrows.png" id="9_x8at7"]
+[ext_resource type="Texture2D" uid="uid://cxsi00dhvr5j5" path="res://GameFiles/SpinHead IMGS/SpeedBooster/top/topArrowsGlow.png" id="10_1pck6"]
+[ext_resource type="AudioStream" uid="uid://d1ihm7103gytw" path="res://GameFiles/SoundEffects/SpeedBoosterSound.mp3" id="12_ua5vc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y2hwl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_17wg8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_17wg8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3ljig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_p1gs4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_bwe4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cp3mt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cp3mt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bwqs0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hqiu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8tl4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_17wg8")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 30.0
+}]
+
+[sub_resource type="Animation" id="Animation_b1tyu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.698039)]
+}
+
+[sub_resource type="Animation" id="Animation_bhmo5"]
+resource_name = "glow"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.698039), Color(1, 1, 1, 0.25098)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fn4qu"]
+_data = {
+&"RESET": SubResource("Animation_b1tyu"),
+&"glow": SubResource("Animation_bhmo5")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6d0qk"]
+size = Vector2(51, 68)
+
+[node name="SpeedBooster" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_exysa")
+metadata/_edit_vertical_guides_ = [13.0]
+
+[node name="BoosterPost" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y2hwl")
+autoplay = "default"
+speed_scale = 2.0
+
+[node name="TopArrows" type="Sprite2D" parent="."]
+position = Vector2(3, -53.5)
+texture = ExtResource("9_x8at7")
+
+[node name="TopArrowsGlow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.698039)
+position = Vector2(3, -53.5)
+texture = ExtResource("10_1pck6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TopArrowsGlow"]
+libraries = {
+"": SubResource("AnimationLibrary_fn4qu")
+}
+autoplay = "glow"
+speed_scale = 1.5
+
+[node name="Detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Detector"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_6d0qk")
+
+[node name="BoosterSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_ua5vc")
+volume_db = 10.0
+pitch_scale = 0.75
+
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]

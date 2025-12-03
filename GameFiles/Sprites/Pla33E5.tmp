@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://dtmw5o80xydm1"]
+
+[ext_resource type="Script" path="res://GameFiles/Gameplay Scripts/player_physics.gd" id="1_7rv2c"]
+[ext_resource type="Script" path="res://GameFiles/Gameplay Scripts/state_machine.gd" id="2_ox70h"]
+[ext_resource type="Script" path="res://GameFiles/Gameplay Scripts/States/on_ground.gd" id="3_q7eih"]
+[ext_resource type="Script" path="res://GameFiles/Gameplay Scripts/States/on_air.gd" id="4_qqkve"]
+[ext_resource type="Script" path="res://GameFiles/ScreenView Scripts/SpeedLine.gd" id="5_af6ql"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ghdgl"]
+load_path = "res://.godot/imported/RollinJackGOLD.png-2906fd9c842966c8e0225473ada0f35d.ctex"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xp4i8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_ghdgl")
+}],
+"loop": true,
+"name": &"Rolling",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gdqmg"]
+radius = 3.02999
+height = 6.05999
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_107ty"]
+radius = 9.0
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_5wp5o"]
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_7rv2c")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_ox70h")
+
+[node name="OnGround" type="Node" parent="StateMachine"]
+script = ExtResource("3_q7eih")
+
+[node name="OnAir" type="Node" parent="StateMachine"]
+script = ExtResource("4_qqkve")
+
+[node name="Characters" type="Node2D" parent="."]
+position = Vector2(0, -4)
+
+[node name="SkullMan" type="AnimatedSprite2D" parent="Characters"]
+sprite_frames = SubResource("SpriteFrames_xp4i8")
+animation = &"Rolling"
+
+[node name="SpeedLine" type="Line2D" parent="Characters"]
+position = Vector2(-7, 0)
+points = PackedVector2Array(0, 0)
+width = 8.0
+default_color = Color(1, 0.576471, 0, 1)
+script = ExtResource("5_af6ql")
+
+[node name="HighCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_gdqmg")
+
+[node name="LowCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_107ty")
+
+[node name="SeparationRayShape3D" type="CollisionShape2D" parent="."]
+shape = SubResource("SeparationRayShape2D_5wp5o")
+
+[node name="LeftGroundSensor" type="RayCast2D" parent="."]
+position = Vector2(-9, 0)
+target_position = Vector2(0, 36)
+
+[node name="RightGroundSensor" type="RayCast2D" parent="."]
+position = Vector2(9, 0)
+target_position = Vector2(0, 36)
+
+[node name="RightWallSensor" type="RayCast2D" parent="."]
+target_position = Vector2(11, 0)
+
+[node name="LeftWallSensor" type="RayCast2D" parent="."]
+target_position = Vector2(-11, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(200, 0)
+limit_top = 0
+limit_bottom = 0
