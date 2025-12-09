@@ -55,6 +55,7 @@ https://nyknck.itch.io/explosion
 Game Design: by Safwan Murad  
 Music: by Safwan Murad  
 Basically Everything Else: by Safwan Murad
+Trailer: by Safwan Murad
 
 
 ## Final Words
