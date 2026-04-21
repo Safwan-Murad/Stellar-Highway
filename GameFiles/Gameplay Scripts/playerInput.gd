@@ -39,14 +39,15 @@ func _process(_delta:float) -> void:
 		first = true
 
 func _input(event:InputEvent) -> void:
+	# Touch drag (finger / non-S Pen)
 	if event is InputEventScreenDrag and event.index == 0:
 		tpos = event.position
 		newpos = get_canvas_transform().affine_inverse().translated(tpos).origin
 		if newpos.y > 1082 or newpos.y < -2:
 			is_pre = false
-	
+
 	elif event is InputEventScreenTouch:
-		if  event.is_pressed() and event.index == 0:
+		if event.is_pressed() and event.index == 0:
 			tpos = event.position
 			oldpos = get_canvas_transform().affine_inverse().translated(tpos).origin
 			newpos = oldpos
@@ -55,4 +56,23 @@ func _input(event:InputEvent) -> void:
 			else:
 				is_pre = true
 		elif event.index == 0:
+			is_pre = false
+
+	# S Pen (and mouse) support — stylus reports as mouse events on Android
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed():
+			tpos = event.position
+			oldpos = get_canvas_transform().affine_inverse().translated(tpos).origin
+			newpos = oldpos
+			if oldpos.y > 1082 or oldpos.y < -2:
+				is_pre = false
+			else:
+				is_pre = true
+		else:
+			is_pre = false
+
+	elif event is InputEventMouseMotion and event.button_mask & MOUSE_BUTTON_MASK_LEFT:
+		tpos = event.position
+		newpos = get_canvas_transform().affine_inverse().translated(tpos).origin
+		if newpos.y > 1082 or newpos.y < -2:
 			is_pre = false
