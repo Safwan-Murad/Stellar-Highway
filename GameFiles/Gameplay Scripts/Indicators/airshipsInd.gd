@@ -1,4 +1,8 @@
 extends Node2D
+## The danger warning for an incoming airships cluster: a beeping marker fixed ahead of the player.
+##
+## On spawn it removes the arrows for airships that didn't actually spawn, then hovers a set
+## distance ahead of the player and frees itself once the player reaches the airships.
 
 @onready var sound_player:AudioStreamPlayer2D = get_node("DangerBeep")
 @onready var parent:Node2D = get_node("../")

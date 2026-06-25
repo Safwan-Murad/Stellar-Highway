@@ -1,10 +1,16 @@
 extends Sprite2D
+## The main-menu game-mode picker.
+##
+## Tracks which mode is selected (its scene path is exposed as [member mode], which
+## gameStart.gd reads when launching). Updates the three buttons' highlighted icons and
+## the high-score clapperboard when the selection changes. Keys 1/2/3 are shortcuts.
 
+## The three selectable mode scenes, in button order.
 var modes:Array[String] = ["res://GameFiles/Modes/EndlessRunnerMode.tscn",
 	"res://GameFiles/Modes/HoleIn-a-WallMode.tscn",
 	"res://GameFiles/Modes/MissilesMode.tscn"
 ]
-var mode:String = modes[0]
+var mode:String = modes[0]  ## The currently selected mode's scene path.
 
 var textures:Array = [
 	[
@@ -40,6 +46,8 @@ func _input(_ev:InputEvent) -> void:
 		await get_tree().create_timer(0.1).timeout
 		noSpam = true
 
+## Selects mode [param btn] (0-2): updates [member mode], the high-score board, and the
+## button icons. Ignored while the shop is open (the wind turbine is parked off to the side).
 func generalPressed(btn:int) -> void:
 	if get_node("../../../../sizeChange/WindTurbine").position.x > 3000:
 		return

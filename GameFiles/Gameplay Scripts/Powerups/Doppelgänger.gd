@@ -1,9 +1,16 @@
 extends Node2D
+## Doppelgänger powerup: spawns a clone that mirrors you and soaks one hit.
+##
+## On pickup it instantiates a [code]PlayerSUS[/code] body next to the player, copying its
+## speed and velocity. The clone trails the real player (see player_physics.gd) and adds its
+## distance to the score as bonus; when it's destroyed the real player keeps going.
+## ("sus"/"imposter" are Among Us jokes — it's just the player's twin.)
 
-var sus:bool = false
-var imposter:Resource = preload("res://GameFiles/Sprites/PlayerSUS.tscn")
-var da_sus:CharacterBody2D
+var sus:bool = false  ## Guard so the pickup only triggers once.
+var imposter:Resource = preload("res://GameFiles/Sprites/PlayerSUS.tscn")  ## The clone scene.
+var da_sus:CharacterBody2D  ## The spawned clone.
 
+## On the player touching the powerup, spawn and launch the mirrored clone.
 func _on_hitbox_body_entered(body:Node) -> void:
 	if body.name == "Player" and not sus:
 		sus = true

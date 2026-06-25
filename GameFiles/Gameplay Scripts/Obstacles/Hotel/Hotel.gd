@@ -1,12 +1,18 @@
 extends Node2D
+## The hotel: roll through its horizontal halls without touching the deadly red walls.
+##
+## It has three stacked halls; this shuffles which one the player enters and decorates two of
+## them with hazard walls — either jagged "stupid" walls ([method stupidWall]) or curved
+## "smooth" walls ([method smoothWall]), placed jutting from the floor or ceiling. Triggers the
+## hotel danger indicator on spawn. [member offx] is the despawn clearance for the generator.
 
-static var offx:int = 1280
+static var offx:int = 1280  ## Despawn clearance distance used by ObstacleGenerator.
 
-var rngMan:int
-var obSp:Sprite2D
+var rngMan:int       ## Reusable random selector (which hall, which wall style, etc.).
+var obSp:Sprite2D    ## Scratch: each hazard wall being placed.
 
-var StW:Resource = preload("res://GameFiles/Sprites/Obstacles/Hotel/Obstacles/StupidWall.tscn")
-var SmW:Resource = preload("res://GameFiles/Sprites/Obstacles/Hotel/Obstacles/SmoothWall.tscn")
+var StW:Resource = preload("res://GameFiles/Sprites/Obstacles/Hotel/Obstacles/StupidWall.tscn")  ## Jagged hazard wall.
+var SmW:Resource = preload("res://GameFiles/Sprites/Obstacles/Hotel/Obstacles/SmoothWall.tscn")  ## Curved hazard wall.
 
 func _ready() -> void:
 	position.y = 540
@@ -28,6 +34,7 @@ func _ready() -> void:
 			1:
 				smoothWall(i+1)
 
+## Fill [param hall] with three jagged "stupid" hazard walls, each randomly from floor or ceiling.
 func stupidWall(hall:int) -> void:
 	get_child(0).get_child(0).play("StupidWall")
 	for i in range(3):
@@ -41,6 +48,7 @@ func stupidWall(hall:int) -> void:
 			
 		get_child(hall).add_child(obSp)
 
+## Fill [param hall] with three curved "smooth" hazard walls, randomly flipped and from floor or ceiling.
 func smoothWall(hall:int) -> void:
 	get_child(0).get_child(0).play("SmoothWall")
 	for i in range(3):

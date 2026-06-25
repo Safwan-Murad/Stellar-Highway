@@ -1,9 +1,14 @@
 extends Node2D
+## The main-menu clapperboard: shows the selected mode's high score and starts the game.
+##
+## Pressing its button (or Enter) snaps the clapperboard shut and, when that animation
+## finishes, loads the mode chosen in Gamemodes.gd via the loading transition.
+## [method changeScore] refreshes the displayed high score when the mode selection changes.
 
-var mode:String
-var noSpam:bool = true
+var mode:String         ## Scene path of the mode to launch (read from Gamemodes at start time).
+var noSpam:bool = true  ## Debounce for the Enter shortcut.
 var Utils:Node2D
-@onready var score:Label = get_node("highScore")
+@onready var score:Label = get_node("highScore")  ## The high-score label on the board.
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -25,6 +30,7 @@ func _on_animation_player_animation_finished(_anim_name:String) -> void:
 	mode = get_node("../../LeftCenter/Gamemodes/Gamemodes").mode
 	get_node("../../Center/Loading").loadStart(mode)
 
+## Display the saved high score for [param mode] (0-2), zero-padded to 8 digits.
 func changeScore(mode:int) -> void:
 	var sc:int = 0
 	if Utils.scores:

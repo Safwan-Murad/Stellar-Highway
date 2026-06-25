@@ -1,11 +1,15 @@
 extends Node2D
+## An under-construction site: roll between the half-built towers and their swinging wrecking balls.
+##
+## Builds 1-4 sections, each an incomplete building topped with a [code]HeavyPendulum[/code]
+## wrecking ball started at a random angle and swing strength. Touching anything here is lethal.
 
-var offx:int = 500
+var offx:int = 500  ## Despawn clearance distance (grows with the number of sections).
 
 @onready var HeavyPendulum:Resource = preload("res://GameFiles/Sprites/Obstacles/Buildings/UnderConstruction/HeavyPendulum.tscn")
 @onready var IncompleteBuilding:Resource = preload("res://GameFiles/Sprites/Obstacles/Buildings/UnderConstruction/IncompleteBuilding.tscn")
-var building:Array = [null, null]
-var morePlz:int = 1
+var building:Array = [null, null]  ## Scratch: [pendulum, tower] for the section being built.
+var morePlz:int = 1  ## How many construction sections to spawn (1-4).
 
 func _ready() -> void:
 	randomize()

@@ -1,11 +1,16 @@
 extends Control
+## The in-menu tutorial book: a flip-through guide to every mechanic and obstacle.
+##
+## [member pics] and [member tutText] are parallel arrays — one picture and one blurb per
+## page. The arrows (or ← / → keys) flip pages; Esc closes it. This is also the clearest
+## plain-English description of every hazard in the game, so it doubles as design docs.
 
-@onready var shady:Sprite2D = get_node("ShadyBusiness")
-@onready var bookPics:Sprite2D = get_node("PageBg/bookPics")
-@onready var pageNum:Label = get_node("PageBg/pageNum")
-@onready var readnLearn:RichTextLabel = get_node("PageBg/readnLearn")
-var currPage:int = 0
-var noSpam:bool = true
+@onready var shady:Sprite2D = get_node("ShadyBusiness")          ## The dimming overlay behind the book.
+@onready var bookPics:Sprite2D = get_node("PageBg/bookPics")     ## The current page's illustration.
+@onready var pageNum:Label = get_node("PageBg/pageNum")          ## "current/total" page indicator.
+@onready var readnLearn:RichTextLabel = get_node("PageBg/readnLearn")  ## The current page's text.
+var currPage:int = 0    ## The page being shown.
+var noSpam:bool = true  ## Debounce for the keyboard page-flip shortcuts.
 
 var pics:Array[Resource] = [
 	preload("res://GameFiles/SpinHead IMGS/UI/menu/tutorialBook/tutPics/0.png"),
@@ -73,6 +78,7 @@ func _on_back_btn_pressed() -> void:
 	currPage = max(currPage-1, 0)
 	changePage()
 
+## Clamps [member currPage] in range and refreshes the picture, text and page number.
 func changePage() -> void:
 	currPage = max(0, currPage)
 	currPage = min(tutText.size() - 1, currPage)
@@ -84,6 +90,8 @@ func _on_close_btn_pressed() -> void:
 	visible = false
 	get_tree().paused = false
 
+## Re-positions and re-scales the page-flip buttons when the book is opened (the layout
+## differs from the editor defaults). Name is just a placeholder joke for "fix the buttons".
 func getUrS___Right() -> void:
 	get_node("PageBg/forwardBTN").position = Vector2(444, -206)
 	get_node("PageBg/forwardBTN").scale = Vector2(1, 1)

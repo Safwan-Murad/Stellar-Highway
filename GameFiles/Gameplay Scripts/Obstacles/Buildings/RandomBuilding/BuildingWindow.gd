@@ -1,4 +1,9 @@
 extends Sprite2D
+## A single window on a procedural building. Picks a random window texture (lit or dark).
+##
+## The picker is weighted toward the darker textures so most windows look unlit. The texture
+## list is a [code]static[/code] array so all windows share one cached copy (hence the joke name
+## [member ScrewConstantStrings] — it avoids re-preloading the same paths per window).
 
 static var ScrewConstantStrings:Array[Resource] = [
 		preload("res://GameFiles/SpinHead IMGS/Buildings/Windows/0.png"),

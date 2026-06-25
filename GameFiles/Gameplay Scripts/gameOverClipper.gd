@@ -1,13 +1,19 @@
 extends Node2D
+## The game-over screen — a film clapperboard that snaps shut on your final score.
+##
+## Reachable via the "clipperBoy" group. [method myCondolences] is the entry point the
+## player calls on death: it plays the "GG" sting, closes the clapperboard, and prints the
+## final score (distance + bonus), zero-padded. Its button returns to the main menu.
 
 var bg_music := AudioStreamPlayer.new()
 
-var score:int
+var score:int  ## The final score shown (distance + bonus).
 
 func _ready() -> void:
 	add_to_group("clipperBoy")
 	bg_music.stream = load("res://GameFiles/OST/Gameplay/GG.mp3")
 
+## Show the game-over screen with the final score. ("My condolences" — you died.)
 func myCondolences() -> void:
 	bg_music.autoplay = true
 	add_child(bg_music)

@@ -1,4 +1,8 @@
 extends Node2D
+## Root script of the main menu: plays the menu music and handles quitting.
+##
+## Sets the menu background colour, loops the theme (kept playing even while paused), and
+## maps the Android back button / window close to a clean quit.
 
 var bg_music := AudioStreamPlayer.new()
 

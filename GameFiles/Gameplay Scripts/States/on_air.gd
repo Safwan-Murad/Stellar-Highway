@@ -1,16 +1,21 @@
 extends '../state.gd'
+## Player state: airborne (jumped or rolled off an edge).
+##
+## Applies gravity (scaled by the Umbrella powerup), light air drag, the Lowrider's
+## landing-bounce animation, and Jetpack thrust. Returns to OnGround on landing.
 
-var has_rolled : bool
+var has_rolled : bool  ## Whether the body was rolling at takeoff (keeps it un-rotated in the air).
 
 func enter(host:CharacterBody2D) -> void:
 	has_rolled = host.is_rolling
 	host.is_rolling = false
 
 func step(host:CharacterBody2D, _delta:float):
+	# Landed: convert air velocity back into ground speed and go grounded.
 	if host.is_grounded:
 		host.ground_reacquisition()
 		return 'OnGround'
-	
+
 	var no_rotation = has_rolled
 	host.rotation_degrees = int(lerp(host.rotation_degrees, 0.0, .2)) if !no_rotation else 0
 	

@@ -1,10 +1,15 @@
 extends Node2D
+## The danger warning for an incoming dragon: a beeping arrow pointing at the dragon's row.
+##
+## [method indicateStart] keeps only the arrow for the row the dragon is in, then hovers ahead
+## of the player and frees itself once the dragon has been reached (or no longer exists).
 
 @onready var sound_player:AudioStreamPlayer2D = get_node("DangerBeep")
 @onready var parent:Node2D = get_node("../")
 @onready var player:CharacterBody2D = get_node("../Player")
-var dragon:Node
+var dragon:Node  ## The dragon this indicator tracks.
 
+## Show only the arrow for row [param place] and start tracking dragon [param dr].
 func indicateStart(place:int, dr:Node) -> void:
 	if place!=0:
 		get_node("Indicator0").queue_free()

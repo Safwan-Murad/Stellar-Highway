@@ -1,4 +1,8 @@
 extends Node2D
+## The danger warning for an incoming hotel: an arrow pointing at the hall the player should enter.
+##
+## Keeps only the arrow matching which hall is the entrance (based on the hotel's piece layout),
+## hovers ahead of the player, and frees itself just before the hotel arrives.
 
 @onready var sound_player:AudioStreamPlayer2D = get_node("DangerBeep")
 @onready var parent:Node2D = get_node("../")

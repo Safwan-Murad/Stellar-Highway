@@ -1,7 +1,12 @@
 extends Button
+## The in-run pause / resume / replay button, and the pause-menu actions.
+##
+## During a run this button pauses and resumes (showing the quit/replay/mute controls and
+## playing pause music). After a game over its job switches ([method switchJobs]) to a
+## "replay" button. Also wires up the pause menu's replay and quit buttons. Key P pauses.
 
-var gameOn:bool = true
-var jobman:bool = true
+var gameOn:bool = true   ## True while the game is running (vs paused).
+var jobman:bool = true   ## True while acting as pause/resume; false after game over (acts as replay).
 var pause:Resource = preload("res://GameFiles/SpinHead IMGS/UI/in-game/PauseBTN/PauseBTN.png")
 var res:Resource = preload("res://GameFiles/SpinHead IMGS/UI/in-game/PauseBTN/ResBTN.png")
 var rep:Resource = preload("res://GameFiles/SpinHead IMGS/UI/in-game/replayBTN/replayBTN.png")
@@ -22,6 +27,7 @@ func _ready() -> void:
 	add_to_group("pauseman")
 	set_process_input(true)
 
+## Called on game over: turns the pause button into a replay button.
 func switchJobs():
 	jobman = false
 	self.icon = rep
@@ -64,6 +70,7 @@ func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
 		repBTN.visible = false
 		quitBTN.visible = false
 
+## Persists the character, star balance and final score before leaving a run (replay/quit).
 func saveAndStuff() -> void:
 	Utils.savegame(get_tree().get_first_node_in_group("Player").currChar, get_tree().get_first_node_in_group("StarCnt").stars)
 	var finalScore:int = get_tree().get_first_node_in_group("Score").sc

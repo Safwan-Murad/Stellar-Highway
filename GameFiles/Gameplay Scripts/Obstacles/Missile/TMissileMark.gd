@@ -1,10 +1,15 @@
 extends Node2D
+## The proximity warning for timed missiles — the audio-only twin of MissileMark.
+##
+## Same nearest-missile beep logic, but tracks the "TMissiles" group and has no on-player
+## marker (timed missiles can't be steered into anything, so there's nothing to aim). Frees
+## itself once no timed missiles remain.
 
-var cooldown:float = 0.2
+var cooldown:float = 0.2  ## Delay between beeps; scales down as the missile nears.
 @onready var sound_player:AudioStreamPlayer2D = get_node("MissileBeep")
 @onready var player:CharacterBody2D = get_node("../Player")
-var missilePos:Vector2
-var missiles:Array
+var missilePos:Vector2  ## Position of the nearest timed missile.
+var missiles:Array      ## All live timed missiles this frame.
 
 func _process(_delta:float) -> void:
 	missiles = get_tree().get_nodes_in_group("TMissiles")

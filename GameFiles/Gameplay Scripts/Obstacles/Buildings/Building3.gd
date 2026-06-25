@@ -1,6 +1,10 @@
 extends StaticBody2D
+## A rooftop building that may carry a random powerup (same scheme as Building2, different art).
+##
+## Randomises its height, optionally drops its spotlights and its two speed pads, and one time
+## in ten per powerup type places a single powerup the player doesn't already hold.
 
-static var offx:int = 1010
+static var offx:int = 1010  ## Despawn clearance distance used by ObstacleGenerator.
 
 var Rockstar:Resource = preload("res://GameFiles/Sprites/Powerups/RockstarGuitar.tscn")
 var Jetpack:Resource = preload("res://GameFiles/Sprites/Powerups/Jetpack.tscn")
@@ -19,6 +23,7 @@ func _ready() -> void:
 		if randi() % 3 != 0:
 			get_node("SpeedBooster" + str(i)).queue_free()
 
+	# 0-4 each pick a powerup (if not already held); 5-9 leave the roof empty.
 	match randi() % 10:
 		0:
 			if not get_tree().get_nodes_in_group("PowerupPopUps")[1].visible:
@@ -41,6 +46,7 @@ func _ready() -> void:
 				Powerup = Lowrider.instantiate()
 				addPU()
 
+## Place the chosen powerup at this building's roof spot.
 func addPU() -> void:
 	Powerup.position = Vector2(-16, -155)
 	add_child(Powerup)

@@ -1,19 +1,25 @@
 extends Node2D
+## Runs the wave-based survival loop for Missiles mode.
+##
+## [method start] is an [code]await[/code]-driven loop: it announces "Wave N", spawns
+## [code]N×2[/code] missiles (a mix of lock-on and timed) from random screen edges,
+## waits, then awards score + stars and advances the wave. Lock-on missiles spawn a
+## [code]MissileMark[/code] warning, timed ones a [code]TMissileMark[/code].
 
 var rockets:Array[Resource] = [
-	preload("res://GameFiles/Sprites/Obstacles/Missile.tscn"),
-	preload("res://GameFiles/Sprites/Obstacles/TimedMissile.tscn")
+	preload("res://GameFiles/Sprites/Obstacles/Missile.tscn"),       # 0 = lock-on (homing) missile
+	preload("res://GameFiles/Sprites/Obstacles/TimedMissile.tscn")   # 1 = timed (fuse) missile
 ]
 
 @onready var tree:SceneTree = get_tree()
 @onready var player:CharacterBody2D = get_node("../Player")
 @onready var parent:Node2D = get_node("../")
 var obj:CharacterBody2D
-var wave:int = 1
-var temp:int
-var tempf:float
-var ms:bool = false
-var tms:bool = false
+var wave:int = 1     ## Current wave number; also scales the missile count and rewards.
+var temp:int         ## Scratch: which missile type was rolled.
+var tempf:float      ## Scratch: spawn-range bound.
+var ms:bool = false  ## A lock-on missile spawned this wave (so spawn its marker once).
+var tms:bool = false ## A timed missile spawned this wave (so spawn its marker once).
 
 var MissileMark:Resource = preload("res://GameFiles/Sprites/Obstacles/MissileMark.tscn")
 var TMissileMark:Resource = preload("res://GameFiles/Sprites/Obstacles/TMissileMark.tscn")
@@ -22,6 +28,8 @@ func _ready() -> void:
 	randomize()
 	player.position.y = get_node("../Building1").position.y - 321
 
+## The endless wave loop. Started by gameStarter.gd on the first touch and never
+## returns (each iteration is one wave, separated by awaited timers).
 func start() -> void:
 	while true:
 		tree.get_first_node_in_group("PowerupPopUps").text = "Wave " + str(wave)

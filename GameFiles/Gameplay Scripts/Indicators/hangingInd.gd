@@ -1,4 +1,8 @@
 extends Node2D
+## The danger warning for the hanging broken stage bars.
+##
+## Tracks the bars' tilt so the warning sits where the bars actually reach (it follows the bar
+## angle), staying ahead of the player, and frees itself once the player has passed.
 
 @onready var sound_player:AudioStreamPlayer2D = get_node("DangerBeep")
 @onready var parent:Node2D = get_node("../")

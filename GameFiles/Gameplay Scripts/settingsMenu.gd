@@ -1,6 +1,8 @@
 extends Control
+## The main-menu settings popup. Opened from the shop view; Esc or its close button
+## dismisses it. Keeps its dimming overlay sized to the current aspect ratio.
 
-@onready var shady:Sprite2D = get_node("ShadyBusiness")
+@onready var shady:Sprite2D = get_node("ShadyBusiness")  ## The dimming overlay behind the panel.
 
 func _ready() -> void:
 	visible = false

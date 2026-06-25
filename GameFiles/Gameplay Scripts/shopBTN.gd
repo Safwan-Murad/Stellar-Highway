@@ -1,6 +1,11 @@
 extends Button
+## Toggles the main menu between its "home" view and the shop view.
+##
+## Pressing it parks the wind-turbine prop off to the side (which other menu scripts use
+## as a "shop is open" flag), hides the home widgets, and shows the shop — or reverses it.
+## Also hosts the tutorial and settings open buttons. Key S toggles the shop.
 
-var gameOn:bool = true
+var gameOn:bool = true  ## True while on the home view; false while the shop is open.
 var shop:Resource = preload("res://GameFiles/SpinHead IMGS/UI/menu/shopBTN/shopBTN.png")
 var back:Resource = preload("res://GameFiles/SpinHead IMGS/UI/menu/shopBTN/shopBTN.png")
 @onready var anim:AnimationPlayer = get_node("AnimationPlayer")

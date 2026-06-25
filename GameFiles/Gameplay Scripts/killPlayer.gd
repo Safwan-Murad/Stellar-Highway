@@ -1,4 +1,8 @@
 extends Area2D
+## A lethal hitbox (e.g. a building's side wall). Touching it ends the run.
+##
+## Hits on the real player route through [code]tartar_sauce()[/code] (which may be
+## absorbed by a defensive powerup); hits on the Doppelgänger clone just kill the clone.
 
 func _on_body_entered(body:Node) -> void:
 	if body.name == "Player":

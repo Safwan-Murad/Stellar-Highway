@@ -1,4 +1,8 @@
 extends Node2D
+## The boot scene (Intro.tscn): plays the studio intro, then opens the main menu.
+##
+## Plays the intro jingle and video; when the audio finishes it switches to MainMenu.
+## Also installs the app-wide back-button / window-close handling (quit cleanly).
 
 @onready var inVideo:VideoStreamPlayer = get_node("CanvasLayer/Control/VideoStreamPlayer")
 

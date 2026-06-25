@@ -1,9 +1,10 @@
 extends Button
+## Mute toggle: flips the Master audio bus and swaps the icon. Key M also toggles it.
 
 var notmuted:Resource = preload("res://GameFiles/SpinHead IMGS/UI/menu/mute/notmuted.png")
 var muted:Resource = preload("res://GameFiles/SpinHead IMGS/UI/menu/mute/muted.png")
 @onready var anim:AnimationPlayer = get_node("AnimationPlayer")
-@onready var audio:int = AudioServer.get_bus_index("Master")
+@onready var audio:int = AudioServer.get_bus_index("Master")  ## Index of the Master bus to mute.
 var noSpam:bool = true
 
 func _ready() -> void:

@@ -1,8 +1,13 @@
 extends Line2D
+## The burning fuse on a timed missile — a countdown rendered as a shrinking line.
+##
+## Draws a 30-segment fuse and burns it down one segment at a time over a random interval,
+## moving the spark particles to the burning tip. When the fuse runs out it calls the parent
+## missile's [code]gg1()[/code] to detonate.
 
-var pnts:Array = []
-var rt:float
-@onready var fusePars:CPUParticles2D = get_node("../../FusePars")
+var pnts:Array = []  ## The fuse's remaining points (popped as it burns).
+var rt:float         ## Seconds between burning each segment (randomised per missile).
+@onready var fusePars:CPUParticles2D = get_node("../../FusePars")  ## The spark particles at the tip.
 
 func _ready() -> void:
 	randomize()

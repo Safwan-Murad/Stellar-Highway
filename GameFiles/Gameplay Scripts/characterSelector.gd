@@ -1,14 +1,22 @@
 extends Node2D
+## The shop / character picker on the main menu.
+##
+## Manages the six character buttons. Each shows one of three states: locked ("F"),
+## owned-but-not-selected ("T0"), or selected ("T1"). Tapping an owned character selects
+## and saves it; tapping a locked one buys it if you can afford it (then selects it).
+## Keys 1-6 are shortcuts.
 
-@onready var b:Array[Node] = get_children()
-var noSpam:bool = true
-var selectedChar:int = 0
+@onready var b:Array[Node] = get_children()  ## The six character buttons.
+var noSpam:bool = true       ## Debounce so a key press doesn't fire many frames in a row.
+var selectedChar:int = 0     ## Index (0-5) of the equipped character.
 @onready var Utils:Node2D = get_tree().get_first_node_in_group("Utils")
-var loaded:bool = false
-var ownedChars:Array = [1, 0, 0, 0, 0, 0]
-var price:Array[int] = [0, 15000, 20000, 25000, 30000, 35000]
-var stars:int = 0
+var loaded:bool = false      ## Set after the first interaction (guards the menu-transition check).
+var ownedChars:Array = [1, 0, 0, 0, 0, 0]  ## Which characters are unlocked (0 is free).
+var price:Array[int] = [0, 15000, 20000, 25000, 30000, 35000]  ## Star cost per character.
+var stars:int = 0            ## Scratch: the player's balance when attempting a purchase.
 
+## Load saved ownership and selection, set each button's locked/owned/selected art accordingly,
+## then re-select the saved character so its preview is shown.
 func _ready() -> void:
 	if Utils.loaded_data:
 		if Utils.loaded_data.has("ownedChars"):
@@ -62,6 +70,8 @@ func _input(_ev:InputEvent) -> void:
 		await get_tree().create_timer(0.1).timeout
 		noSpam = true
 
+## Handles a press on character [param btn]: select it if owned, otherwise try to buy it
+## (and select on success). Ignored unless the shop is open. Saves after any change.
 func generalPressed(btn:int) -> void:
 	if get_node("../../WindTurbine").position.x < 3000 and loaded:
 		return

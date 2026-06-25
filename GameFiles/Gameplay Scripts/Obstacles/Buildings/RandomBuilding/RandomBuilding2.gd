@@ -1,4 +1,10 @@
 extends StaticBody2D
+## A larger, symmetrical procedurally generated building, often crowned with a powerup.
+##
+## Like RandomBuilding it samples a random math function [method f] for the first half of the
+## roof, but then mirrors a log-curve dome to make a symmetrical tower, lining both sides with
+## stars and frequently placing a powerup at the peak. Two collider helpers run as it goes:
+## [method giveBirth] (right/leading edge) and [method giveAnotherBirth] (left/mirrored edge).
 
 var Rockstar:Resource = preload("res://GameFiles/Sprites/Powerups/RockstarGuitar.tscn")
 var Jetpack:Resource = preload("res://GameFiles/Sprites/Powerups/Jetpack.tscn")
@@ -6,11 +12,11 @@ var Dopel:Resource = preload("res://GameFiles/Sprites/Powerups/Doppelgänger.tsc
 var Umbrella:Resource = preload("res://GameFiles/Sprites/Powerups/Umbrella.tscn")
 var Lowrider:Resource = preload("res://GameFiles/Sprites/Powerups/Lowrider.tscn")
 
-var offx:float = 2420
-var offy:int = 96
-static var Euler:float = 2.7182818284590452353602874713527
+var offx:float = 2420  ## Despawn clearance distance (half the generated width).
+var offy:int = 96      ## Vertical placement padding so the building sits on screen.
+static var Euler:float = 2.7182818284590452353602874713527  ## e, used by the sigmoid/log curves.
 
-var colls:Array = []
+var colls:Array = []   ## The per-segment roof colliders.
 var Star:Resource = preload("res://GameFiles/Sprites/Currency/Star.tscn")
 @onready var bP:Polygon2D = get_node("BuildingPolygon")
 @onready var bO:Line2D = get_node("BuildingOutline")
@@ -92,6 +98,7 @@ func _ready() -> void:
 			stTemp.position = polyPnts.back() + Vector2(0, -36)
 			bP.add_child(stTemp)
 			
+		# At the midpoint (the peak), maybe crown the building with a powerup.
 		if i == int(mxSize/2 - 1):
 			match randi() % 10:
 				0:
@@ -120,6 +127,8 @@ func _ready() -> void:
 						stTemp.position = polyPnts.back() + Vector2(0, -36)
 						bP.add_child(stTemp)
 	
+	# Second pass: grow a symmetrical log-curve dome, mirroring each new point to the
+	# other side (push_back vs push_front) so the tower is left-right symmetrical.
 	x = 0
 	var cnt:int = 0
 	x_step = randf_range(0.18, 0.33)
@@ -180,6 +189,8 @@ func _ready() -> void:
 	bO.set_points(polyPnts)
 	bP.decorationTime(maxPnt, polyPnts[polyPnts.size()-2].y, polyPnts[0].x, polyPnts[polyPnts.size()-3].x)
 
+## The roofline shape function for the first (asymmetric) half of the roof; [member fx] picks
+## the curve (sine, sigmoid, arcsine or log).
 func f(x:float) -> float:
 	match fx:
 		0:
@@ -190,9 +201,10 @@ func f(x:float) -> float:
 			return asin((1 + x_step) * sin(x))
 		3:
 			return log(sin(x) + w[0])
-	
+
 	return x
 
+## Append a collision segment between the last two points on the leading (right) edge.
 func giveBirth() -> void:
 	colls.push_back(CollisionShape2D.new())
 	colls.back().shape = SegmentShape2D.new()
@@ -200,6 +212,7 @@ func giveBirth() -> void:
 	colls.back().shape.b = polyPnts.back() - Vector2(offx, 0)
 	add_child(colls.back())
 
+## Append a collision segment for the first two points on the mirrored (left) edge.
 func giveAnotherBirth() -> void:
 	colls.push_back(CollisionShape2D.new())
 	colls.back().shape = SegmentShape2D.new()

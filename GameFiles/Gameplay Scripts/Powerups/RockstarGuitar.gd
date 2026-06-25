@@ -1,7 +1,13 @@
 extends Node2D
+## Rockstar Guitar powerup: for 10 seconds, the lines you draw sprout stars.
+##
+## On pickup it flips playerInput's [code]powerup[/code] flag (so drawn segments scatter
+## stars), shows the HUD icon, and rides along. After 10 seconds it clears the flag and
+## frees itself.
 
-var sus:bool = false
+var sus:bool = false  ## Guard so the pickup only triggers once.
 
+## On the player touching the powerup, enable star-drawing for 10 seconds.
 func _on_kill_me_body_entered(body:Node) -> void:
 	if body.name == "Player" and not sus:
 		sus = true

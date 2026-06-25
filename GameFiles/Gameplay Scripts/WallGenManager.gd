@@ -1,12 +1,17 @@
 extends Node2D
+## Spawns the bat walls for Hole-in-a-Wall mode.
+##
+## Once the run begins ([member gameStart], flipped by gameStarter.gd), it keeps one
+## [code]BatWall[/code] on screen at a time. Each successive wall is a little narrower
+## ([member wall_dist]) and harder, so the gap to thread tightens with progress.
 
 var BatWall:Resource = preload("res://GameFiles/Sprites/Obstacles/WalloBats/BatWall.tscn")
 
 @onready var player:CharacterBody2D = get_node("../Player")
-var wall:Node2D
+var wall:Node2D            ## The bat wall currently on screen.
 var ready2spawn:bool = true
-var gameStart:bool = false
-var spawned:int = 0
+var gameStart:bool = false ## Stays false until the player's first touch starts the run.
+var spawned:int = 0        ## How many walls have spawned (drives difficulty/tightness).
 @onready var parent:Node2D = get_node("../")
 
 func _ready() -> void:
@@ -14,6 +19,7 @@ func _ready() -> void:
 	player.position.y = get_node("../Building1").position.y - 321
 	get_node("../../UI/Center/Loading").loadEnd()
 
+## Spawn a wall when ready; free it once the player has passed, then arm the next.
 func _process(_delta:float) -> void:
 	if gameStart:
 		if ready2spawn:

@@ -1,4 +1,9 @@
 extends StaticBody2D
+## The decorative dragon that flies across the main menu (spawned by DragonsGenerator).
+##
+## A trimmed-down cousin of the gameplay [code]Dragon[/code]: same sine-wave body generation,
+## but no stars, no hitbox tuning, and no engage/self-destruct logic. It just weaves across the
+## menu and frees itself once it has flown off the side.
 
 var dP:Resource = preload("res://GameFiles/Sprites/Obstacles/Dragon/dragonPiece.tscn")
 @onready var dH:Sprite2D = get_node("DragonHead")

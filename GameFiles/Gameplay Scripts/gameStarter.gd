@@ -1,4 +1,9 @@
 extends Label
+## The "tap to begin" prompt that kicks off a run on the first touch.
+##
+## Until the player touches the screen the run is idle. On the first touch this sets the
+## player's starting auto-run speed (faster in Missiles mode), starts the relevant spawner
+## (MissileManager waves, or arming WallGenManager), then removes itself.
 
 func _input(event:InputEvent) -> void:
 	if event is InputEventScreenTouch:

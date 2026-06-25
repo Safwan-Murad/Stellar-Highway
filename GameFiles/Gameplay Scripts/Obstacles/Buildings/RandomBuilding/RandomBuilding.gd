@@ -1,28 +1,35 @@
 extends StaticBody2D
+## A building with a procedurally generated, wavy rooftop — a different silhouette every time.
+##
+## The roofline is sampled from a randomly chosen math function [method f] (sines, sigmoids,
+## arcsines, log curves and combinations, selected by [member fx]). For each sample it adds a
+## point to the roof polygon, a matching collision segment, and occasional stars. The walls and
+## a flat base close off the shape, then the face is tiled with windows. Per the tutorial these
+## roofs are forgiving: you won't game-over even if you clip the sides.
 
-var offx:float = 2048
-var offy:int = 96
-static var Euler:float = 2.7182818284590452353602874713527
+var offx:float = 2048  ## Despawn clearance distance (half the generated width).
+var offy:int = 96      ## Vertical placement padding so the building sits on screen.
+static var Euler:float = 2.7182818284590452353602874713527  ## e, used by the sigmoid/log curves.
 
-var colls:Array = []
+var colls:Array = []   ## The per-segment roof colliders.
 var Star:Resource = preload("res://GameFiles/Sprites/Currency/Star.tscn")
-@onready var bP:Polygon2D = get_node("BuildingPolygon")
-@onready var bO:Line2D = get_node("BuildingOutline")
-var polyPnts:Array[Vector2] = []
-var stTemp:Node2D
-var x:float = 0.0
-@export var mxSize:int = 128
-@export var chx:int = 32
-@export var verticality:int = 64
-var bHeight:float = 360
-var x_step:float = 0.2
-var maxPnt:float = -69420
-var minPnt:float = 69420
-var fx:int = 0
-var w:Array = []
-var deviance:float = 0.0
-var d_ch:float
-var temp
+@onready var bP:Polygon2D = get_node("BuildingPolygon")  ## The filled building shape.
+@onready var bO:Line2D = get_node("BuildingOutline")     ## The building's outline stroke.
+var polyPnts:Array[Vector2] = []  ## All polygon points (roofline, then walls and base).
+var stTemp:Node2D   ## Scratch star instance.
+var x:float = 0.0   ## Input to f(x); advances by x_step each sample.
+@export var mxSize:int = 128  ## Number of roof samples (roof width in segments).
+@export var chx:int = 32      ## Horizontal step between roof samples.
+@export var verticality:int = 64  ## Roof height amplitude (how tall the bumps are).
+var bHeight:float = 360  ## Height of the solid body below the roofline.
+var x_step:float = 0.2   ## Step added to x per sample (the roof "frequency").
+var maxPnt:float = -69420 ## Lowest roof point (max Y) seen — used to size the body.
+var minPnt:float = 69420  ## Highest roof point (min Y) seen — used to place the building.
+var fx:int = 0       ## Which roof function (0-7) f() uses this time.
+var w:Array = []     ## Random coefficients for the chosen function.
+var deviance:float = 0.0  ## Slow vertical drift added to the roofline.
+var d_ch:float       ## Per-sample change in deviance (the drift rate).
+var temp             ## Scratch reused in f() and when wiring the wall colliders.
 
 func _ready() -> void:
 	randomize()
@@ -94,11 +101,14 @@ func _ready() -> void:
 				x_step *= -1
 			x = randf_range(0, 2 * PI)
 
+	# Centre the generated shape on this node's origin.
 	offx = (mxSize * chx) / 2.0
 	bP.position.x = -offx
 	bO.position.x = -offx
 	position.y = 650
-	
+
+	# Walk the roofline left-to-right, sampling f(x) for each point and building a
+	# collision segment between consecutive points (with stars on every other point).
 	polyPnts.push_back(Vector2(0, verticality*f(x) + deviance))
 	maxPnt = max(maxPnt, polyPnts.back().y)
 	minPnt = min(minPnt, polyPnts.back().y)
@@ -124,11 +134,13 @@ func _ready() -> void:
 			stTemp.position = polyPnts.back() + Vector2(0, -36)
 			bP.add_child(stTemp)
 	
+	# Place the building at a random valid height now that the roof's extent is known.
 	if minPnt < 0:
 		offy -= minPnt
 	position.y = offy + randi() % int(max(1, 968 - (maxPnt - minPnt)))
 	bHeight = max(100, 1100 - maxPnt - position.y)
-	
+
+	# Close the polygon with the right wall, base and left wall back to the start.
 	polyPnts.push_back(Vector2(polyPnts.back().x, maxPnt + bHeight))
 	polyPnts.push_back(Vector2(0, polyPnts.back().y))
 	polyPnts.push_back(polyPnts[0])
@@ -147,6 +159,9 @@ func _ready() -> void:
 	bO.set_points(polyPnts)
 	bP.decorationTime(maxPnt, polyPnts[polyPnts.size()-2].y, 0, offx * 2)
 
+## The roofline shape function: returns a height for input [param x] using whichever curve
+## [member fx] selected (sine, sigmoid, arcsine, log, or polynomial combinations of them). The
+## random [member w] coefficients give each building its own character.
 func f(x:float) -> float:
 	match fx:
 		0:

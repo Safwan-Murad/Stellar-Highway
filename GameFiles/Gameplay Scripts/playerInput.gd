@@ -1,20 +1,29 @@
 extends Node2D
+## Turns pointer input into the solid terrain the character rolls on.
+##
+## While a finger/stylus/mouse is pressed and dragging on the play area, this samples
+## the pointer in world space and, every ~15 px of travel, drops a [code]CollLine[/code]
+## segment — a visible line plus a [SegmentShape2D] collider. Supports touch, the S Pen
+## (which arrives as mouse events on Android) and the mouse. When the Rockstar powerup
+## is active, stars are scattered along the drawn line. Lives in the "playerInput" group.
 
-var first:bool = false
-var is_pre:bool = false
-var oldpos:Vector2 = Vector2(0, 0)
-var newpos:Vector2 = Vector2(0, 0)
-var tpos:Vector2 = Vector2(0, 0)
+var first:bool = false      ## True on the first frame of a new stroke (skips drawing a stray segment).
+var is_pre:bool = false     ## True while actively drawing (pointer down inside the play area).
+var oldpos:Vector2 = Vector2(0, 0)  ## World position of the last placed point.
+var newpos:Vector2 = Vector2(0, 0)  ## World position of the current pointer sample.
+var tpos:Vector2 = Vector2(0, 0)    ## Latest raw (screen-space) pointer position.
 var Line:Resource = preload("res://GameFiles/Sprites/CollLine.tscn")
 var Star:Resource = preload("res://GameFiles/Sprites/Currency/Star.tscn")
-var lineTemp:StaticBody2D
-var stTemp:Node2D
-var switch:bool = false
-var powerup:bool = false
+var lineTemp:StaticBody2D   ## The segment currently being instantiated.
+var stTemp:Node2D           ## Scratch star instance.
+var switch:bool = false     ## Alternates so stars are placed on every other segment, not all.
+var powerup:bool = false    ## True while the Rockstar powerup is active (enables star drawing).
 
 func _ready() -> void:
 	add_to_group("playerInput")
 
+## Each frame, if drawing, extend the line: once the pointer has moved >15 px from the
+## last point, spawn a new collider segment between them (and maybe a star).
 func _process(_delta:float) -> void:
 	if is_pre:
 		if not first:
@@ -38,6 +47,9 @@ func _process(_delta:float) -> void:
 	else:
 		first = true
 
+## Tracks pointer state across the three input kinds. Pressing inside the play area
+## starts a stroke (is_pre = true); releasing, or dragging off the top/bottom edge,
+## ends it. The actual segment creation happens in _process.
 func _input(event:InputEvent) -> void:
 	# Touch drag (finger / non-S Pen)
 	if event is InputEventScreenDrag and event.index == 0:

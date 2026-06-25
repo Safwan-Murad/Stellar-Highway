@@ -1,6 +1,10 @@
 extends Label
+## The player's persistent star balance (the "Stars" group).
+##
+## Loads the saved total on startup and displays it. This is the wallet the shop spends
+## from when buying characters, and what the in-run StarCnt is added into on game over.
 
-var stars:int = 0
+var stars:int = 0  ## The saved star balance.
 var Utils:Node2D
 
 func _ready() -> void:

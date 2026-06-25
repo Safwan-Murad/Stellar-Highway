@@ -1,11 +1,16 @@
 extends Node2D
+## The proximity warning for lock-on missiles: a beep and a flashing marker on the player.
+##
+## Tracks the nearest live lock-on missile (the "Missiles" group). The closer it is, the
+## faster the beep and the marker flash ([member cooldown] shrinks with distance). Frees
+## itself once no lock-on missiles remain.
 
-var cooldown:float = 0.2
+var cooldown:float = 0.2  ## Delay between beeps/flashes; scales down as the missile nears.
 @onready var sound_player:AudioStreamPlayer2D = get_node("MissileBeep")
-@onready var marker:Sprite2D = get_node("MissileMarker")
+@onready var marker:Sprite2D = get_node("MissileMarker")  ## The flashing marker drawn on the player.
 @onready var player:CharacterBody2D = get_node("../Player")
-var missilePos:Vector2
-var missiles:Array
+var missilePos:Vector2  ## Position of the nearest missile.
+var missiles:Array      ## All live lock-on missiles this frame.
 
 func _process(_delta:float) -> void:
 	missiles = get_tree().get_nodes_in_group("Missiles")
