@@ -7,7 +7,7 @@ extends Node2D
 ## Spawners multiply their horizontal spawn offsets by [code]true_scalex/true_scaley[/code]
 ## so obstacles always appear just past the right edge, on any screen.
 
-var minimum_size:Vector2 = Vector2(1920, 1080)  ## The design resolution.
+var minimum_size:Vector2 = Vector2(Refs.SCREEN_WIDTH, Refs.SCREEN_HEIGHT)  ## The design resolution.
 var last_size:Vector2 = Vector2(1920, 1080)     ## Window size seen last frame (to detect changes).
 var win_size:Vector2 = Vector2(1920, 1080)      ## Current window/screen size.
 var true_scalex:float = 1.0  ## Horizontal scale factor vs the design width.
@@ -23,7 +23,7 @@ func _ready() -> void:
 		win_size = DisplayServer.window_get_size()
 		
 	if win_size.x != last_size.x or win_size.y != last_size.y:
-		if win_size.x/win_size.y > 1920.0/1080:
+		if win_size.x/win_size.y > Refs.DESIGN_ASPECT:
 			changeSize()
 		else:
 			true_scalex = 1.0
@@ -41,7 +41,7 @@ func _process(_delta:float) -> void:
 		win_size = DisplayServer.window_get_size()
 		
 	if win_size.x != last_size.x or win_size.y != last_size.y:
-		if win_size.x/win_size.y > 1920.0/1080:
+		if win_size.x/win_size.y > Refs.DESIGN_ASPECT:
 			changeSize()
 		else:
 			true_scalex = 1.0

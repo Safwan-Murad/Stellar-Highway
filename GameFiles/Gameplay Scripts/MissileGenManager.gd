@@ -44,7 +44,7 @@ func start() -> void:
 			else:
 				ms = true
 			if randi() % 2:
-				tempf = player.position.x + 64 + 1920 * parent.true_scalex/parent.scale.y
+				tempf = player.position.x + 64 + 1920 * parent.true_scalex/parent.true_scaley
 				obj.position.x = randf_range(-tempf, tempf)
 				if randi() % 2:
 					obj.position.y = -64
@@ -52,9 +52,9 @@ func start() -> void:
 					obj.position.y = 1144
 			else:
 				if randi() % 2:
-					obj.position.x = player.position.x + 64 + 1920 * parent.true_scalex/parent.scale.y * 0.8
+					obj.position.x = player.position.x + 64 + 1920 * parent.true_scalex/parent.true_scaley * 0.8
 				else:
-					obj.position.x = -(player.position.x + 64 + 1920 * parent.true_scalex/parent.scale.y * 0.5)
+					obj.position.x = -(player.position.x + 64 + 1920 * parent.true_scalex/parent.true_scaley * 0.5)
 				obj.position.y = randf_range(-1144, 1144)
 			parent.add_child(obj)
 		if ms and not get_node_or_null("../MissileMark"):

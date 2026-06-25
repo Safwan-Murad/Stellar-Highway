@@ -54,7 +54,9 @@ func _ready() -> void:
 	set_process_input(true)
 
 func _process(_delta:float) -> void:
-	shady.scale.x = get_node("../../../sizeChange").true_scalex/get_node("../../../sizeChange").true_scaley
+	var pf:Node = Refs.playfield()
+	if pf:
+		shady.scale.x = pf.true_scalex / pf.true_scaley
 
 func _input(_ev:InputEvent) -> void:
 	if (Input.is_key_pressed(KEY_RIGHT) or Input.is_key_pressed(KEY_LEFT)) and noSpam:

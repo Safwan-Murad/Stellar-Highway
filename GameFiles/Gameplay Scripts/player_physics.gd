@@ -164,7 +164,7 @@ func _process(delta:float) -> void:
 		get_tree().get_first_node_in_group("Score").extra -= rep
 		rep = position.x - scoreStart
 	# Fell off the bottom of the screen: a clone just despawns; the real player dies.
-	if position.y >= 1620:
+	if position.y >= Refs.KILL_Y:
 		if name != "Player":
 			if get_tree().get_nodes_in_group("PowerupPopUps"):
 				get_tree().get_nodes_in_group("PowerupPopUps")[3].visible = false

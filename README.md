@@ -120,7 +120,7 @@ A few conventions to keep in mind while reading the source:
 
 - **One script per node.** Almost every script `extends` a Godot node type and is attached directly to a node in a scene. Some nodes exist *only* to host a script (a manager or generator with no visuals).
 - **Scripts in `Gameplay Scripts/` ↔ scenes in `Sprites/`.** A script like `Obstacles/Dragon.gd` is the brain attached to the scene `Sprites/Obstacles/Dragon/Dragon.tscn`. Generators `preload` and `instantiate` these `.tscn` files.
-- **No autoloads / singletons.** Cross-object communication happens almost entirely through **Godot groups** (see [The "Groups" Wiring](#the-groups-wiring)) and relative node paths.
+- **One autoload, `Refs`.** [`Refs.gd`](GameFiles/Gameplay%20Scripts/Refs.gd) is a small project-wide singleton holding shared screen/world constants and validity-cached accessors for the handful of nodes scripts fetch constantly (player, playfield, score…). Beyond that, cross-object communication happens through **Godot groups** (see [The "Groups" Wiring](#the-groups-wiring)) and relative node paths.
 - **No multithreaded gameplay code.** (`project.godot` enables physics on a separate thread, but the game logic itself is single-threaded and easy to follow.)
 
 ---
@@ -222,7 +222,7 @@ With no autoloads, objects find each other through **Godot groups**. The most im
 | `Missiles` / `TMissiles` / `GMissiles` | live missiles | targeting markers & on-screen arrows |
 | `SpeedLine` / `MoreBounce` | speed trail / bounce button | visual effects tied to state |
 
-When you see `get_tree().get_first_node_in_group("…")` in the code, this table is the key to what it's reaching for.
+When you see `get_tree().get_first_node_in_group("…")` in the code, this table is the key to what it's reaching for. The most frequently-fetched of these (player, playfield, score, stars, popups) also have cached accessors on the [`Refs`](GameFiles/Gameplay%20Scripts/Refs.gd) autoload — e.g. `Refs.player()` instead of the group lookup — which avoid re-searching the tree every frame.
 
 ---
 
@@ -231,6 +231,7 @@ When you see `get_tree().get_first_node_in_group("…")` in the code, this table
 A system-by-system index of the scripts under `GameFiles/`. Each file also carries a `##` doc comment at the top explaining itself in detail.
 
 **Core loop & player**
+- [`Refs.gd`](GameFiles/Gameplay%20Scripts/Refs.gd) — the `Refs` autoload: shared screen/world constants + cached node accessors.
 - [`main.gd`](GameFiles/Gameplay%20Scripts/main.gd) — small standalone helper (hides cursor, F11 fullscreen). *Not currently attached to a scene.*
 - [`player_physics.gd`](GameFiles/Gameplay%20Scripts/player_physics.gd), [`state_machine.gd`](GameFiles/Gameplay%20Scripts/state_machine.gd), [`state.gd`](GameFiles/Gameplay%20Scripts/state.gd), [`States/on_ground.gd`](GameFiles/Gameplay%20Scripts/States/on_ground.gd), [`States/on_air.gd`](GameFiles/Gameplay%20Scripts/States/on_air.gd) — player & physics.
 - [`playerInput.gd`](GameFiles/Gameplay%20Scripts/playerInput.gd), [`CollLine.gd`](GameFiles/Gameplay%20Scripts/CollLine.gd) — terrain drawing.

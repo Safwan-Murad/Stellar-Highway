@@ -20,7 +20,6 @@ func _ready() -> void:
 ## delta added to the saved balance (negative when buying a character); [param ownedChars]
 ## overrides the owned-character flags (kept as-is when null).
 func savegame(selChar:int, stars:int = 0, ownedChars = null) -> void:
-	var file:FileAccess = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if loaded_data:
 		if loaded_data.has("Stars"):
 			tempStars = loaded_data["Stars"] + stars
@@ -38,19 +37,17 @@ func savegame(selChar:int, stars:int = 0, ownedChars = null) -> void:
 		"ownedChars": ownedChars
 	}
 	loaded_data = data
-	var jstr:String = JSON.stringify(data)
-	file.store_line(jstr)
+	_store_json(SAVE_PATH, data)
 
 ## Records [param score] as the high score for [param gamemode] (0-2), keeping the
 ## existing best if it's higher.
 func saveScore(score:int, gamemode:int) -> void:
-	var file1:FileAccess = FileAccess.open(SCORE_PATH, FileAccess.WRITE)
 	var games:Array = [0, 0, 0]
 	if scores:
 		for i in range(games.size()):
 			if scores.has(str(i)):
 				games[i] = scores[str(i)]
-	
+
 	games[gamemode] = max(games[gamemode], score)
 	var data1:Dictionary = {
 		"0": games[0],
@@ -58,16 +55,44 @@ func saveScore(score:int, gamemode:int) -> void:
 		"2": games[2]
 	}
 	scores = data1
-	var jstr1:String = JSON.stringify(data1)
-	file1.store_line(jstr1)
+	_store_json(SCORE_PATH, data1)
 
 ## Loads both save files into memory on startup (if they exist).
+## Each file is parsed independently and only adopted if it's a valid JSON object,
+## so a missing or corrupt file falls back to defaults instead of crashing.
 func loadgame() -> void:
-	var file:FileAccess = FileAccess.open(SAVE_PATH, FileAccess.READ)
-	if FileAccess.file_exists(SAVE_PATH):
-		if not file.eof_reached():
-			loaded_data = JSON.parse_string(file.get_line())
-	var file1 = FileAccess.open(SCORE_PATH, FileAccess.READ)
-	if FileAccess.file_exists(SCORE_PATH):
-		if not file.eof_reached():
-			scores = JSON.parse_string(file1.get_line())
+	var parsed = _read_json(SAVE_PATH)
+	if parsed is Dictionary:
+		loaded_data = parsed
+	var parsed_scores = _read_json(SCORE_PATH)
+	if parsed_scores is Dictionary:
+		scores = parsed_scores
+
+## Reads and JSON-parses one save file, returning the parsed value or null if the
+## file is absent, empty or unreadable. Never throws on a missing/corrupt file.
+func _read_json(path:String):
+	if not FileAccess.file_exists(path):
+		return null
+	var file:FileAccess = FileAccess.open(path, FileAccess.READ)
+	if file == null or file.eof_reached():
+		return null
+	return JSON.parse_string(file.get_line())
+
+## Writes [param data] as JSON to [param path] atomically: it writes a temporary
+## file first and only swaps it into place once the write fully succeeds, so an app
+## kill mid-write can't corrupt an existing save (it just keeps the previous one).
+func _store_json(path:String, data:Dictionary) -> void:
+	var tmp_path:String = path + ".tmp"
+	var file:FileAccess = FileAccess.open(tmp_path, FileAccess.WRITE)
+	if file == null:
+		return
+	file.store_line(JSON.stringify(data))
+	file.close() # flush to disk before the swap
+	var dir:DirAccess = DirAccess.open("user://")
+	if dir == null:
+		return
+	var fname:String = path.get_file()
+	var tmp_fname:String = tmp_path.get_file()
+	if dir.file_exists(fname):
+		dir.remove(fname)
+	dir.rename(tmp_fname, fname)
