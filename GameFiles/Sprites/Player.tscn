@@ -1,6 +1,7 @@
-[gd_scene load_steps=45 format=3 uid="uid://dtmw5o80xydm1"]
+[gd_scene load_steps=46 format=3 uid="uid://dtmw5o80xydm1"]
 
 [ext_resource type="Script" uid="uid://bdlr56ya76gfw" path="res://GameFiles/Gameplay Scripts/player_physics.gd" id="1_7rv2c"]
+[ext_resource type="Script" path="res://GameFiles/Gameplay Scripts/CameraShake.gd" id="45_shake"]
 [ext_resource type="Script" uid="uid://bjc8pfrnjxvr1" path="res://GameFiles/Gameplay Scripts/state_machine.gd" id="2_ox70h"]
 [ext_resource type="Script" uid="uid://b3qk7v56uvwxa" path="res://GameFiles/Gameplay Scripts/States/on_ground.gd" id="3_q7eih"]
 [ext_resource type="Script" uid="uid://b8yjnislskjmq" path="res://GameFiles/Gameplay Scripts/States/on_air.gd" id="4_qqkve"]
@@ -391,6 +392,7 @@ target_position = Vector2(-11, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(420, 540)
+script = ExtResource("45_shake")
 limit_left = -100000000
 limit_top = 0
 limit_right = 100000000

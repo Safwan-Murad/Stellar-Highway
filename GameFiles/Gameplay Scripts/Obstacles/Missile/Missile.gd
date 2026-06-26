@@ -57,6 +57,7 @@ func _on_kill_me_body_entered(body:Node) -> void:
 ## Explode a lock-on missile: stop it, leave its groups, and play the blast. ("gg" = it's over.)
 func gg() -> void:
 	get_node("ExpSound").play()
+	Refs.shake(0.35)
 	pleaseStopHesAlreadyDead = true
 	velocity = Vector2(0, 0)
 	remove_from_group("GMissiles")
@@ -71,6 +72,7 @@ func gg() -> void:
 ## Explode a timed missile (called by its fuse when it burns out).
 func gg1() -> void:
 	get_node("ExpSound").play()
+	Refs.shake(0.5)
 	pleaseStopHesAlreadyDead = true
 	velocity = Vector2(0, 0)
 	remove_from_group("GMissiles")

@@ -13,39 +13,12 @@ const PATH := "user://settings.bin"
 
 var music_volume: float = 1.0   ## 0..1, applied to the "Music" audio bus (1.0 = no change).
 var haptics_on: bool = true     ## Whether to buzz on hits/pickups (Android; a no-op elsewhere).
+var shake_on: bool = true       ## Whether the camera shakes on impacts (see Refs.shake).
 var draw_offset: float = 0.0    ## Assist draw: pixels the drawn line sits above the finger. 0 = classic.
 
-# Beat detection: read the bass energy off the Music bus and smooth it into a 0..1 "beat" value
-# that reactive visuals (the stage lights, the moon) read each frame.
-const BEAT_GAIN := 28.0       ## Scales the small raw bass magnitude up into 0..1. Tune to taste.
-const BEAT_SMOOTHING := 0.25  ## How quickly [member beat] follows the music (higher = snappier).
-
-var beat: float = 0.0  ## Smoothed bass envelope, 0..1. Read by BeatPulse.gd / SpotlightBeat.gd.
-var _music_analyzer: AudioEffectSpectrumAnalyzerInstance  ## Reads the music's spectrum.
-
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS  # keep the beat live even while the game is paused
 	_load()
 	_apply()
-	_setup_analyzer()
-
-func _process(_delta: float) -> void:
-	if _music_analyzer == null:
-		return
-	var mag: float = _music_analyzer.get_magnitude_for_frequency_range(30.0, 130.0).length()
-	beat = lerp(beat, clamp(mag * BEAT_GAIN, 0.0, 1.0), BEAT_SMOOTHING)
-
-## Puts a spectrum analyzer on the Music bus and caches its instance, so visuals can pulse to the
-## beat. Safe to call once; does nothing if the bus is missing.
-func _setup_analyzer() -> void:
-	var music: int = AudioServer.get_bus_index("Music")
-	if music < 0:
-		return
-	if AudioServer.get_bus_effect_count(music) == 0:
-		AudioServer.add_bus_effect(music, AudioEffectSpectrumAnalyzer.new())
-	var inst = AudioServer.get_bus_effect_instance(music, 0)
-	if inst is AudioEffectSpectrumAnalyzerInstance:
-		_music_analyzer = inst
 
 ## Pushes the current settings into the engine. Safe to call repeatedly.
 func _apply() -> void:
@@ -59,6 +32,7 @@ func set_value(key: String, value) -> void:
 	match key:
 		"music_volume": music_volume = float(value)
 		"haptics_on": haptics_on = bool(value)
+		"shake_on": shake_on = bool(value)
 		"draw_offset": draw_offset = float(value)
 	_apply()
 	_save()
@@ -79,6 +53,7 @@ func _load() -> void:
 	if parsed is Dictionary:
 		music_volume = float(parsed.get("music_volume", music_volume))
 		haptics_on = bool(parsed.get("haptics_on", haptics_on))
+		shake_on = bool(parsed.get("shake_on", shake_on))
 		draw_offset = float(parsed.get("draw_offset", draw_offset))
 
 ## Writes the settings atomically (temp file, then swap) so an interrupted write can't corrupt them.
@@ -86,6 +61,7 @@ func _save() -> void:
 	var data: Dictionary = {
 		"music_volume": music_volume,
 		"haptics_on": haptics_on,
+		"shake_on": shake_on,
 		"draw_offset": draw_offset,
 	}
 	var tmp_path: String = PATH + ".tmp"

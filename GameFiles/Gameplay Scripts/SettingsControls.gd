@@ -10,14 +10,17 @@ extends Control
 
 @onready var music: HSlider = $Center/VBox/MusicSlider
 @onready var haptics: CheckButton = $Center/VBox/Haptics
+@onready var shake: CheckButton = $Center/VBox/Shake
 @onready var assist: HSlider = $Center/VBox/AssistSlider
 
 func _ready() -> void:
 	# Seed the controls from the saved settings...
 	music.value = Settings.music_volume
 	haptics.button_pressed = Settings.haptics_on
+	shake.button_pressed = Settings.shake_on
 	assist.value = Settings.draw_offset
 	# ...then persist + apply any change the player makes.
 	music.value_changed.connect(func(v): Settings.set_value("music_volume", v))
 	haptics.toggled.connect(func(on): Settings.set_value("haptics_on", on))
+	shake.toggled.connect(func(on): Settings.set_value("shake_on", on))
 	assist.value_changed.connect(func(v): Settings.set_value("draw_offset", v))

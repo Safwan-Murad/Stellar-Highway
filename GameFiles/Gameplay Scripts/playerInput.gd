@@ -46,16 +46,14 @@ func _ready() -> void:
 func _world(screen_pos:Vector2) -> Vector2:
 	return get_canvas_transform().affine_inverse().translated(screen_pos).origin - Vector2(0, Settings.draw_offset)
 
-## Gives a freshly-created segment its look: a stroke that thickens with the player's speed and an
-## ink colour matched to the selected character's trail. Purely cosmetic — the segment's collider
-## is set up independently, so this can't affect how the line plays.
+## Gives a freshly-created segment its look: a stroke that thickens with the player's speed. The
+## colour stays the line's own (set in CollLine.tscn). Purely cosmetic — the segment's collider is
+## set up independently, so this can't affect how the line plays.
 func _style_segment(ln:Line2D) -> void:
 	var pl:Node = Refs.player()
 	if pl == null:
 		return
 	ln.width = clamp(3.5 + pl.vel / 300.0, 3.5, 8.0)
-	if pl.trail:
-		ln.default_color = pl.trail.default_color
 
 ## Each frame, if drawing, sample the pointer and commit a new curve point once it has moved more
 ## than SAMPLE_DISTANCE from the last one.

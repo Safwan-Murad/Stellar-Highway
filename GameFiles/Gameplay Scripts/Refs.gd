@@ -29,6 +29,7 @@ var _star_count: Node
 var _stars: Node
 var _utils: Node
 var _powerup_popups: Array
+var _camera_shake: Node
 
 ## The playable character (group "Player"), or null if there isn't one yet.
 func player() -> Node:
@@ -73,3 +74,13 @@ func powerup_popups() -> Array:
 	if _powerup_popups.is_empty() or not is_instance_valid(_powerup_popups[0]):
 		_powerup_popups = get_tree().get_nodes_in_group("PowerupPopUps")
 	return _powerup_popups
+
+## Shakes the player camera by [param amount] (0..1 trauma), if the camera exists and the player
+## hasn't turned screen shake off. Safe to call from anywhere (e.g. explosions, game over).
+func shake(amount: float) -> void:
+	if not Settings.shake_on:
+		return
+	if not is_instance_valid(_camera_shake):
+		_camera_shake = get_tree().get_first_node_in_group("CameraShake")
+	if _camera_shake:
+		_camera_shake.add_trauma(amount)
