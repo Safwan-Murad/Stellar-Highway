@@ -12,8 +12,12 @@ script = ExtResource("1_jr5p0")
 z_index = 2
 z_as_relative = false
 points = PackedVector2Array(0, 0)
-width = 3.0
+width = 4.0
 default_color = Color(1, 0, 1, 1)
+begin_cap_mode = 2
+end_cap_mode = 2
+joint_mode = 2
+antialiased = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("SegmentShape2D_cmwxn")

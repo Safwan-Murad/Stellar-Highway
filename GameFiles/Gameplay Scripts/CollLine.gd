@@ -7,6 +7,19 @@ extends StaticBody2D
 var disTime:float = 3.0  ## Seconds left before this segment auto-deletes.
 var sus:bool = true      ## Guard so the fade-out is only triggered once.
 
+func _ready() -> void:
+	# The scene wires up body_exited (for the fade); we also light the segment up on enter.
+	get_node("Area2D").body_entered.connect(_on_area_2d_body_entered)
+
+## Light up while the player is rolling onto this segment — it brightens and swells, then the
+## body_exited fade dissolves it behind the player. Purely cosmetic.
+func _on_area_2d_body_entered(body:Node) -> void:
+	if body.name == "Player":
+		var ln:Line2D = get_node("Line2D")
+		ln.default_color = ln.default_color.lerp(Color.WHITE, 0.6)
+		var tween:Tween = create_tween()
+		tween.tween_property(ln, "width", ln.width * 1.8, 0.08)
+
 func _process(delta:float):
 	disTime-=delta
 
