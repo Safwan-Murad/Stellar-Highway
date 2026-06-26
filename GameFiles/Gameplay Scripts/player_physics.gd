@@ -332,6 +332,7 @@ func tartar_sauce(fr:bool=false) -> void:
 ## Commits the game over: persists stars and the final score, pauses the scene
 ## tree, and shows the clapperboard game-over screen.
 func doTheGameoverThing() -> void:
+	Settings.vibrate(120)
 	Utils.savegame(currChar, get_tree().get_first_node_in_group("StarCnt").stars)
 	get_tree().get_first_node_in_group("pauseman").switchJobs()
 	get_tree().paused = true

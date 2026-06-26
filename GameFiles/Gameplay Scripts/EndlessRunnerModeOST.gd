@@ -21,6 +21,7 @@ func _ready() -> void:
 		bg_music.stream = load("res://GameFiles/OST/Gameplay/Actionator 192.mp3")
 	else:
 		bg_music.stream = load("res://GameFiles/OST/Gameplay/Error! Error! ERROR! 192.mp3")
+	bg_music.bus = "Music"
 	bg_music.autoplay = true
 	add_child(bg_music)
 	

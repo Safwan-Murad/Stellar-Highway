@@ -11,6 +11,7 @@ var sus:bool = false  ## Guard so the pickup only triggers once.
 func _on_kill_me_body_entered(body:Node) -> void:
 	if body.name == "Player" and not sus:
 		sus = true
+		Settings.vibrate(30)
 		get_tree().get_first_node_in_group("playerInput").powerup = true
 		get_tree().get_nodes_in_group("PowerupPopUps")[0].text = "ROCKSTAR"
 		get_tree().get_nodes_in_group("PowerupPopUps")[0].get_node("AnimationPlayer").play("PopUp")

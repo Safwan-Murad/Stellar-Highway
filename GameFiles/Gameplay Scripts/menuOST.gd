@@ -11,6 +11,7 @@ func _ready() -> void:
 	get_tree().set_quit_on_go_back(false)
 	RenderingServer.set_default_clear_color(Color("#1a141c"))
 	bg_music.stream = load("res://GameFiles/OST/Gameplay/SpinHead 192.mp3")
+	bg_music.bus = "Music"
 	bg_music.autoplay = true
 	bg_music.process_mode = Node.PROCESS_MODE_ALWAYS
 	

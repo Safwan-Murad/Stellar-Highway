@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://jk8gnskxp6w"]
+[gd_scene load_steps=12 format=3 uid="uid://jk8gnskxp6w"]
 
 [ext_resource type="Texture2D" uid="uid://dt60sskrtjbyx" path="res://GameFiles/SpinHead IMGS/LightProjector/Stand.png" id="1_518pk"]
 [ext_resource type="Texture2D" uid="uid://rmckei5ufpj3" path="res://GameFiles/SpinHead IMGS/LightProjector/Holders.png" id="1_qgrtb"]
 [ext_resource type="Script" uid="uid://b5udwgkhs5rmo" path="res://GameFiles/ScreenView Scripts/rotateLight.gd" id="1_ykxst"]
 [ext_resource type="Texture2D" uid="uid://dqn42uw8db4p3" path="res://GameFiles/SpinHead IMGS/LightProjector/lightSource.png" id="2_misj7"]
+[ext_resource type="Script" path="res://GameFiles/Gameplay Scripts/SpotlightBeat.gd" id="5_beat"]
 
 [sub_resource type="Animation" id="Animation_kbrg4"]
 length = 0.001
@@ -109,6 +110,7 @@ texture = ExtResource("1_qgrtb")
 rotation = -0.523599
 texture = ExtResource("2_misj7")
 offset = Vector2(0, -527)
+script = ExtResource("5_beat")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LightSource"]
 speed_scale = 0.5

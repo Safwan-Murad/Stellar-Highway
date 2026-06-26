@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Refs="*res://GameFiles/Gameplay Scripts/Refs.gd"
+Settings="*res://GameFiles/Gameplay Scripts/Settings.gd"
 
 [display]
 

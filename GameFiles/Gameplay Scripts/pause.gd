@@ -51,6 +51,7 @@ func _on_pressed() -> void:
 				self.icon = res
 				bg_music = AudioStreamPlayer.new()
 				bg_music.stream = stream
+				bg_music.bus = "Music"
 				bg_music.autoplay = true
 				add_child(bg_music)
 			else:

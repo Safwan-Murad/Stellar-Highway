@@ -19,11 +19,6 @@ const SAMPLE_DISTANCE := 15.0
 ## nodes. If drawing ever hitches on a low-end phone, drop this to 1 (or add object pooling).
 const SMOOTH_SUBDIVISIONS := 2
 
-## Assist draw: how far above the finger (px) the drawn line appears, so your hand doesn't cover
-## the action. 0 = classic (line directly under the pointer). This is the mechanic for the
-## accessibility option; expose it through a menu toggle to let players opt in.
-const DRAW_OFFSET := 0.0
-
 ## Whether to emit a small spark at the drawing tip during fast play. Purely cosmetic.
 const SPARKLES := true
 
@@ -47,9 +42,9 @@ func _ready() -> void:
 		_make_sparks()
 
 ## Converts a screen-space pointer position to a world position, applying the assist-draw offset
-## so the line can be lifted above the finger when DRAW_OFFSET is non-zero.
+## (Settings.draw_offset) so the line can be lifted above the finger for players who opt in.
 func _world(screen_pos:Vector2) -> Vector2:
-	return get_canvas_transform().affine_inverse().translated(screen_pos).origin - Vector2(0, DRAW_OFFSET)
+	return get_canvas_transform().affine_inverse().translated(screen_pos).origin - Vector2(0, Settings.draw_offset)
 
 ## Gives a freshly-created segment its look: a stroke that thickens with the player's speed and an
 ## ink colour matched to the selected character's trail. Purely cosmetic — the segment's collider

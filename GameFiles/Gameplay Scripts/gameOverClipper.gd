@@ -12,6 +12,7 @@ var score:int  ## The final score shown (distance + bonus).
 func _ready() -> void:
 	add_to_group("clipperBoy")
 	bg_music.stream = load("res://GameFiles/OST/Gameplay/GG.mp3")
+	bg_music.bus = "Music"
 
 ## Show the game-over screen with the final score. ("My condolences" — you died.)
 func myCondolences() -> void:
