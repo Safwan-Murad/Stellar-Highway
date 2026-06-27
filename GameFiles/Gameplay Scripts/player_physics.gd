@@ -87,6 +87,12 @@ func _ready() -> void:
 		currChar = 0
 	add_to_group("Player")
 	scoreStart = position.x
+	# The character is always rolling, so keep the short "rolling" hitbox active and the ground
+	# sensors at their fixed spread. These never change, so they're set once here (was per-frame).
+	high_collider.disabled = true
+	low_collider.disabled = false
+	left_ground.position.x = -7
+	right_ground.position.x = 7
 	if name == "Player":
 		if Utils.loaded_data:
 			if Utils.loaded_data.has("playerCharacter"):
@@ -131,13 +137,9 @@ func _ready() -> void:
 ## mirrors the real player's state onto the Doppelgänger clone, and triggers a
 ## game over / clone cleanup when a body falls off the bottom of the screen.
 func _process(delta:float) -> void:
-	high_collider.disabled = 1
-	low_collider.disabled = 0
-	left_ground.position.x = -7
-	right_ground.position.x = 7
-
 	if(abs(gsp) > 10) and not get_node_or_null("Lowrider"):
-		spinSpd = ((5.0 / 60.0) + (gsp / 120.0))/10
+		# Scale by delta*60 so the roll spins at a consistent rate regardless of frame rate.
+		spinSpd = ((5.0 / 60.0) + (gsp / 120.0)) / 10 * delta * 60.0
 		if currChar == 5:
 			wheel.rotate(spinSpd)
 			wheel1.rotation = wheel.rotation
@@ -150,18 +152,20 @@ func _process(delta:float) -> void:
 	
 	# Doppelgänger clone: copy the real player's speed/state, trail it, and feed the
 	# distance it covers into the score as bonus "extra" (rep prevents double counting).
-	if get_node_or_null("../Player") and name != "Player":
-		minSpeed = get_node("../Player").minSpeed
-		spdOffset = get_node("../Player").spdOffset
-		TOPROLL = get_node("../Player").TOPROLL
-		grv_scaler = get_node("../Player").grv_scaler
-		can_jump = get_node("../Player").can_jump
-		if get_node("../Player").get_node_or_null("Lowrider"):
-			position = get_node("../Player").position - Vector2(cos(get_node("../Player").rotation) * 40, 8 * cos(get_node("../Player").rotation) + 40 * sin(get_node("../Player").rotation))
-		elif position.distance_to(get_node("../Player").position) <= 64:
-			position += (position - get_node("../Player").position)/1.69
-		get_tree().get_first_node_in_group("Score").extra += position.x - scoreStart
-		get_tree().get_first_node_in_group("Score").extra -= rep
+	var realPlayer:Node = get_node_or_null("../Player")
+	if realPlayer and name != "Player":
+		minSpeed = realPlayer.minSpeed
+		spdOffset = realPlayer.spdOffset
+		TOPROLL = realPlayer.TOPROLL
+		grv_scaler = realPlayer.grv_scaler
+		can_jump = realPlayer.can_jump
+		if realPlayer.get_node_or_null("Lowrider"):
+			position = realPlayer.position - Vector2(cos(realPlayer.rotation) * 40, 8 * cos(realPlayer.rotation) + 40 * sin(realPlayer.rotation))
+		elif position.distance_to(realPlayer.position) <= 64:
+			position += (position - realPlayer.position)/1.69
+		var score_node:Node = Refs.score()
+		score_node.extra += position.x - scoreStart
+		score_node.extra -= rep
 		rep = position.x - scoreStart
 	# Fell off the bottom of the screen: a clone just despawns; the real player dies.
 	if position.y >= Refs.KILL_Y:
@@ -199,15 +203,14 @@ func physics_step() -> void:
 
 ## Returns true if the character is too slow to cling to a steep wall/ceiling and
 ## should drop back into the air state (Sonic's "fall off when slow" rule).
-func fall_from_ground():
+func fall_from_ground() -> bool:
 	if abs(gsp) < FALL and ground_mode != 0:
 		var angle = abs(rad_to_deg(ground_angle()))
-		
 		if angle >= 90 and angle <= 180:
 			ground_mode = 0
 			return true
-		
 		return false
+	return false
 
 ## Keeps the character glued to the surface across a slope: aligns rotation to the
 ## ground and nudges velocity into the surface so it doesn't pop off small bumps.
@@ -225,12 +228,8 @@ func ground_reacquisition() -> void:
 	
 	if angle >= 0 and angle < 22.5:
 		gsp = velocity.x
-	elif angle >= 22.5 and angle < 45.0:
-		if abs(velocity.x) > velocity.y:
-			gsp = velocity.x
-		else:
-			gsp = velocity.y * -sign(sin(ground_angle()))
-	elif angle >= 45.0 and angle < 90:
+	elif angle >= 22.5 and angle < 90:
+		# Steeper landing: keep horizontal speed if it dominates, else convert the fall into gsp.
 		if abs(velocity.x) > velocity.y:
 			gsp = velocity.x
 		else:
@@ -245,14 +244,13 @@ func ground_angle() -> float:
 ## Whether the body is currently resting on a floor-ish surface (used to (re)enter
 ## the grounded state): a ground ray exists, faces upward enough, and we're falling onto it.
 func is_on_ground() -> bool:
-	var ground_ray = get_ground_ray()
-	
+	# Reuses the ground_ray physics_step() already resolved this frame (avoids a second sensor pass).
 	if ground_ray != null:
 		var point = ground_ray.get_collision_point()
 		var normal = ground_ray.get_collision_normal()
 		if abs(rad_to_deg(normal.angle_to(Vector2(0, -1)))) < 90:
 			return position.y + 20 > point.y and velocity.y >= 0
-	
+
 	return false
 
 ## Picks which ground sensor to trust. If only one sensor hits, the body is on an

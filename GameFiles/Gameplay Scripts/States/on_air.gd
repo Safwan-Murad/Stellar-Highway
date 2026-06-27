@@ -17,7 +17,7 @@ func step(host:CharacterBody2D, _delta:float):
 		return 'OnGround'
 
 	var no_rotation = has_rolled
-	host.rotation_degrees = int(lerp(host.rotation_degrees, 0.0, .2)) if !no_rotation else 0
+	host.rotation_degrees = lerp(host.rotation_degrees, 0.0, 0.2) if !no_rotation else 0.0
 	
 	if host.velocity.y < 0 and host.velocity.y > -240:
 		host.velocity.x -= int(host.velocity.x / 7.5) / 15360.0
