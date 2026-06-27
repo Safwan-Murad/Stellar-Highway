@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://due6oua27qlr8"]
+[gd_scene format=3 uid="uid://due6oua27qlr8"]
 
 [ext_resource type="Script" uid="uid://d08ytogtatupf" path="res://GameFiles/Gameplay Scripts/menuOST.gd" id="1_pbi5w"]
 [ext_resource type="Script" uid="uid://5ciqi6304l5q" path="res://GameFiles/ScreenView Scripts/changeSize.gd" id="1_uuidw"]
@@ -116,7 +116,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("17_crk5d")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 10.0
 }]
@@ -151,7 +151,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_2x630")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fire_B",
 "speed": 20.0
 }, {
@@ -183,7 +183,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("28_yynxe")
 }],
-"loop": true,
+"loop": 1,
 "name": &"fire_R",
 "speed": 20.0
 }]
@@ -236,7 +236,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("57_ueg6m")
 }],
-"loop": true,
+"loop": 1,
 "name": &"Spin",
 "speed": 20.0
 }]
@@ -703,142 +703,142 @@ _data = {
 &"onClick": SubResource("Animation_2nlsb")
 }
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="Node2D" unique_id=298990654]
 script = ExtResource("1_pbi5w")
 metadata/_edit_horizontal_guides_ = [1234.0, 1213.0]
 
-[node name="Utils" type="Node2D" parent="."]
+[node name="Utils" type="Node2D" parent="." unique_id=486744234]
 script = ExtResource("59_i8dj5")
 
-[node name="sizeChange" type="Node2D" parent="."]
+[node name="sizeChange" type="Node2D" parent="." unique_id=711848017]
 script = ExtResource("1_uuidw")
 
-[node name="BG" parent="sizeChange" instance=ExtResource("2_pfrs0")]
+[node name="BG" parent="sizeChange" unique_id=1846609053 instance=ExtResource("2_pfrs0")]
 metadata/_edit_horizontal_guides_ = [1080.0]
 metadata/_edit_lock_ = true
 
-[node name="WindTurbine" type="Node2D" parent="sizeChange"]
+[node name="WindTurbine" type="Node2D" parent="sizeChange" unique_id=1848169571]
 position = Vector2(960, 540)
 
-[node name="Camera2D" type="Camera2D" parent="sizeChange/WindTurbine"]
+[node name="Camera2D" type="Camera2D" parent="sizeChange/WindTurbine" unique_id=1459428071]
 position = Vector2(0, -160)
 offset = Vector2(0, 540)
 limit_top = 0
 limit_bottom = 0
 
-[node name="spawnDoppel" type="Node2D" parent="sizeChange"]
+[node name="spawnDoppel" type="Node2D" parent="sizeChange" unique_id=1085962909]
 script = ExtResource("11_1rtxh")
 
-[node name="DragonsGenerator" type="Node2D" parent="sizeChange"]
+[node name="DragonsGenerator" type="Node2D" parent="sizeChange" unique_id=1792123578]
 script = ExtResource("6_vwr8v")
 
-[node name="Restaurant1" type="StaticBody2D" parent="sizeChange"]
+[node name="Restaurant1" type="StaticBody2D" parent="sizeChange" unique_id=1062873564]
 position = Vector2(8669, 1112)
 scale = Vector2(1.5, 1.5)
 
-[node name="InnerLayer" type="Sprite2D" parent="sizeChange/Restaurant1"]
+[node name="InnerLayer" type="Sprite2D" parent="sizeChange/Restaurant1" unique_id=324428887]
 z_index = -5
 z_as_relative = false
 position = Vector2(-10, -287)
 texture = ExtResource("13_whsc6")
 
-[node name="OuterLayer" type="Sprite2D" parent="sizeChange/Restaurant1"]
+[node name="OuterLayer" type="Sprite2D" parent="sizeChange/Restaurant1" unique_id=1866243419]
 z_index = 5
 z_as_relative = false
 texture = ExtResource("14_jx0qy")
 
-[node name="RollinJackGold" type="Sprite2D" parent="sizeChange/Restaurant1"]
+[node name="RollinJackGold" type="Sprite2D" parent="sizeChange/Restaurant1" unique_id=58987689]
 position = Vector2(-262, -239.5)
 texture = ExtResource("15_iy0kn")
 
-[node name="TheMasked" type="AnimatedSprite2D" parent="sizeChange/Restaurant1"]
+[node name="TheMasked" type="AnimatedSprite2D" parent="sizeChange/Restaurant1" unique_id=750982614]
 position = Vector2(-1, -242.5)
 scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_334vv")
 autoplay = "default"
 
-[node name="BatBall" type="Sprite2D" parent="sizeChange/Restaurant1"]
+[node name="BatBall" type="Sprite2D" parent="sizeChange/Restaurant1" unique_id=2080672192]
 position = Vector2(260, -241.5)
 texture = ExtResource("19_021oa")
 
-[node name="SmoothSkater" type="Sprite2D" parent="sizeChange/Restaurant1"]
+[node name="SmoothSkater" type="Sprite2D" parent="sizeChange/Restaurant1" unique_id=51435950]
 position = Vector2(-262, -515)
 texture = ExtResource("20_72hn7")
 
-[node name="Wheel" type="Sprite2D" parent="sizeChange/Restaurant1/SmoothSkater"]
+[node name="Wheel" type="Sprite2D" parent="sizeChange/Restaurant1/SmoothSkater" unique_id=1978316892]
 position = Vector2(-22, 16)
 texture = ExtResource("21_258uc")
 
-[node name="Wheel2" type="Sprite2D" parent="sizeChange/Restaurant1/SmoothSkater"]
+[node name="Wheel2" type="Sprite2D" parent="sizeChange/Restaurant1/SmoothSkater" unique_id=570417220]
 position = Vector2(4, 16)
 texture = ExtResource("21_258uc")
 
-[node name="SegwayJohnny" type="Sprite2D" parent="sizeChange/Restaurant1"]
+[node name="SegwayJohnny" type="Sprite2D" parent="sizeChange/Restaurant1" unique_id=1159619721]
 position = Vector2(-1, -527)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("22_2e5h4")
 
-[node name="Wheel" type="Sprite2D" parent="sizeChange/Restaurant1/SegwayJohnny"]
+[node name="Wheel" type="Sprite2D" parent="sizeChange/Restaurant1/SegwayJohnny" unique_id=1116674617]
 show_behind_parent = true
 position = Vector2(0, 12)
 texture = ExtResource("23_aw1vm")
 
-[node name="Fire" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/SegwayJohnny"]
+[node name="Fire" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/SegwayJohnny" unique_id=1856483542]
 show_behind_parent = true
 position = Vector2(-23, -9)
 sprite_frames = SubResource("SpriteFrames_kgk0j")
 animation = &"fire_B"
 script = ExtResource("30_r0vlr")
 
-[node name="Misslie" type="Sprite2D" parent="sizeChange/Restaurant1/SegwayJohnny"]
+[node name="Misslie" type="Sprite2D" parent="sizeChange/Restaurant1/SegwayJohnny" unique_id=1059783516]
 show_behind_parent = true
 position = Vector2(0, -9)
 texture = ExtResource("31_oedme")
 
-[node name="Outrider" type="Sprite2D" parent="sizeChange/Restaurant1"]
+[node name="Outrider" type="Sprite2D" parent="sizeChange/Restaurant1" unique_id=1146120550]
 position = Vector2(260, -520)
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("32_cljhg")
 
-[node name="Wheel" type="Sprite2D" parent="sizeChange/Restaurant1/Outrider"]
+[node name="Wheel" type="Sprite2D" parent="sizeChange/Restaurant1/Outrider" unique_id=1180321465]
 show_behind_parent = true
 position = Vector2(-16.5, 11.5)
 texture = ExtResource("23_aw1vm")
 
-[node name="Wheel1" type="Sprite2D" parent="sizeChange/Restaurant1/Outrider"]
+[node name="Wheel1" type="Sprite2D" parent="sizeChange/Restaurant1/Outrider" unique_id=500317440]
 show_behind_parent = true
 position = Vector2(19.5, 11.5)
 texture = ExtResource("23_aw1vm")
 
-[node name="GlassMan" type="Sprite2D" parent="sizeChange/Restaurant1/Outrider"]
+[node name="GlassMan" type="Sprite2D" parent="sizeChange/Restaurant1/Outrider" unique_id=1245360616]
 position = Vector2(-19.5, -1)
 texture = ExtResource("33_bwqb5")
 
-[node name="charSelBTNS" type="Node2D" parent="sizeChange/Restaurant1"]
+[node name="charSelBTNS" type="Node2D" parent="sizeChange/Restaurant1" unique_id=1982607024]
 z_index = 7
 z_as_relative = false
 script = ExtResource("35_bb3ra")
 
-[node name="B0" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS"]
+[node name="B0" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS" unique_id=536716545]
 position = Vector2(-262, -134)
 shape = SubResource("RectangleShape2D_v5ag0")
 
-[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0"]
+[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0" unique_id=1089764468]
 visible = false
 texture = ExtResource("37_rc478")
 
-[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0/F"]
+[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0/F" unique_id=1356569922]
 position = Vector2(-96.0833, 0)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_yavkl")
 animation = &"Spin"
 autoplay = "Spin"
 
-[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0/F/Star"]
+[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0/F/Star" unique_id=626145188]
 texture = ExtResource("58_pkhtx")
 metadata/_edit_lock_ = true
 
-[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B0/F"]
+[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B0/F" unique_id=1579105314]
 offset_left = -50.7496
 offset_top = -6.50003
 offset_right = 157.25
@@ -852,38 +852,36 @@ theme_override_fonts/font = SubResource("FontVariation_s58yu")
 theme_override_font_sizes/font_size = 28
 text = "0"
 
-[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0"]
+[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0" unique_id=1426537858]
 visible = false
 texture = ExtResource("35_qhrcp")
 
-[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0"]
+[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B0" unique_id=247890412]
 texture = ExtResource("36_fuvqf")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B0"]
-libraries = {
-&"": SubResource("AnimationLibrary_wetub")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B0" unique_id=377531216]
+libraries/ = SubResource("AnimationLibrary_wetub")
 speed_scale = 8.0
 
-[node name="B1" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS"]
+[node name="B1" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS" unique_id=439349376]
 position = Vector2(-1, -134)
 shape = SubResource("RectangleShape2D_v5ag0")
 
-[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1"]
+[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1" unique_id=2111186558]
 texture = ExtResource("37_rc478")
 
-[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1/F"]
+[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1/F" unique_id=306758935]
 position = Vector2(-96.0833, 0)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_yavkl")
 animation = &"Spin"
 autoplay = "Spin"
 
-[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1/F/Star"]
+[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1/F/Star" unique_id=1272618635]
 texture = ExtResource("58_pkhtx")
 metadata/_edit_lock_ = true
 
-[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B1/F"]
+[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B1/F" unique_id=11129201]
 offset_left = -50.7496
 offset_top = -6.50003
 offset_right = 157.25
@@ -897,39 +895,37 @@ theme_override_fonts/font = SubResource("FontVariation_s58yu")
 theme_override_font_sizes/font_size = 28
 text = "15000"
 
-[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1"]
+[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1" unique_id=2138500701]
 visible = false
 texture = ExtResource("37_52hbt")
 
-[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1"]
+[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B1" unique_id=1864893976]
 visible = false
 texture = ExtResource("38_7fwly")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B1"]
-libraries = {
-&"": SubResource("AnimationLibrary_wetub")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B1" unique_id=1801114231]
+libraries/ = SubResource("AnimationLibrary_wetub")
 speed_scale = 8.0
 
-[node name="B2" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS"]
+[node name="B2" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS" unique_id=829844213]
 position = Vector2(260, -134)
 shape = SubResource("RectangleShape2D_v5ag0")
 
-[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2"]
+[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2" unique_id=629901953]
 texture = ExtResource("37_rc478")
 
-[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2/F"]
+[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2/F" unique_id=976599667]
 position = Vector2(-96.0833, 0)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_yavkl")
 animation = &"Spin"
 autoplay = "Spin"
 
-[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2/F/Star"]
+[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2/F/Star" unique_id=1929195183]
 texture = ExtResource("58_pkhtx")
 metadata/_edit_lock_ = true
 
-[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B2/F"]
+[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B2/F" unique_id=874907208]
 offset_left = -50.7496
 offset_top = -6.50003
 offset_right = 157.25
@@ -943,39 +939,37 @@ theme_override_fonts/font = SubResource("FontVariation_s58yu")
 theme_override_font_sizes/font_size = 28
 text = "20000"
 
-[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2"]
+[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2" unique_id=255134869]
 visible = false
 texture = ExtResource("39_5ktxk")
 
-[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2"]
+[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B2" unique_id=2100034135]
 visible = false
 texture = ExtResource("40_3jh20")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B2"]
-libraries = {
-&"": SubResource("AnimationLibrary_wetub")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B2" unique_id=1031912626]
+libraries/ = SubResource("AnimationLibrary_wetub")
 speed_scale = 8.0
 
-[node name="B3" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS"]
+[node name="B3" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS" unique_id=1017027180]
 position = Vector2(-262, -447)
 shape = SubResource("RectangleShape2D_v5ag0")
 
-[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3"]
+[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3" unique_id=2107671730]
 texture = ExtResource("37_rc478")
 
-[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3/F"]
+[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3/F" unique_id=419684524]
 position = Vector2(-96.0833, 0)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_yavkl")
 animation = &"Spin"
 autoplay = "Spin"
 
-[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3/F/Star"]
+[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3/F/Star" unique_id=2048503527]
 texture = ExtResource("58_pkhtx")
 metadata/_edit_lock_ = true
 
-[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B3/F"]
+[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B3/F" unique_id=768843109]
 offset_left = -50.7496
 offset_top = -6.50003
 offset_right = 157.25
@@ -989,39 +983,37 @@ theme_override_fonts/font = SubResource("FontVariation_s58yu")
 theme_override_font_sizes/font_size = 28
 text = "25000"
 
-[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3"]
+[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3" unique_id=1395282409]
 visible = false
 texture = ExtResource("41_feb0q")
 
-[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3"]
+[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B3" unique_id=1532406233]
 visible = false
 texture = ExtResource("42_7e4r0")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B3"]
-libraries = {
-&"": SubResource("AnimationLibrary_wetub")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B3" unique_id=763776166]
+libraries/ = SubResource("AnimationLibrary_wetub")
 speed_scale = 8.0
 
-[node name="B4" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS"]
+[node name="B4" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS" unique_id=1916938250]
 position = Vector2(-1, -447)
 shape = SubResource("RectangleShape2D_v5ag0")
 
-[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4"]
+[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4" unique_id=751387240]
 texture = ExtResource("37_rc478")
 
-[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4/F"]
+[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4/F" unique_id=2144873285]
 position = Vector2(-96.0833, 0)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_yavkl")
 animation = &"Spin"
 autoplay = "Spin"
 
-[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4/F/Star"]
+[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4/F/Star" unique_id=727201641]
 texture = ExtResource("58_pkhtx")
 metadata/_edit_lock_ = true
 
-[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B4/F"]
+[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B4/F" unique_id=155272437]
 offset_left = -50.7496
 offset_top = -6.50003
 offset_right = 157.25
@@ -1035,39 +1027,37 @@ theme_override_fonts/font = SubResource("FontVariation_s58yu")
 theme_override_font_sizes/font_size = 28
 text = "30000"
 
-[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4"]
+[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4" unique_id=1069329507]
 visible = false
 texture = ExtResource("43_6g37d")
 
-[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4"]
+[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B4" unique_id=664045717]
 visible = false
 texture = ExtResource("44_hiicr")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B4"]
-libraries = {
-&"": SubResource("AnimationLibrary_wetub")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B4" unique_id=686031583]
+libraries/ = SubResource("AnimationLibrary_wetub")
 speed_scale = 8.0
 
-[node name="B5" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS"]
+[node name="B5" type="TouchScreenButton" parent="sizeChange/Restaurant1/charSelBTNS" unique_id=1962118567]
 position = Vector2(260, -447)
 shape = SubResource("RectangleShape2D_v5ag0")
 
-[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5"]
+[node name="F" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5" unique_id=1627452859]
 texture = ExtResource("37_rc478")
 
-[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5/F"]
+[node name="Star" type="AnimatedSprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5/F" unique_id=1956566055]
 position = Vector2(-96.0833, 0)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_yavkl")
 animation = &"Spin"
 autoplay = "Spin"
 
-[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5/F/Star"]
+[node name="Glow" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5/F/Star" unique_id=2121376144]
 texture = ExtResource("58_pkhtx")
 metadata/_edit_lock_ = true
 
-[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B5/F"]
+[node name="Stars" type="Label" parent="sizeChange/Restaurant1/charSelBTNS/B5/F" unique_id=262638768]
 offset_left = -50.7496
 offset_top = -6.50003
 offset_right = 157.25
@@ -1081,26 +1071,24 @@ theme_override_fonts/font = SubResource("FontVariation_s58yu")
 theme_override_font_sizes/font_size = 28
 text = "35000"
 
-[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5"]
+[node name="T0" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5" unique_id=34946257]
 visible = false
 texture = ExtResource("45_x036p")
 
-[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5"]
+[node name="T1" type="Sprite2D" parent="sizeChange/Restaurant1/charSelBTNS/B5" unique_id=1643950580]
 visible = false
 texture = ExtResource("46_vmqx4")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B5"]
-libraries = {
-&"": SubResource("AnimationLibrary_wetub")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="sizeChange/Restaurant1/charSelBTNS/B5" unique_id=847202317]
+libraries/ = SubResource("AnimationLibrary_wetub")
 speed_scale = 8.0
 
-[node name="playerInput" type="Node2D" parent="."]
+[node name="playerInput" type="Node2D" parent="." unique_id=1726273072]
 script = ExtResource("4_uukeg")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1344771]
 
-[node name="BottomRight" type="Control" parent="UI"]
+[node name="BottomRight" type="Control" parent="UI" unique_id=1688679511]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -1110,7 +1098,7 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="muteBTN" type="Button" parent="UI/BottomRight"]
+[node name="muteBTN" type="Button" parent="UI/BottomRight" unique_id=248567139]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -1125,29 +1113,27 @@ icon = ExtResource("61_t1f4y")
 flat = true
 script = ExtResource("62_2ky4e")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/BottomRight/muteBTN"]
-libraries = {
-&"": SubResource("AnimationLibrary_1yvgl")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/BottomRight/muteBTN" unique_id=1735172931]
+libraries/ = SubResource("AnimationLibrary_1yvgl")
 speed_scale = 8.0
 
-[node name="TopLeft" type="Control" parent="UI"]
+[node name="TopLeft" type="Control" parent="UI" unique_id=1806081948]
 visible = false
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Star" type="AnimatedSprite2D" parent="UI/TopLeft"]
+[node name="Star" type="AnimatedSprite2D" parent="UI/TopLeft" unique_id=899623393]
 position = Vector2(102, 154)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_yavkl")
 animation = &"Spin"
 autoplay = "Spin"
 
-[node name="Glow" type="Sprite2D" parent="UI/TopLeft/Star"]
+[node name="Glow" type="Sprite2D" parent="UI/TopLeft/Star" unique_id=1754246733]
 texture = ExtResource("58_pkhtx")
 metadata/_edit_lock_ = true
 
-[node name="Stars" type="Label" parent="UI/TopLeft"]
+[node name="Stars" type="Label" parent="UI/TopLeft" unique_id=718174612]
 layout_mode = 0
 offset_left = 170.0
 offset_top = 144.0
@@ -1162,7 +1148,7 @@ theme_override_font_sizes/font_size = 28
 text = "0"
 script = ExtResource("60_irjnr")
 
-[node name="BottomCenter" type="Control" parent="UI"]
+[node name="BottomCenter" type="Control" parent="UI" unique_id=621342766]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -1172,28 +1158,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ClipperBoard" parent="UI/BottomCenter" instance=ExtResource("4_lmltx")]
+[node name="ClipperBoard" parent="UI/BottomCenter" unique_id=1334445904 instance=ExtResource("4_lmltx")]
 position = Vector2(0, -192)
 
-[node name="TopCenter" type="Control" parent="UI"]
+[node name="TopCenter" type="Control" parent="UI" unique_id=1430503028]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 grow_horizontal = 2
 
-[node name="Logo2d" type="Sprite2D" parent="UI/TopCenter"]
+[node name="Logo2d" type="Sprite2D" parent="UI/TopCenter" unique_id=1944548597]
 position = Vector2(0, 180)
 texture = ExtResource("14_0nkaa")
 
-[node name="TopRight" type="Control" parent="UI"]
+[node name="TopRight" type="Control" parent="UI" unique_id=1415671447]
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 grow_horizontal = 0
 
-[node name="shopBTN" type="Button" parent="UI/TopRight"]
+[node name="shopBTN" type="Button" parent="UI/TopRight" unique_id=446055414]
 layout_mode = 0
 offset_left = -161.0
 offset_top = 251.0
@@ -1204,13 +1190,11 @@ icon = ExtResource("17_opccb")
 flat = true
 script = ExtResource("18_juqsk")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TopRight/shopBTN"]
-libraries = {
-&"": SubResource("AnimationLibrary_ygyrm")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TopRight/shopBTN" unique_id=1000218460]
+libraries/ = SubResource("AnimationLibrary_ygyrm")
 speed_scale = 8.0
 
-[node name="tutBTN" type="Button" parent="UI/TopRight"]
+[node name="tutBTN" type="Button" parent="UI/TopRight" unique_id=1536492569]
 layout_mode = 0
 offset_left = -161.0
 offset_top = 151.0
@@ -1220,13 +1204,11 @@ focus_mode = 0
 icon = ExtResource("68_0y2u4")
 flat = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TopRight/tutBTN"]
-libraries = {
-&"": SubResource("AnimationLibrary_bv1nr")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TopRight/tutBTN" unique_id=1353635704]
+libraries/ = SubResource("AnimationLibrary_bv1nr")
 speed_scale = 8.0
 
-[node name="settingsBTN" type="Button" parent="UI/TopRight"]
+[node name="settingsBTN" type="Button" parent="UI/TopRight" unique_id=1358140833]
 layout_mode = 0
 offset_left = -161.0
 offset_top = 51.0
@@ -1236,17 +1218,15 @@ focus_mode = 0
 icon = ExtResource("69_g7ge2")
 flat = true
 
-[node name="Cogs" type="Sprite2D" parent="UI/TopRight/settingsBTN"]
+[node name="Cogs" type="Sprite2D" parent="UI/TopRight/settingsBTN" unique_id=324338656]
 position = Vector2(53, 40)
 texture = ExtResource("70_wd5pq")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TopRight/settingsBTN"]
-libraries = {
-&"": SubResource("AnimationLibrary_5jagf")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/TopRight/settingsBTN" unique_id=111498376]
+libraries/ = SubResource("AnimationLibrary_5jagf")
 speed_scale = 8.0
 
-[node name="LeftCenter" type="Control" parent="UI"]
+[node name="LeftCenter" type="Control" parent="UI" unique_id=347689947]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -1255,18 +1235,18 @@ offset_top = -242.0
 offset_bottom = -242.0
 grow_vertical = 0
 
-[node name="Gamemodes" type="Node2D" parent="UI/LeftCenter"]
+[node name="Gamemodes" type="Node2D" parent="UI/LeftCenter" unique_id=1658552298]
 position = Vector2(0, -8)
 scale = Vector2(0.8, 0.8)
 
-[node name="Gamemodes" type="Sprite2D" parent="UI/LeftCenter/Gamemodes"]
+[node name="Gamemodes" type="Sprite2D" parent="UI/LeftCenter/Gamemodes" unique_id=1808193335]
 position = Vector2(107, -52)
 scale = Vector2(0.99, 0.99)
 texture = ExtResource("40_cnefp")
 offset = Vector2(17.5, -128.5)
 script = ExtResource("41_io2fi")
 
-[node name="endlessBTN" type="Button" parent="UI/LeftCenter/Gamemodes"]
+[node name="endlessBTN" type="Button" parent="UI/LeftCenter/Gamemodes" unique_id=1262777063]
 offset_left = -10.0
 offset_top = -122.0
 offset_right = 259.0
@@ -1276,7 +1256,7 @@ focus_mode = 0
 icon = ExtResource("41_vnbhw")
 flat = true
 
-[node name="batwallsBTN" type="Button" parent="UI/LeftCenter/Gamemodes"]
+[node name="batwallsBTN" type="Button" parent="UI/LeftCenter/Gamemodes" unique_id=489966771]
 offset_left = -10.0
 offset_top = -2.0
 offset_right = 259.0
@@ -1286,7 +1266,7 @@ focus_mode = 0
 icon = ExtResource("43_oaqxt")
 flat = true
 
-[node name="missilesBTN" type="Button" parent="UI/LeftCenter/Gamemodes"]
+[node name="missilesBTN" type="Button" parent="UI/LeftCenter/Gamemodes" unique_id=196678921]
 offset_left = -10.0
 offset_top = 118.0
 offset_right = 259.0
@@ -1296,14 +1276,12 @@ focus_mode = 0
 icon = ExtResource("42_0ci37")
 flat = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/LeftCenter/Gamemodes"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/LeftCenter/Gamemodes" unique_id=1613259136]
 root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_hldk8")
-}
+libraries/ = SubResource("AnimationLibrary_hldk8")
 speed_scale = 8.0
 
-[node name="Center" type="Control" parent="UI"]
+[node name="Center" type="Control" parent="UI" unique_id=1453254881]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -1313,7 +1291,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="tutorialBook" type="Control" parent="UI/Center"]
+[node name="tutorialBook" type="Control" parent="UI/Center" unique_id=1031034018]
 process_mode = 2
 visible = false
 anchors_preset = 0
@@ -1321,17 +1299,17 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("73_3lxta")
 
-[node name="ShadyBusiness" type="Sprite2D" parent="UI/Center/tutorialBook"]
+[node name="ShadyBusiness" type="Sprite2D" parent="UI/Center/tutorialBook" unique_id=1858783371]
 texture = ExtResource("73_5vaig")
 
-[node name="PageBg" type="Sprite2D" parent="UI/Center/tutorialBook"]
+[node name="PageBg" type="Sprite2D" parent="UI/Center/tutorialBook" unique_id=1655797857]
 texture = ExtResource("75_porer")
 
-[node name="bookPics" type="Sprite2D" parent="UI/Center/tutorialBook/PageBg"]
+[node name="bookPics" type="Sprite2D" parent="UI/Center/tutorialBook/PageBg" unique_id=2078485221]
 position = Vector2(0, -166)
 texture = ExtResource("76_ss6dt")
 
-[node name="readnLearn" type="RichTextLabel" parent="UI/Center/tutorialBook/PageBg"]
+[node name="readnLearn" type="RichTextLabel" parent="UI/Center/tutorialBook/PageBg" unique_id=1793431830]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1351,7 +1329,7 @@ theme_override_fonts/normal_font = SubResource("FontVariation_8s53r")
 theme_override_font_sizes/normal_font_size = 24
 text = "Draw a line under the character using your hand/mouse so it doesn't fall. Draw the line close to the character so you can react fast when obstacles come. Going down/up will increase/decrease your speed respectively"
 
-[node name="pageNum" type="Label" parent="UI/Center/tutorialBook/PageBg"]
+[node name="pageNum" type="Label" parent="UI/Center/tutorialBook/PageBg" unique_id=1467525887]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1371,7 +1349,7 @@ theme_override_fonts/font = SubResource("FontVariation_kt56a")
 theme_override_font_sizes/font_size = 28
 text = "0/14"
 
-[node name="closeBTN" type="Button" parent="UI/Center/tutorialBook/PageBg"]
+[node name="closeBTN" type="Button" parent="UI/Center/tutorialBook/PageBg" unique_id=1046177458]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1387,7 +1365,7 @@ focus_mode = 0
 icon = ExtResource("78_tanab")
 flat = true
 
-[node name="forwardBTN" type="Button" parent="UI/Center/tutorialBook/PageBg"]
+[node name="forwardBTN" type="Button" parent="UI/Center/tutorialBook/PageBg" unique_id=881115038]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1403,13 +1381,11 @@ focus_mode = 0
 icon = ExtResource("77_kw2tw")
 flat = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Center/tutorialBook/PageBg/forwardBTN"]
-libraries = {
-&"": SubResource("AnimationLibrary_cvomj")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Center/tutorialBook/PageBg/forwardBTN" unique_id=1734342324]
+libraries/ = SubResource("AnimationLibrary_cvomj")
 speed_scale = 8.0
 
-[node name="backBTN" type="Button" parent="UI/Center/tutorialBook/PageBg"]
+[node name="backBTN" type="Button" parent="UI/Center/tutorialBook/PageBg" unique_id=55562277]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1425,13 +1401,11 @@ focus_mode = 0
 icon = ExtResource("78_cfhxq")
 flat = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Center/tutorialBook/PageBg/backBTN"]
-libraries = {
-&"": SubResource("AnimationLibrary_8dx1e")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Center/tutorialBook/PageBg/backBTN" unique_id=731291867]
+libraries/ = SubResource("AnimationLibrary_8dx1e")
 speed_scale = 8.0
 
-[node name="Settings" type="Control" parent="UI/Center"]
+[node name="Settings" type="Control" parent="UI/Center" unique_id=1455298442]
 process_mode = 2
 visible = false
 anchors_preset = 0
@@ -1439,13 +1413,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("81_i12mq")
 
-[node name="ShadyBusiness" type="Sprite2D" parent="UI/Center/Settings"]
+[node name="ShadyBusiness" type="Sprite2D" parent="UI/Center/Settings" unique_id=1250483283]
 texture = ExtResource("73_5vaig")
 
-[node name="PageBg" type="Sprite2D" parent="UI/Center/Settings"]
+[node name="PageBg" type="Sprite2D" parent="UI/Center/Settings" unique_id=1565739576]
 texture = ExtResource("75_porer")
 
-[node name="readnLearn" type="RichTextLabel" parent="UI/Center/Settings/PageBg"]
+[node name="readnLearn" type="RichTextLabel" parent="UI/Center/Settings/PageBg" unique_id=187697181]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1479,7 +1453,7 @@ Thank you for playing Stellar Highway!
 Copyright © Stellar Stones"
 selection_enabled = true
 
-[node name="pageNum" type="Label" parent="UI/Center/Settings/PageBg"]
+[node name="pageNum" type="Label" parent="UI/Center/Settings/PageBg" unique_id=682505063]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1499,7 +1473,7 @@ theme_override_fonts/font = SubResource("FontVariation_kt56a")
 theme_override_font_sizes/font_size = 28
 text = "CREDITS:"
 
-[node name="closeBTN" type="Button" parent="UI/Center/Settings/PageBg"]
+[node name="closeBTN" type="Button" parent="UI/Center/Settings/PageBg" unique_id=1439793386]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1515,7 +1489,7 @@ focus_mode = 0
 icon = ExtResource("78_tanab")
 flat = true
 
-[node name="Loading" parent="UI/Center" instance=ExtResource("16_8a04u")]
+[node name="Loading" parent="UI/Center" unique_id=121995087 instance=ExtResource("16_8a04u")]
 process_mode = 3
 
 [connection signal="pressed" from="sizeChange/Restaurant1/charSelBTNS/B0" to="sizeChange/Restaurant1/charSelBTNS" method="_on_b_0_pressed"]
