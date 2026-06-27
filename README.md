@@ -23,6 +23,7 @@ Stellar Highway is a passion project that wasn't built to make money, so as a bi
   - [Spawning the World](#spawning-the-world)
   - [Resolution Scaling](#resolution-scaling)
   - [Saving & Progression](#saving--progression)
+  - [Audio, Settings & Game Feel](#audio-settings--game-feel)
   - [The "Groups" Wiring](#the-groups-wiring)
 - [Code Map](#code-map)
 - [Glossary of Odd Names](#glossary-of-odd-names)
@@ -120,7 +121,7 @@ A few conventions to keep in mind while reading the source:
 
 - **One script per node.** Almost every script `extends` a Godot node type and is attached directly to a node in a scene. Some nodes exist *only* to host a script (a manager or generator with no visuals).
 - **Scripts in `Gameplay Scripts/` ↔ scenes in `Sprites/`.** A script like `Obstacles/Dragon.gd` is the brain attached to the scene `Sprites/Obstacles/Dragon/Dragon.tscn`. Generators `preload` and `instantiate` these `.tscn` files.
-- **One autoload, `Refs`.** [`Refs.gd`](GameFiles/Gameplay%20Scripts/Refs.gd) is a small project-wide singleton holding shared screen/world constants and validity-cached accessors for the handful of nodes scripts fetch constantly (player, playfield, score…). Beyond that, cross-object communication happens through **Godot groups** (see [The "Groups" Wiring](#the-groups-wiring)) and relative node paths.
+- **Two autoloads, `Refs` and `Settings`.** [`Refs.gd`](GameFiles/Gameplay%20Scripts/Refs.gd) is a small project-wide singleton holding shared screen/world constants and validity-cached accessors for the handful of nodes scripts fetch constantly (player, playfield, score…). [`Settings.gd`](GameFiles/Gameplay%20Scripts/Settings.gd) holds the persisted player preferences (music volume, haptics, screen shake, assist-draw) and applies them. Beyond those, cross-object communication happens through **Godot groups** (see [The "Groups" Wiring](#the-groups-wiring)) and relative node paths.
 - **No multithreaded gameplay code.** (`project.godot` enables physics on a separate thread, but the game logic itself is single-threaded and easy to follow.)
 
 ---
@@ -181,7 +182,7 @@ The **Doppelgänger** powerup spawns a second body using the [`PlayerSUS.tscn`](
 
 ### Drawing the Track
 
-[`playerInput.gd`](GameFiles/Gameplay%20Scripts/playerInput.gd) converts pointer input into terrain. As your finger moves, it samples points in world space and, every ~15 px, instantiates a [`CollLine.tscn`](GameFiles/Sprites/CollLine.tscn) segment — a `StaticBody2D` carrying a `Line2D` (the visible stroke) and a `SegmentShape2D` (the collider the character actually rolls on). It supports **touch, S Pen, and mouse** input (the S Pen reports as mouse events on Android). When the **Rockstar** powerup is active, stars are sprinkled along the drawn line. Each segment fades itself out after a few seconds (or once the player passes it) via [`CollLine.gd`](GameFiles/Gameplay%20Scripts/CollLine.gd) to keep memory in check.
+[`playerInput.gd`](GameFiles/Gameplay%20Scripts/playerInput.gd) converts pointer input into terrain. As your finger moves it samples points in world space every ~15 px and joins them with a **quadratic-Bézier curve**, so the collision the character rides is smoothly rounded instead of a chain of sharp corners. Each curve piece is a [`CollLine.tscn`](GameFiles/Sprites/CollLine.tscn) segment — a `StaticBody2D` carrying a `Line2D` (the visible stroke) and a `SegmentShape2D` (the collider the character actually rolls on). It supports **touch, S Pen, and mouse** input (the S Pen reports as mouse events on Android). The stroke thickens with the player's speed, brightens as the character rolls over it, and throws a small spark at speed; an optional **assist-draw** offset (`Settings.draw_offset`) can lift the line above the finger. When the **Rockstar** powerup is active, stars are sprinkled along it. Each segment fades itself out after a few seconds (or once the player passes it) via [`CollLine.gd`](GameFiles/Gameplay%20Scripts/CollLine.gd) to keep memory in check.
 
 ### Spawning the World
 
@@ -204,11 +205,27 @@ The game renders at a fixed **1080 px height**, but the width is flexible to fit
 - `savefile.bin` — `{ "playerCharacter": int, "Stars": int, "ownedChars": [6 bools] }`
 - `scorefile.bin` — `{ "0": int, "1": int, "2": int }` — the high score for each of the three modes.
 
+Player preferences live in a third file, `settings.bin`, owned by the [`Settings`](GameFiles/Gameplay%20Scripts/Settings.gd) autoload rather than `Utils` (see [Audio, Settings & Game Feel](#audio-settings--game-feel)). All three files are written **atomically** — to a temp file that's swapped into place only once the write fully succeeds — and validated on load, so an interrupted or corrupt write falls back to defaults instead of bricking the data.
+
 There are **6 characters** (indices 0–5). Character 0 is free; the rest cost `[15000, 20000, 25000, 30000, 35000]` stars and are bought in the shop ([`characterSelector.gd`](GameFiles/Gameplay%20Scripts/characterSelector.gd)).
+
+### Audio, Settings & Game Feel
+
+**Audio buses** ([`default_bus_layout.tres`](default_bus_layout.tres)) — a **Music** bus feeds the **Master** bus. The four music tracks (menu, gameplay, pause, game-over) route to *Music* so it can be turned down on its own; the sound effects stay on *Master*, which the on-screen mute button toggles. (Giving sound effects their own volume slider would mean adding an *SFX* bus and routing the SFX players to it.)
+
+**Settings** — the [`Settings`](GameFiles/Gameplay%20Scripts/Settings.gd) autoload persists four preferences to `settings.bin` and applies them on startup:
+- **Music volume** → the *Music* bus.
+- **Haptics** → whether `Settings.vibrate(ms)` buzzes (Android; a no-op on desktop). Fired on game-over and powerup pickups.
+- **Screen shake** → whether `Refs.shake()` is allowed to shake the camera.
+- **Assist draw** (`draw_offset`) → lifts the drawn line above the finger so your hand doesn't cover the action (off by default).
+
+The player-facing controls are a small scene, [`SettingsControls.tscn`](GameFiles/Sprites/UI/SettingsControls.tscn) (wired by [`SettingsControls.gd`](GameFiles/Gameplay%20Scripts/SettingsControls.gd)), instanced into the main menu's Settings panel. A control just calls `Settings.set_value(key, value)` and the autoload handles persisting + applying it — so adding a new toggle is only a few lines.
+
+**Screen shake** — [`CameraShake.gd`](GameFiles/Gameplay%20Scripts/CameraShake.gd) on the player camera is a trauma-based shake (intensity decays over time), triggered via `Refs.shake(amount)` from impacts like the game-over and missile explosions. It shakes the camera *offset* (so it layers on top of the look-ahead `changeSize` sets each frame) and processes even while the tree is paused, so the death shake still plays.
 
 ### The "Groups" Wiring
 
-With no autoloads, objects find each other through **Godot groups**. The most important ones:
+Beyond the two autoloads, objects find each other through **Godot groups**. The most important ones:
 
 | Group | Who's in it | Looked up for… |
 | --- | --- | --- |
@@ -231,7 +248,9 @@ When you see `get_tree().get_first_node_in_group("…")` in the code, this table
 A system-by-system index of the scripts under `GameFiles/`. Each file also carries a `##` doc comment at the top explaining itself in detail.
 
 **Core loop & player**
-- [`Refs.gd`](GameFiles/Gameplay%20Scripts/Refs.gd) — the `Refs` autoload: shared screen/world constants + cached node accessors.
+- [`Refs.gd`](GameFiles/Gameplay%20Scripts/Refs.gd) — the `Refs` autoload: shared screen/world constants + cached node accessors (incl. `Refs.shake()`).
+- [`Settings.gd`](GameFiles/Gameplay%20Scripts/Settings.gd) — the `Settings` autoload: persisted prefs (music volume, haptics, screen shake, assist-draw), applied to the engine.
+- [`CameraShake.gd`](GameFiles/Gameplay%20Scripts/CameraShake.gd) — trauma-based screen shake on the player camera.
 - [`main.gd`](GameFiles/Gameplay%20Scripts/main.gd) — small standalone helper (hides cursor, F11 fullscreen). *Not currently attached to a scene.*
 - [`player_physics.gd`](GameFiles/Gameplay%20Scripts/player_physics.gd), [`state_machine.gd`](GameFiles/Gameplay%20Scripts/state_machine.gd), [`state.gd`](GameFiles/Gameplay%20Scripts/state.gd), [`States/on_ground.gd`](GameFiles/Gameplay%20Scripts/States/on_ground.gd), [`States/on_air.gd`](GameFiles/Gameplay%20Scripts/States/on_air.gd) — player & physics.
 - [`playerInput.gd`](GameFiles/Gameplay%20Scripts/playerInput.gd), [`CollLine.gd`](GameFiles/Gameplay%20Scripts/CollLine.gd) — terrain drawing.
@@ -249,7 +268,7 @@ A system-by-system index of the scripts under `GameFiles/`. Each file also carri
 - [`Currency/Star.gd`](GameFiles/Gameplay%20Scripts/Currency/Star.gd), [`Currency/StarCounter.gd`](GameFiles/Gameplay%20Scripts/Currency/StarCounter.gd), [`Currency/menuStars.gd`](GameFiles/Gameplay%20Scripts/Currency/menuStars.gd) — stars.
 
 **Menus & UI**
-- [`Gamemodes.gd`](GameFiles/Gameplay%20Scripts/Gamemodes.gd), [`characterSelector.gd`](GameFiles/Gameplay%20Scripts/characterSelector.gd), [`shopBTN.gd`](GameFiles/Gameplay%20Scripts/shopBTN.gd), [`tutorialBook.gd`](GameFiles/Gameplay%20Scripts/tutorialBook.gd), [`settingsMenu.gd`](GameFiles/Gameplay%20Scripts/settingsMenu.gd), [`menuOST.gd`](GameFiles/Gameplay%20Scripts/menuOST.gd) — main-menu screens.
+- [`Gamemodes.gd`](GameFiles/Gameplay%20Scripts/Gamemodes.gd), [`characterSelector.gd`](GameFiles/Gameplay%20Scripts/characterSelector.gd), [`shopBTN.gd`](GameFiles/Gameplay%20Scripts/shopBTN.gd), [`tutorialBook.gd`](GameFiles/Gameplay%20Scripts/tutorialBook.gd), [`settingsMenu.gd`](GameFiles/Gameplay%20Scripts/settingsMenu.gd) + [`SettingsControls.gd`](GameFiles/Gameplay%20Scripts/SettingsControls.gd), [`menuOST.gd`](GameFiles/Gameplay%20Scripts/menuOST.gd) — main-menu screens.
 - [`pause.gd`](GameFiles/Gameplay%20Scripts/pause.gd), [`mute.gd`](GameFiles/Gameplay%20Scripts/mute.gd), [`gameOverClipper.gd`](GameFiles/Gameplay%20Scripts/gameOverClipper.gd) — in-run UI.
 - [`ScreenView Scripts/`](GameFiles/ScreenView%20Scripts) — visual helpers: `Loading.gd`, `SpeedLine.gd`, `Glow.gd`, `rotateLight.gd`, `changeSize.gd`, `MainMenu/gameStart.gd`, `MainMenu/spawnDoppel.gd`, `UI/p2s.gd`.
 

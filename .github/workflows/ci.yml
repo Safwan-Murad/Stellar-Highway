@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  compile-check:
+    name: Compile check (Godot 4.5.1)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Godot 4.5.1
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.5.1
+          use-dotnet: false
+
+      # Import textures/scenes so preload() calls resolve on a fresh checkout.
+      # If "--import" ever stops working on a Godot version, swap it for "--editor --quit".
+      - name: Import resources
+        run: godot --headless --import
+
+      # Loads every .gd script and fails the build if any don't compile.
+      - name: Check all scripts compile
+        run: godot --headless --path . -s ci/check_scripts.gd
